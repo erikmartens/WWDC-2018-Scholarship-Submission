@@ -38,24 +38,24 @@ class MainMenuNode: SKSpriteNode {
         let verticalButtonSpace = size.height / CGFloat(buttonCount)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
-        let buttonRect = CGRect(x: 0, y: 0, width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
+        let buttonSize = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         
-        resumeButton = ButtonNode(rect: buttonRect, labelText: "Resume Game", backgroundImageName: "Images/button_inactive") // todo
+        resumeButton = ButtonNode(size: buttonSize, labelText: "Resume Game", backgroundImageName: "Images/button_inactive") // todo
         let resumeButtonCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
         resumeButton.position = CGPoint(x: 0, y: resumeButtonCoordinateY)
         
-        startButton = ButtonNode(rect: buttonRect, labelText: "Start New Game", backgroundImageName: "Images/button_active")
+        startButton = ButtonNode(size: buttonSize, labelText: "Start New Game", backgroundImageName: "Images/button_active")
         let startButtonCoordinateY = verticalButtonSpace / CGFloat(2)
         startButton.position = CGPoint(x: 0, y: startButtonCoordinateY)
         
-        highscoreButton = ButtonNode(rect: buttonRect, labelText: "Highscores", backgroundImageName: "Images/button_active")
+        highscoreButton = ButtonNode(size: buttonSize, labelText: "Highscores", backgroundImageName: "Images/button_active")
         let highscoreButtonCoordinateY = verticalButtonSpace / CGFloat(2)
         highscoreButton.position = CGPoint(x: 0, y: -highscoreButtonCoordinateY)
         
-        addQuestionButton = ButtonNode(rect: buttonRect, labelText: "Add Questions", backgroundImageName: "Images/button_active")
+        addQuestionButton = ButtonNode(size: buttonSize, labelText: "Add Questions", backgroundImageName: "Images/button_active")
         let addQuestionButtonCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
         addQuestionButton.position = CGPoint(x: 0, y: -addQuestionButtonCoordinateY)
-
+        
         addChild(resumeButton)
         addChild(startButton)
         addChild(highscoreButton)
@@ -73,27 +73,27 @@ class MainMenuNode: SKSpriteNode {
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         guard let touch = touches.first else {
-                return
+            return
         }
         let location = touch.location(in: self)
         
         if resumeButton.contains(location) {
-            resumeButton.backgroundNode.texture = SKTexture(imageNamed: "Images/button_selected") // todo
+            resumeButton.fillTexture = SKTexture(imageNamed: "Images/button_selected") // todo
             return
         }
         
         if startButton.contains(location) {
-            startButton.backgroundNode.texture = SKTexture(imageNamed: "Images/button_selected")
+            startButton.fillTexture = SKTexture(imageNamed: "Images/button_selected")
             return
         }
         
         if highscoreButton.contains(location) {
-            highscoreButton.backgroundNode.texture = SKTexture(imageNamed: "Images/button_selected")
+            highscoreButton.fillTexture = SKTexture(imageNamed: "Images/button_selected")
             return
         }
         
         if addQuestionButton.contains(location) {
-            addQuestionButton.backgroundNode.texture = SKTexture(imageNamed: "Images/button_selected")
+            addQuestionButton.fillTexture = SKTexture(imageNamed: "Images/button_selected")
             return
         }
     }
@@ -106,25 +106,25 @@ class MainMenuNode: SKSpriteNode {
         let location = touch.location(in: self)
         
         if resumeButton.contains(location) {
-            resumeButton.backgroundNode.texture = SKTexture(imageNamed: "Images/button_inactive") // todo
-             applicationDelegate?.didSelectNode(with: .game) // todo
+            resumeButton.fillTexture = SKTexture(imageNamed: "Images/button_inactive") // todo
+            applicationDelegate?.didSelectNode(with: .game) // todo
             return
         }
         
         if startButton.contains(location) {
-            startButton.backgroundNode.texture = SKTexture(imageNamed: "Images/button_active")
+            startButton.fillTexture = SKTexture(imageNamed: "Images/button_active")
             applicationDelegate?.didSelectNode(with: .game)
             return
         }
         
         if highscoreButton.contains(location) {
-            highscoreButton.backgroundNode.texture = SKTexture(imageNamed: "Images/button_active")
+            highscoreButton.fillTexture = SKTexture(imageNamed: "Images/button_active")
             applicationDelegate?.didSelectNode(with: .highscore)
             return
         }
         
         if addQuestionButton.contains(location) {
-            addQuestionButton.backgroundNode.texture = SKTexture(imageNamed: "Images/button_active")
+            addQuestionButton.fillTexture = SKTexture(imageNamed: "Images/button_active")
             applicationDelegate?.didSelectNode(with: .addQuestion)
             return
         }
