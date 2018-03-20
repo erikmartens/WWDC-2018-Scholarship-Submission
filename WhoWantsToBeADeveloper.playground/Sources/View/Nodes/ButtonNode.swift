@@ -1,5 +1,9 @@
 import SpriteKit
 
+let kButtonActiveTexture = SKTexture(imageNamed: "Images/button_active")
+let kButtonInactiveTexture = SKTexture(imageNamed: "Images/button_inactive")
+let kButtonSelectedTexture = SKTexture(imageNamed: "Images/button_selected")
+
 class ButtonNode: SKShapeNode {
     
     // MARK: - Properties
@@ -9,7 +13,7 @@ class ButtonNode: SKShapeNode {
     
     // MARK: - Initialization
     
-    init(size: CGSize, labelText: String, backgroundImageName: String) {
+    init(size: CGSize, labelText: String, backgroundTexture: SKTexture) {
         super.init()
         
         let pathOriginX = size.width / CGFloat(2)
@@ -26,8 +30,7 @@ class ButtonNode: SKShapeNode {
         labelNode.zPosition = 2
         
         fillColor = .white
-        let texture = SKTexture(imageNamed: backgroundImageName)
-        fillTexture = texture
+        fillTexture = backgroundTexture
         
         addChild(labelNode)
     }
