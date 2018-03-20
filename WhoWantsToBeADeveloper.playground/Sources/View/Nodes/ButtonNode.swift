@@ -4,7 +4,7 @@ class ButtonNode: SKShapeNode {
     
     // MARK: - Properties
     
-    var labelNode: SKLabelNode!
+    private var labelNode: SKLabelNode!
     
     
     // MARK: - Initialization
@@ -29,13 +29,7 @@ class ButtonNode: SKShapeNode {
         let texture = SKTexture(imageNamed: backgroundImageName)
         fillTexture = texture
         
-//        let texture = SKTexture(imageNamed: backgroundImageName)
-//        backgroundNode = SKSpriteNode(texture: texture)
-//        backgroundNode.size = CGSize(width: rect.width, height: rect.height)
-//        backgroundNode.zPosition = 1
-        
         addChild(labelNode)
-//        addChild(backgroundNode)
     }
     
     required public init?(coder aDecoder: NSCoder) {
