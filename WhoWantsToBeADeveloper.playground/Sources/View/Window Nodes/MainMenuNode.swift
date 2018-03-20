@@ -18,6 +18,7 @@ class MainMenuNode: SKSpriteNode {
     
     private var backgroundImage: SKSpriteNode!
     
+    private let buttonsCount = 4
     private var buttons: [ButtonNode] {
         return [resumeButton, startButton, highscoreButton, addQuestionButton]
     }
@@ -38,7 +39,7 @@ class MainMenuNode: SKSpriteNode {
         backgroundImage.size = applicationDelegate.aplicationFrame.size
         backgroundImage.zPosition = -1
         
-        let verticalButtonSpace = size.height / CGFloat(4)
+        let verticalButtonSpace = size.height / CGFloat(buttonsCount)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSize = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
@@ -116,7 +117,7 @@ class MainMenuNode: SKSpriteNode {
         
         if startButton.contains(location) {
             startButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .game)
+            applicationDelegate?.didSelectNode(with: .selectGameMode)
             return
         }
         

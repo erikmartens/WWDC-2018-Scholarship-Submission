@@ -12,7 +12,7 @@ import PlaygroundSupport
 With this playful approach to learning [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/) and basics about object-oriented programming, anyone who enjoys diving into a new topic via a quiz like fashion, will feel right at home.
  If you have 3 minutes everyday to answer some questions, you will go far.
  
- > To get started open the live view inside the assistant editor. You can also add your own questions through the game interface, in order to get a more personalized learning experience. Or you hack the `Question.json` file directly.
+ > To get started open the live view inside the assistant editor. You can also add your own questions through the game interface, in order to get a more personalized learning experience. Or you hack the `Questions.json` file directly.
  
  __Enjoy and hopefully see you at WWDC 18__ ❤️
  */

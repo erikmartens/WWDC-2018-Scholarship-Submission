@@ -3,7 +3,7 @@ import SpriteKit
 
 enum GameMode: Int {
     case classic
-    case endless
+    case arcade
 }
 
 enum NodeType: Int {
@@ -26,6 +26,7 @@ public class ApplicationScene: SKScene {
     private var mainMenuNode: MainMenuNode?
 //    private var gameModeSelectionNode: GameModeSelectionNode?
     private var gameNode: GameNode?
+    private var gameModeSelectionNode: GameModeSelectionNode?
 //    private var highscoreNode: HighscoreNode?
     private var questionAdditionNode: QuestionAdditionNode?
     
@@ -65,9 +66,17 @@ extension ApplicationScene: ApplicationDelegate {
     func didSelectNode(with nodeType: NodeType) {
         switch nodeType {
         case .mainMenu:
-            break
+            if mainMenuNode == nil {
+                mainMenuNode = MainMenuNode(applicationDelegate: self)
+            }
+            removeAllChildren()
+            addChild(mainMenuNode!)
         case .selectGameMode:
-            break
+            if gameModeSelectionNode == nil {
+                gameModeSelectionNode = GameModeSelectionNode(applicationDelegate: self)
+            }
+            removeAllChildren()
+            addChild(gameModeSelectionNode!)
         case .game:
             break
         case .highscore:
