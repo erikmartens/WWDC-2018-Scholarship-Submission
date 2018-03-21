@@ -46,7 +46,7 @@ class GameModeSelectionNode: SKSpriteNode {
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSizeRegular = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
-        let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
+        let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 4 * verticalPadding)
         
         instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Select a game mode!")
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
@@ -109,8 +109,8 @@ class GameModeSelectionNode: SKSpriteNode {
         let location = touch.location(in: self)
         
         if classicModeButton.contains(location) {
-            classicModeButton.fillTexture = kButtonInactiveTexture // todo
-            applicationDelegate?.didSelectNode(with: .game) // todo
+            classicModeButton.fillTexture = kButtonActiveTexture
+            applicationDelegate?.didSelectNode(with: .game)
             return
         }
         

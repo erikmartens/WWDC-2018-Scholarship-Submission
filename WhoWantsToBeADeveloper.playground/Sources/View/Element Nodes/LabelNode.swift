@@ -22,9 +22,12 @@ class LabelNode: SKShapeNode {
         strokeColor = .clear
         
         labelNode = SKLabelNode(text: labelText)
+        labelNode.preferredMaxLayoutWidth = size.width * 0.98
+        labelNode.fontName = "SanFrancisco-Bold"
         labelNode.fontColor = .white
-        labelNode.numberOfLines = 4
-        labelNode.verticalAlignmentMode = .top
+        labelNode.numberOfLines = 2
+        labelNode.lineBreakMode = .byWordWrapping
+        labelNode.verticalAlignmentMode = .center
         labelNode.zPosition = 2
         
         fillColor = .white

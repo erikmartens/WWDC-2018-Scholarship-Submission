@@ -24,8 +24,11 @@ class ButtonNode: SKShapeNode {
         strokeColor = .clear
         
         labelNode = SKLabelNode(text: labelText)
+        labelNode.preferredMaxLayoutWidth = size.width * 0.98
+        labelNode.fontName = "SanFrancisco-Bold"
         labelNode.fontColor = .white
         labelNode.numberOfLines = 1
+        labelNode.lineBreakMode = .byTruncatingTail
         labelNode.verticalAlignmentMode = .center
         labelNode.zPosition = 2
         
