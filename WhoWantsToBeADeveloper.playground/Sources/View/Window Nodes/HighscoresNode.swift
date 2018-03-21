@@ -59,28 +59,28 @@ class HighscoresNode: SKSpriteNode {
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
         instructionLabel.position = CGPoint(x: 0, y: instructionLabelCoordinateY)
         
-        labelNode_0 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test1", dateLabelText: "", scoreLabelText: "")
+        labelNode_0 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test1", dateLabelText: "01.01.1990", scoreLabelText: "99")
         let labelNodeCoordinateY_0 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
-        labelNode_0.position = CGPoint(x: 0, y: -labelNodeCoordinateY_0)
+        labelNode_0.position = CGPoint(x: 0, y: labelNodeCoordinateY_0)
         
-        labelNode_1 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test2", dateLabelText: "", scoreLabelText: "")
+        labelNode_1 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test2", dateLabelText: "01.01.1990", scoreLabelText: "99")
         let labelNodeCoordinateY_1 = verticalButtonSpace / CGFloat(2)
-        labelNode_1.position = CGPoint(x: 0, y: -labelNodeCoordinateY_1)
+        labelNode_1.position = CGPoint(x: 0, y: labelNodeCoordinateY_1)
         
-        labelNode_2 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test3", dateLabelText: "", scoreLabelText: "")
+        labelNode_2 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test3", dateLabelText: "01.01.1990", scoreLabelText: "99")
         let labelNodeCoordinateY_2 = verticalButtonSpace / CGFloat(2)
-        labelNode_2.position = CGPoint(x: 0, y: labelNodeCoordinateY_2)
+        labelNode_2.position = CGPoint(x: 0, y: -labelNodeCoordinateY_2)
         
-        labelNode_3 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test4", dateLabelText: "", scoreLabelText: "")
+        labelNode_3 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test4", dateLabelText: "01.01.1990", scoreLabelText: "99")
         let labelNodeCoordinateY_3 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
-        labelNode_3.position = CGPoint(x: 0, y: labelNodeCoordinateY_3)
+        labelNode_3.position = CGPoint(x: 0, y: -labelNodeCoordinateY_3)
         
-        labelNode_4 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test5", dateLabelText: "", scoreLabelText: "")
+        labelNode_4 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test5", dateLabelText: "01.01.1990", scoreLabelText: "99")
         let labelNodeCoordinateY_4 = verticalButtonSpace * 2 + verticalButtonSpace / CGFloat(2)
-        labelNode_4.position = CGPoint(x: 0, y: labelNodeCoordinateY_4)
+        labelNode_4.position = CGPoint(x: 0, y: -labelNodeCoordinateY_4)
         
         backButton = ButtonNode(size: buttonSizeSmall, labelText: "Back", backgroundTexture: kButtonActiveTexture)
-        let backButtonCoordinateY = verticalButtonSpace * 3 + verticalButtonSpace * 5 / CGFloat(2)
+        let backButtonCoordinateY = verticalButtonSpace * 3 + verticalButtonSpace / CGFloat(2)
         backButton.position = CGPoint(x: 0, y: -backButtonCoordinateY)
         
         addChild(instructionLabel)

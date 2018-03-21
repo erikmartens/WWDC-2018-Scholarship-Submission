@@ -19,12 +19,7 @@ class HighscoreLabelNode: SKShapeNode {
         let pathOriginX = size.width / CGFloat(2)
         let pathOriginY = size.height / CGFloat(2)
         let pathRect = CGRect(x: -pathOriginX, y: -pathOriginY, width: size.width, height: size.height)
-        
-        /* Initialize all Properties */
-        nameLabelNode = SKLabelNode(text: namelabelText)
-        dateLabelNode = SKLabelNode(text: namelabelText)
-        scoreLabelNode = SKLabelNode(text: namelabelText)
-        
+
         /* Additional Configuration */
         isUserInteractionEnabled = false
         path = CGPath(rect: pathRect, transform: nil)
@@ -32,12 +27,16 @@ class HighscoreLabelNode: SKShapeNode {
         fillColor = .white
         fillTexture = SKTexture(imageNamed: "Images/label_background")
         
+        /* Initialize all Properties */
+        nameLabelNode = SKLabelNode(text: namelabelText)
         nameLabelNode.configure(with: size.width * 0.4)
         nameLabelNode.position = CGPoint(x: -pathOriginX + nameLabelNode.frame.size.width / 2, y: 0)
         
+        dateLabelNode = SKLabelNode(text: dateLabelText)
         dateLabelNode.configure(with: size.width * 0.4)
         dateLabelNode.position = CGPoint(x: -pathOriginX + nameLabelNode.frame.size.width + dateLabelNode.frame.size.width / 2, y: 0)
         
+        scoreLabelNode = SKLabelNode(text: scoreLabelText)
         scoreLabelNode.configure(with: size.width * 0.2)
         scoreLabelNode.position = CGPoint(x: -pathOriginX + nameLabelNode.frame.size.width + dateLabelNode.frame.size.width + scoreLabelNode.frame.size.width / 2, y: 0)
         
