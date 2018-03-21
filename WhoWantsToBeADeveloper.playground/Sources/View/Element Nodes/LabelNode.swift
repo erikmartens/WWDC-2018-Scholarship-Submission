@@ -4,14 +4,16 @@ class LabelNode: SKShapeNode {
     
     // MARK: - Properties
     
-    private var labelNode: SKLabelNode!
+    private var labelNode: SKLabelNode
     
     
     // MARK: - Initialization
     
     init(size: CGSize, labelText: String) {
-        super.init()
         
+labelNode = SKLabelNode(text: labelText)
+        super.init()
+
         isUserInteractionEnabled = false
         
         let pathOriginX = size.width / CGFloat(2)
@@ -20,23 +22,22 @@ class LabelNode: SKShapeNode {
         
         path = CGPath(rect: pathRect, transform: nil)
         strokeColor = .clear
+        fillColor = .white
+        fillTexture = SKTexture(imageNamed: "Images/label_background")
         
-        labelNode = SKLabelNode(text: labelText)
         labelNode.preferredMaxLayoutWidth = size.width * 0.98
         labelNode.fontName = "SanFrancisco-Bold"
         labelNode.fontColor = .white
         labelNode.numberOfLines = 2
         labelNode.lineBreakMode = .byWordWrapping
         labelNode.verticalAlignmentMode = .center
-        labelNode.zPosition = 2
-        
-        fillColor = .white
-        fillTexture = SKTexture(imageNamed: "Images/label_background")
+        labelNode.zPosition = 1
         
         addChild(labelNode)
     }
     
     required public init?(coder aDecoder: NSCoder) {
+        labelNode = SKLabelNode(text: nil)
         super.init(coder: aDecoder)
     }
 }

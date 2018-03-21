@@ -123,7 +123,7 @@ class MainMenuNode: SKSpriteNode {
         
         if highscoreButton.contains(location) {
             highscoreButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .highscore)
+            applicationDelegate?.didSelectNode(with: .highscores)
             return
         }
         

@@ -1,6 +1,6 @@
 import SpriteKit
 
-class GameModeSelectionNode: SKSpriteNode {
+class HighscoresNode: SKSpriteNode {
     
     // MARK: - Public Properties
     
@@ -12,14 +12,15 @@ class GameModeSelectionNode: SKSpriteNode {
     private weak var applicationDelegate: ApplicationDelegate?
     
     private var instructionLabel: LabelNode!
+    
     private var classicModeButton: ButtonNode!
     private var arcadeModeButton: ButtonNode!
     private var backButton: ButtonNode!
     
     private var backgroundImage: SKSpriteNode!
     
-    private let buttonsCount =  3
-    private var buttons: [ButtonNode] {
+    private let labelsCount =  3
+    private var labels: [ButtonNode] {
         return [classicModeButton, arcadeModeButton, backButton]
     }
     
@@ -42,7 +43,7 @@ class GameModeSelectionNode: SKSpriteNode {
         let instructionNodeHeight = size.height * 0.25
         let instructionNodeSize = CGSize(width: size.width, height: instructionNodeHeight)
         
-        let verticalButtonSpace = (size.height - instructionNodeHeight) / CGFloat(buttonsCount)
+        let verticalButtonSpace = (size.height - instructionNodeHeight) / CGFloat(labelsCount)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSizeRegular = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
@@ -126,6 +127,6 @@ class GameModeSelectionNode: SKSpriteNode {
             return
         }
         
-        buttons.forEach { $0.fillTexture = kButtonActiveTexture }
+        labels.forEach { $0.fillTexture = kButtonActiveTexture }
     }
 }

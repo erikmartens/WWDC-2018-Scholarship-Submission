@@ -10,7 +10,7 @@ enum NodeType: Int {
     case mainMenu
     case selectGameMode
     case game
-    case highscore
+    case highscores
     case addQuestion
 }
 
@@ -79,7 +79,7 @@ extension ApplicationScene: ApplicationDelegate {
             addChild(gameModeSelectionNode!)
         case .game:
             break
-        case .highscore:
+        case .highscores:
             break
         case .addQuestion:
             break
