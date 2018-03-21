@@ -1,6 +1,6 @@
 import SpriteKit
 
-class QuestionNode: SKShapeNode {
+class QuestionLabelNode: SKShapeNode {
     
     // MARK: - Properties
     
