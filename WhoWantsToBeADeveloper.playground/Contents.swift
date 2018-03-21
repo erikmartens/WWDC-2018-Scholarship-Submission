@@ -4,13 +4,12 @@ import PlaygroundSupport
 /*:
  # Welcome to "Who Wants to Be a Developer"
  
- In this playground you will learn about the programming language [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/),
- by answering questions based on a variation of the popular _Who Wants to Be a Millionaire_ game format. Whether you are a beginner, intermediate or expert, there is a game mode for you.
+ In this playground you will learn about the programming language [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/), as well as about Apple development frameworks,
+ by playing a variation of the popular _Who Wants to Be a Millionaire_ game format. If you have 3 minutes everyday to answer some questions, you will solidify your knowledge and/or be inspired to do some additional research.
  
- My personal journey has taught me that anyone can achieve their goals, when they are taught in a fashion that suits their personal needs. What's more, breaking the ice is essential. Beginning easy but challenging and increasing the difficulty gradually will trigger the thirst for more, instead of creating frustration.
+ My personal journey has taught me that anyone can achieve their goals, when they are taught in a fashion that suits their personal learning style. What's more, breaking the ice is essential. Beginning easy but challenging and increasing the difficulty gradually will trigger the thirst for more, instead of creating frustration.
  
-With this playful approach to learning [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/) and basics about object-oriented programming, anyone who enjoys diving into a new topic via a quiz like fashion, will feel right at home.
- If you have 3 minutes everyday to answer some questions, you will go far.
+With this playful approach to learning [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/) and the basics about devloping for Apple's platforms, anyone who enjoys diving into a new topic via a quiz like fashion, will feel right at home.
  
  > To get started open the live view inside the assistant editor. You can also add your own questions through the game interface, in order to get a more personalized learning experience. Or you hack the `Questions.json` file directly.
  
