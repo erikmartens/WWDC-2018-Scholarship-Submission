@@ -1,5 +1,0 @@
-import SpriteKit
-
-extension SKLabelNode {
-
-}
