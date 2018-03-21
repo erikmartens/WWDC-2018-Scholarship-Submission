@@ -27,7 +27,6 @@ class ButtonNode: SKShapeNode {
         fillColor = .white
         fillTexture = backgroundTexture
         
-        
         labelNode.preferredMaxLayoutWidth = size.width * 0.98
         labelNode.fontName = "SanFrancisco-Bold"
         labelNode.fontColor = .white
@@ -37,8 +36,6 @@ class ButtonNode: SKShapeNode {
         labelNode.zPosition = 1
         
         addChild(labelNode)
-        
-        
     }
     
     required public init?(coder aDecoder: NSCoder) {

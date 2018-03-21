@@ -27,7 +27,7 @@ public class ApplicationScene: SKScene {
 //    private var gameModeSelectionNode: GameModeSelectionNode?
     private var gameNode: GameNode?
     private var gameModeSelectionNode: GameModeSelectionNode?
-//    private var highscoreNode: HighscoreNode?
+    private var highscoresNode: HighscoresNode?
     private var questionAdditionNode: QuestionAdditionNode?
     
     private var currentNodeType: NodeType = .mainMenu
@@ -80,7 +80,11 @@ extension ApplicationScene: ApplicationDelegate {
         case .game:
             break
         case .highscores:
-            break
+            if highscoresNode == nil {
+                highscoresNode = HighscoresNode(applicationDelegate: self)
+            }
+            removeAllChildren()
+            addChild(highscoresNode!)
         case .addQuestion:
             break
         }

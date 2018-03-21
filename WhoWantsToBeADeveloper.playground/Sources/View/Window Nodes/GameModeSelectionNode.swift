@@ -27,18 +27,15 @@ class GameModeSelectionNode: SKSpriteNode {
     // MARK: - Initialization
     
     init(applicationDelegate: ApplicationDelegate) {
+        
         super.init(texture: nil, color: .clear, size: .zero)
         
-        self.applicationDelegate = applicationDelegate
-        
+        /* Additional Configuration */
         isUserInteractionEnabled = true
         size = CGSize(width: applicationDelegate.aplicationFrame.size.width, height: applicationDelegate.aplicationFrame.size.height)
         position = CGPoint(x: applicationDelegate.aplicationFrame.midX, y: applicationDelegate.aplicationFrame.midY)
         
-        backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = applicationDelegate.aplicationFrame.size
-        backgroundImage.zPosition = -1
-        
+        /* Definitions */
         let instructionNodeHeight = size.height * 0.25
         let instructionNodeSize = CGSize(width: size.width, height: instructionNodeHeight)
         
@@ -47,6 +44,13 @@ class GameModeSelectionNode: SKSpriteNode {
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSizeRegular = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 4 * verticalPadding)
+        
+        /* Initialize and configure all properties */
+        self.applicationDelegate = applicationDelegate
+        
+        backgroundImage = SKSpriteNode(imageNamed: "Images/background")
+        backgroundImage.size = applicationDelegate.aplicationFrame.size
+        backgroundImage.zPosition = -1
         
         instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Select a game mode!")
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)

@@ -12,62 +12,83 @@ class HighscoresNode: SKSpriteNode {
     private weak var applicationDelegate: ApplicationDelegate?
     
     private var instructionLabel: LabelNode!
-    
-    private var classicModeButton: ButtonNode!
-    private var arcadeModeButton: ButtonNode!
+    private var labelNode_0: HighscoreLabelNode!
+    private var labelNode_1: HighscoreLabelNode!
+    private var labelNode_2: HighscoreLabelNode!
+    private var labelNode_3: HighscoreLabelNode!
+    private var labelNode_4: HighscoreLabelNode!
     private var backButton: ButtonNode!
     
     private var backgroundImage: SKSpriteNode!
     
-    private let labelsCount =  3
-    private var labels: [ButtonNode] {
-        return [classicModeButton, arcadeModeButton, backButton]
+    private let elementsCount =  6
+    private var buttons: [ButtonNode] {
+        return [backButton]
     }
     
     
     // MARK: - Initialization
     
     init(applicationDelegate: ApplicationDelegate) {
+        
         super.init(texture: nil, color: .clear, size: .zero)
         
-        self.applicationDelegate = applicationDelegate
-        
+        /* Additional Configuration */
         isUserInteractionEnabled = true
         size = CGSize(width: applicationDelegate.aplicationFrame.size.width, height: applicationDelegate.aplicationFrame.size.height)
         position = CGPoint(x: applicationDelegate.aplicationFrame.midX, y: applicationDelegate.aplicationFrame.midY)
         
-        backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = applicationDelegate.aplicationFrame.size
-        backgroundImage.zPosition = -1
-        
+        /* Definitions */
         let instructionNodeHeight = size.height * 0.25
         let instructionNodeSize = CGSize(width: size.width, height: instructionNodeHeight)
         
-        let verticalButtonSpace = (size.height - instructionNodeHeight) / CGFloat(labelsCount)
+        let verticalButtonSpace = (size.height - instructionNodeHeight) / CGFloat(elementsCount)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSizeRegular = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 4 * verticalPadding)
         
-        instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Select a game mode!")
+        /* Initialize and configure all properties */
+        self.applicationDelegate = applicationDelegate
+        
+        backgroundImage = SKSpriteNode(imageNamed: "Images/background")
+        backgroundImage.size = applicationDelegate.aplicationFrame.size
+        backgroundImage.zPosition = -1
+        
+        instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Arcade Mode Highscores")
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
         instructionLabel.position = CGPoint(x: 0, y: instructionLabelCoordinateY)
         
-        classicModeButton = ButtonNode(size: buttonSizeRegular, labelText: "Classic Mode", backgroundTexture: kButtonActiveTexture) // todo
-        let classicModeButtonCoordinateY = verticalButtonSpace / CGFloat(2)
-        classicModeButton.position = CGPoint(x: 0, y: classicModeButtonCoordinateY)
+        labelNode_0 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test1", dateLabelText: "", scoreLabelText: "")
+        let labelNodeCoordinateY_0 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
+        labelNode_0.position = CGPoint(x: 0, y: -labelNodeCoordinateY_0)
         
-        arcadeModeButton = ButtonNode(size: buttonSizeRegular, labelText: "Arcade Mode", backgroundTexture: kButtonActiveTexture)
-        let arcadeModeButtonCoordinateY = verticalButtonSpace / CGFloat(2)
-        arcadeModeButton.position = CGPoint(x: 0, y: -arcadeModeButtonCoordinateY)
+        labelNode_1 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test2", dateLabelText: "", scoreLabelText: "")
+        let labelNodeCoordinateY_1 = verticalButtonSpace / CGFloat(2)
+        labelNode_1.position = CGPoint(x: 0, y: -labelNodeCoordinateY_1)
+        
+        labelNode_2 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test3", dateLabelText: "", scoreLabelText: "")
+        let labelNodeCoordinateY_2 = verticalButtonSpace / CGFloat(2)
+        labelNode_2.position = CGPoint(x: 0, y: labelNodeCoordinateY_2)
+        
+        labelNode_3 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test4", dateLabelText: "", scoreLabelText: "")
+        let labelNodeCoordinateY_3 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
+        labelNode_3.position = CGPoint(x: 0, y: labelNodeCoordinateY_3)
+        
+        labelNode_4 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test5", dateLabelText: "", scoreLabelText: "")
+        let labelNodeCoordinateY_4 = verticalButtonSpace * 2 + verticalButtonSpace / CGFloat(2)
+        labelNode_4.position = CGPoint(x: 0, y: labelNodeCoordinateY_4)
         
         backButton = ButtonNode(size: buttonSizeSmall, labelText: "Back", backgroundTexture: kButtonActiveTexture)
-        let backButtonCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
+        let backButtonCoordinateY = verticalButtonSpace * 3 + verticalButtonSpace * 5 / CGFloat(2)
         backButton.position = CGPoint(x: 0, y: -backButtonCoordinateY)
         
         addChild(instructionLabel)
-        addChild(classicModeButton)
-        addChild(arcadeModeButton)
+        addChild(labelNode_0)
+        addChild(labelNode_1)
+        addChild(labelNode_2)
+        addChild(labelNode_3)
+        addChild(labelNode_4)
         addChild(backButton)
         addChild(backgroundImage)
     }
@@ -86,16 +107,6 @@ class HighscoresNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
         
-        if classicModeButton.contains(location) {
-            classicModeButton.fillTexture = kButtonSelectedTexture // todo
-            return
-        }
-        
-        if arcadeModeButton.contains(location) {
-            arcadeModeButton.fillTexture = kButtonSelectedTexture
-            return
-        }
-        
         if backButton.contains(location) {
             backButton.fillTexture = kButtonSelectedTexture
             return
@@ -109,24 +120,12 @@ class HighscoresNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
         
-        if classicModeButton.contains(location) {
-            classicModeButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .game)
-            return
-        }
-        
-        if arcadeModeButton.contains(location) {
-            arcadeModeButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .game)
-            return
-        }
-        
         if backButton.contains(location) {
             backButton.fillTexture = kButtonActiveTexture
             applicationDelegate?.didSelectNode(with: .mainMenu)
             return
         }
         
-        labels.forEach { $0.fillTexture = kButtonActiveTexture }
+        buttons.forEach { $0.fillTexture = kButtonActiveTexture }
     }
 }
