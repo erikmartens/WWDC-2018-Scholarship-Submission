@@ -4,14 +4,16 @@ let kButtonActiveTexture = SKTexture(imageNamed: "Images/button_active")
 let kButtonInactiveTexture = SKTexture(imageNamed: "Images/button_inactive")
 let kButtonSelectedTexture = SKTexture(imageNamed: "Images/button_selected")
 
-let kButtonDropuoutActiveTexture = SKTexture(imageNamed: "Images/button_dropout")
-let kButtonDropuoutSelectedTexture = SKTexture(imageNamed: "Images/button_dropout_selected")
+let kButtonPauseActiveTexture = SKTexture(imageNamed: "Images/button_dropout")
+let kButtonPauseSelectedTexture = SKTexture(imageNamed: "Images/button_dropout_selected")
 
 let kJokerFiftyFiftyActiveTexture = SKTexture(imageNamed: "Images/joker_fiftyFifty_active")
 let kJokerFiftyFiftyInactiveTexture = SKTexture(imageNamed: "Images/joker_fiftyFifty_inactive")
+let kJokerFiftyFiftySelectedTexture = SKTexture(imageNamed: "Images/joker_fiftyFifty_active") // todo
 
 let kJokerAudienceActiveTexture = SKTexture(imageNamed: "Images/joker_audience_active")
 let kJokerAudienceInactiveTexture = SKTexture(imageNamed: "Images/joker_audience_inactive")
+let kJokerAudienceSelectedTexture = SKTexture(imageNamed: "Images/joker_audience_active") // todo
 
 class ButtonNode: SKShapeNode {
     

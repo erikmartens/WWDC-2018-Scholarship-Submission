@@ -95,3 +95,14 @@ extension ApplicationScene: ApplicationDelegate {
         }
     }
 }
+
+extension ApplicationScene: ApplicationGameDelegate { // todoaddChild
+    
+    func didPauseGame(with state: GameStateDTO) {
+        
+    }
+    
+    func didCompleteGame(with score: Int) {
+        
+    }
+}

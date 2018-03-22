@@ -12,25 +12,25 @@ enum JokerOption: Int {
     case audience
 }
 
-protocol GameControllerDelegate {
+protocol GameControllerDelegate: class {
     func didSelectAnswerOption(_ option: AnswerOption)
     func didSelectJokerOption(_ option: JokerOption)
-    func didSelectExit()
+    func didSelectPause()
 }
 
 class GameController {
     
     // MARK: - Private Properties
     
-    private weak var applicationDelegate: ApplicationDelegate?
+    private weak var applicationGameDelegate: ApplicationGameDelegate?
     private weak var gameNodeDelegate: GameNodeDelegate?
     private weak var gameModelDelegate: GameModelDelegate?
     
     
     // MARK: - Initialization
     
-    init(applicationDelegate: ApplicationDelegate?, gameNodeDelegate: GameNodeDelegate, gameModelDelegate: GameModelDelegate) {
-        self.applicationDelegate = applicationDelegate
+    init(applicationGameDelegate: ApplicationGameDelegate?, gameNodeDelegate: GameNodeDelegate, gameModelDelegate: GameModelDelegate) {
+        self.applicationGameDelegate = applicationGameDelegate
         self.gameNodeDelegate = gameNodeDelegate
         self.gameModelDelegate = gameModelDelegate
     }
@@ -53,7 +53,7 @@ extension GameController: GameControllerDelegate { // todo
         
     }
     
-    func didSelectExit() {
+    func didSelectPause() {
         
     }
 }

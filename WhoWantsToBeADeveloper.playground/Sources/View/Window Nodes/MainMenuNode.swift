@@ -110,29 +110,21 @@ class MainMenuNode: SKSpriteNode {
         let location = touch.location(in: self)
         
         if resumeButton.contains(location) {
-            resumeButton.fillTexture = kButtonInactiveTexture // todo
             applicationDelegate?.didSelectNode(with: .game) // todo
-            return
         }
         
         if startButton.contains(location) {
-            startButton.fillTexture = kButtonActiveTexture
             applicationDelegate?.didSelectNode(with: .selectGameMode)
-            return
         }
         
         if highscoreButton.contains(location) {
-            highscoreButton.fillTexture = kButtonActiveTexture
             applicationDelegate?.didSelectNode(with: .highscores)
-            return
         }
         
         if addQuestionButton.contains(location) {
-            addQuestionButton.fillTexture = kButtonActiveTexture
             applicationDelegate?.didSelectNode(with: .addQuestion)
-            return
         }
         
-        buttons.forEach { $0.fillTexture = kButtonActiveTexture }
+        buttons.forEach { $0.fillTexture = kButtonActiveTexture } // todo: resume button texture
     }
 }

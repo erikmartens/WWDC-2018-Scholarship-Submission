@@ -15,6 +15,7 @@ class GameNode: SKSpriteNode {
     // MARK: - Private Properties
 
     private weak var applicationDelegate: ApplicationDelegate?
+    private weak var gameControllerDelegate: GameControllerDelegate?
 
     private var questionLabel: QuestionLabelNode!
     private var answerOption_0: ButtonNode!
@@ -23,14 +24,13 @@ class GameNode: SKSpriteNode {
     private var answerOption_3: ButtonNode!
     private var jokerFiftyFiftyButton: ButtonNode!
     private var jokerAudienceButton: ButtonNode!
-    private var dropoutButton: ButtonNode!
+    private var pauseButton: ButtonNode!
 
     private var backgroundImage: SKSpriteNode!
 
     private let rowsCount = 3
-    private let buttonsCount = 7
-    private var buttons: [ButtonNode] {
-        return [answerOption_0, answerOption_1, answerOption_2, answerOption_3, jokerFiftyFiftyButton, jokerAudienceButton, dropoutButton]
+    private var answerOptionButtons: [ButtonNode] {
+        return [answerOption_0, answerOption_1, answerOption_2, answerOption_3]
     }
 
 
@@ -63,28 +63,44 @@ class GameNode: SKSpriteNode {
         backgroundImage.zPosition = -1
 
         questionLabel = QuestionLabelNode(size: questionLabelNodeSize, questionNumberLabelText: "", questionLabelText: "", timeLabelText: "") // todo
-        let questionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
-        questionLabel.position = CGPoint(x: 0, y: instructionLabelCoordinateY)
+        let questionLabelCoordinateY = size.height / CGFloat(2) - questionLabelNodeHeight / CGFloat(2)
+        questionLabel.position = CGPoint(x: 0, y: questionLabelCoordinateY)
 
-        classicModeButton = ButtonNode(size: buttonSizeRegular, labelText: "Classic Mode", backgroundTexture: kButtonActiveTexture) // todo
-        let classicModeButtonCoordinateY = verticalButtonSpace / CGFloat(2)
-        classicModeButton.position = CGPoint(x: 0, y: classicModeButtonCoordinateY)
+        let answerOptionsLeftCoordinateX = -(size.width / 4)
+        let answerOptionsRightCoordinateX = size.width / 4
+        let answerOptionsTopCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
+        let answerOptionsBottomCoordinateY: CGFloat = 0
+        let bottomButtonsCoordinateY = -(verticalButtonSpace + verticalButtonSpace / CGFloat(2))
+        
+        answerOption_0 = ButtonNode(size: buttonSizeRegular, labelText: "Option A", backgroundTexture: kButtonActiveTexture) // todo
+        answerOption_0.position = CGPoint(x: answerOptionsLeftCoordinateX, y: answerOptionsTopCoordinateY)
+        
+        answerOption_1 = ButtonNode(size: buttonSizeRegular, labelText: "Option A", backgroundTexture: kButtonActiveTexture) // todo
+        answerOption_1.position = CGPoint(x: answerOptionsRightCoordinateX, y: answerOptionsTopCoordinateY)
+        
+        answerOption_2 = ButtonNode(size: buttonSizeRegular, labelText: "Option A", backgroundTexture: kButtonActiveTexture) // todo
+        answerOption_2.position = CGPoint(x: answerOptionsLeftCoordinateX, y: answerOptionsBottomCoordinateY)
+        
+        answerOption_3 = ButtonNode(size: buttonSizeRegular, labelText: "Option A", backgroundTexture: kButtonActiveTexture) // todo
+        answerOption_3.position = CGPoint(x: answerOptionsRightCoordinateX, y: answerOptionsBottomCoordinateY)
+        
+        jokerFiftyFiftyButton = ButtonNode(size: buttonSizeSmall, labelText: "Classic Mode", backgroundTexture: kJokerFiftyFiftyActiveTexture) // todo
+        jokerFiftyFiftyButton.position = CGPoint(x: -(size.width / 3), y: bottomButtonsCoordinateY)
 
-        arcadeModeButton = ButtonNode(size: buttonSizeRegular, labelText: "Arcade Mode", backgroundTexture: kButtonActiveTexture)
-        let arcadeModeButtonCoordinateY = verticalButtonSpace / CGFloat(2)
-        arcadeModeButton.position = CGPoint(x: 0, y: -arcadeModeButtonCoordinateY)
+        jokerAudienceButton = ButtonNode(size: buttonSizeSmall, labelText: "Arcade Mode", backgroundTexture: kJokerAudienceActiveTexture) // todo
+        jokerAudienceButton.position = CGPoint(x: 0, y: bottomButtonsCoordinateY)
 
-        backButton = ButtonNode(size: buttonSizeSmall, labelText: "Back", backgroundTexture: kButtonActiveTexture)
-        let backButtonCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
-        backButton.position = CGPoint(x: 0, y: -backButtonCoordinateY)
+        pauseButton = ButtonNode(size: buttonSizeSmall, labelText: "Back", backgroundTexture: kButtonPauseActiveTexture) // todo
+        pauseButton.position = CGPoint(x: size.width / 3, y: bottomButtonsCoordinateY)
 
         addChild(questionLabel)
         addChild(answerOption_0)
-        addChild(answerOption_0)
-        addChild(answerOption_0)
-        addChild(answerOption_0)
-        addChild(arcadeModeButton)
-        addChild(backButton)
+        addChild(answerOption_1)
+        addChild(answerOption_2)
+        addChild(answerOption_3)
+        addChild(jokerFiftyFiftyButton)
+        addChild(jokerAudienceButton)
+        addChild(pauseButton)
         addChild(backgroundImage)
     }
 
@@ -102,18 +118,38 @@ class GameNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
 
-        if classicModeButton.contains(location) {
-            classicModeButton.fillTexture = kButtonSelectedTexture // todo
+        if answerOption_0.contains(location) {
+            answerOption_0.fillTexture = kButtonSelectedTexture
+            return
+        }
+        
+        if answerOption_1.contains(location) {
+            answerOption_1.fillTexture = kButtonSelectedTexture
+            return
+        }
+        
+        if answerOption_2.contains(location) {
+            answerOption_2.fillTexture = kButtonSelectedTexture
+            return
+        }
+        
+        if answerOption_3.contains(location) {
+            answerOption_3.fillTexture = kButtonSelectedTexture
             return
         }
 
-        if arcadeModeButton.contains(location) {
-            arcadeModeButton.fillTexture = kButtonSelectedTexture
+        if jokerFiftyFiftyButton.contains(location) {
+            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
+            return
+        }
+        
+        if jokerAudienceButton.contains(location) {
+            jokerAudienceButton.fillTexture = kJokerAudienceSelectedTexture
             return
         }
 
-        if backButton.contains(location) {
-            backButton.fillTexture = kButtonSelectedTexture
+        if pauseButton.contains(location) {
+            pauseButton.fillTexture = kButtonPauseSelectedTexture
             return
         }
     }
@@ -125,25 +161,38 @@ class GameNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
 
-        if classicModeButton.contains(location) {
-            classicModeButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .game)
-            return
+        if answerOption_0.contains(location) {
+            gameControllerDelegate?.didSelectAnswerOption(.optionA)
+        }
+        
+        if answerOption_1.contains(location) {
+            gameControllerDelegate?.didSelectAnswerOption(.optionB)
+        }
+        
+        if answerOption_2.contains(location) {
+            gameControllerDelegate?.didSelectAnswerOption(.optionC)
+        }
+        
+        if answerOption_3.contains(location) {
+            gameControllerDelegate?.didSelectAnswerOption(.optionD)
+        }
+        
+        if jokerFiftyFiftyButton.contains(location) {
+            gameControllerDelegate?.didSelectJokerOption(.fiftyFifty)
+        }
+        
+        if jokerAudienceButton.contains(location) {
+            gameControllerDelegate?.didSelectJokerOption(.audience)
+        }
+        
+        if pauseButton.contains(location) {
+            gameControllerDelegate?.didSelectPause()
         }
 
-        if arcadeModeButton.contains(location) {
-            arcadeModeButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .game)
-            return
-        }
-
-        if backButton.contains(location) {
-            backButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .mainMenu)
-            return
-        }
-
-        buttons.forEach { $0.fillTexture = kButtonActiveTexture }
+        answerOptionButtons.forEach { $0.fillTexture = kButtonActiveTexture }
+        jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
+        jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
+        pauseButton.fillTexture = kButtonPauseSelectedTexture
     }
 }
 
