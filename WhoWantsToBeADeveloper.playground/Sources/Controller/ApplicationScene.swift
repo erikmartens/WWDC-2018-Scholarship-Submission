@@ -1,14 +1,8 @@
 import Foundation
 import SpriteKit
 
-enum GameMode: Int {
-    case classic
-    case arcade
-}
-
 enum NodeType: Int {
     case mainMenu
-    case selectGameMode
     case game
     case highscores
     case addQuestion
@@ -29,13 +23,11 @@ public class ApplicationScene: SKScene {
     // MARK: - Private Properties
     
     private var mainMenuNode: MainMenuNode?
-//    private var gameModeSelectionNode: GameModeSelectionNode?
-    private var gameNode: GameNode?
-    private var gameModeSelectionNode: GameModeSelectionNode?
     private var highscoresNode: HighscoresNode?
     private var questionAdditionNode: QuestionAdditionNode?
     
-    private var currentNodeType: NodeType = .mainMenu
+    private var gameController: GameController?
+    private var gameNode: GameNode?
     
     
     // MARK: - Setup
@@ -76,14 +68,13 @@ extension ApplicationScene: ApplicationDelegate {
             }
             removeAllChildren()
             addChild(mainMenuNode!)
-        case .selectGameMode:
-            if gameModeSelectionNode == nil {
-                gameModeSelectionNode = GameModeSelectionNode(applicationDelegate: self)
-            }
-            removeAllChildren()
-            addChild(gameModeSelectionNode!)
         case .game:
-            break
+            if gameNode == nil {
+                gameNode = GameNode(applicationDelegate: self)
+            }
+            if gameController == nil {
+                
+            }
         case .highscores:
             if highscoresNode == nil {
                 highscoresNode = HighscoresNode(applicationDelegate: self)
@@ -99,7 +90,12 @@ extension ApplicationScene: ApplicationDelegate {
 extension ApplicationScene: ApplicationGameDelegate { // todoaddChild
     
     func didPauseGame(with state: GameStateDTO) {
-        
+        if mainMenuNode == nil {
+            mainMenuNode = MainMenuNode(applicationDelegate: self)
+        }
+        // todo store game state
+        removeAllChildren()
+        addChild(mainMenuNode!)
     }
     
     func didCompleteGame(with score: Int) {
