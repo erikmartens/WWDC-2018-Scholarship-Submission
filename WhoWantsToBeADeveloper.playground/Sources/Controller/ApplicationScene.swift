@@ -14,6 +14,7 @@ protocol ApplicationDelegate: class {
 }
 
 protocol ApplicationGameDelegate: class {
+    func presentGame(with gameNode: GameNode)
     func didPauseGame(with state: GameStateDTO)
     func didCompleteGame(with score: Int)
 }
@@ -27,7 +28,6 @@ public class ApplicationScene: SKScene {
     private var questionAdditionNode: QuestionAdditionNode?
     
     private var gameController: GameController?
-    private var gameNode: GameNode?
     
     
     // MARK: - Setup
@@ -69,11 +69,8 @@ extension ApplicationScene: ApplicationDelegate {
             removeAllChildren()
             addChild(mainMenuNode!)
         case .game:
-            if gameNode == nil {
-                gameNode = GameNode(applicationDelegate: self)
-            }
             if gameController == nil {
-                
+                gameController = GameController(applicationGameDelegate: self)
             }
         case .highscores:
             if highscoresNode == nil {
@@ -87,18 +84,30 @@ extension ApplicationScene: ApplicationDelegate {
     }
 }
 
-extension ApplicationScene: ApplicationGameDelegate { // todoaddChild
+extension ApplicationScene: ApplicationGameDelegate {
+    
+    func presentGame(with gameNode: GameNode) {
+        removeAllChildren()
+        addChild(gameNode)
+    }
     
     func didPauseGame(with state: GameStateDTO) {
         if mainMenuNode == nil {
             mainMenuNode = MainMenuNode(applicationDelegate: self)
         }
         // todo store game state
+        // activate resume button
         removeAllChildren()
         addChild(mainMenuNode!)
+        gameController = nil
     }
     
     func didCompleteGame(with score: Int) {
-        
+        if highscoresNode == nil {
+            //highscoresNode = highscoresNode(applicationDelegate: self, score: Int) // todo
+        }
+        removeAllChildren()
+        addChild(highscoresNode!)
+        gameController = nil
     }
 }

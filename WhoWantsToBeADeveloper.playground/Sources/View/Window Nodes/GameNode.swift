@@ -14,7 +14,6 @@ class GameNode: SKSpriteNode {
 
     // MARK: - Private Properties
 
-    private weak var applicationDelegate: ApplicationDelegate?
     private weak var gameControllerDelegate: GameControllerDelegate?
 
     private var questionLabel: QuestionLabelNode!
@@ -36,7 +35,9 @@ class GameNode: SKSpriteNode {
 
     // MARK: - Initialization
 
-    init(applicationDelegate: ApplicationDelegate) {
+    init(gameControllerDelegate: GameControllerDelegate) {
+        
+        self.gameControllerDelegate = gameControllerDelegate
 
         super.init(texture: nil, color: .clear, size: .zero)
 

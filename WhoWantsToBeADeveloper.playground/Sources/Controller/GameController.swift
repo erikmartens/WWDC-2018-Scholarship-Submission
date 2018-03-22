@@ -21,22 +21,36 @@ protocol GameControllerDelegate: class {
 class GameController {
     
     // MARK: - Private Properties
-    
+
     private weak var applicationGameDelegate: ApplicationGameDelegate?
-    private weak var gameNodeDelegate: GameNodeDelegate?
-    private weak var gameModelDelegate: GameModelDelegate?
+
+    private var gameNode: GameNode?
+    private var gameModel: GameModel?
     
     
     // MARK: - Initialization
     
-    init(applicationGameDelegate: ApplicationGameDelegate?, gameNodeDelegate: GameNodeDelegate, gameModelDelegate: GameModelDelegate) {
+    init(applicationGameDelegate: ApplicationGameDelegate) {
         self.applicationGameDelegate = applicationGameDelegate
-        self.gameNodeDelegate = gameNodeDelegate
-        self.gameModelDelegate = gameModelDelegate
+        startGame()
     }
     
     
     // MARK: - Private Helpers
+
+    private func startGame() {
+        if gameModel == nil {
+            gameModel = GameModel() // todo
+        }
+        if gameNode == nil {
+            gameNode = GameNode(gameControllerDelegate: self)
+        }
+        applicationGameDelegate?.presentGame(with: gameNode!)
+    }
+
+    private func fireTimer() {
+        //gameNodeDelegate?.updateTimer() // todo
+    }
     
     private func timerDidRunOut() { // todo
         
