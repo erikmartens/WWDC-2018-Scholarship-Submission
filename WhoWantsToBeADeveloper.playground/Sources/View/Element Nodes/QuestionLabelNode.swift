@@ -2,7 +2,26 @@ import SpriteKit
 
 class QuestionLabelNode: SKShapeNode {
     
-    // MARK: - Properties
+    // MARK: - Public Properties
+    
+    var questionNumberLabelText: String? {
+        get { return questionNumberLabelNode.text }
+        set { questionNumberLabelNode.text = newValue }
+    }
+    
+    var questionLabelText: String? {
+        get { return questionLabelNode.text }
+        set { questionLabelNode.text = newValue }
+    }
+    
+    // todo: maybe delete this convenience accessor
+    var timerLabelText: String? {
+        get { return timerLabelNode.text }
+        set { timerLabelNode.text = newValue }
+    }
+    
+    
+    // MARK: - Private Properties
     
     private var questionNumberLabelNode: SKLabelNode!
     private var questionLabelNode: SKLabelNode!

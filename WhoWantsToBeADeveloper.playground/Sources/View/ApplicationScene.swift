@@ -19,6 +19,11 @@ protocol ApplicationDelegate: class {
     func didSelectNode(with nodeType: NodeType)
 }
 
+protocol ApplicationGameDelegate: class {
+    func didPauseGame(with state: GameStateDTO)
+    func didCompleteGame(with score: Int)
+}
+
 public class ApplicationScene: SKScene {
     
     // MARK: - Private Properties

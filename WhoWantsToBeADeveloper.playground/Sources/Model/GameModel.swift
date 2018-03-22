@@ -1,6 +1,6 @@
 import Foundation
 
-protocol GameModelDeleagate: class {
+protocol GameModelDelegate: class {
     
 }
 
