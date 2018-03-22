@@ -14,6 +14,7 @@ protocol ApplicationDelegate: class {
 }
 
 protocol ApplicationGameDelegate: class {
+    var aplicationFrame: CGRect { get }
     func presentGame(with gameNode: GameNode)
     func didPauseGame(with state: GameStateDTO)
     func didCompleteGame(with score: Int)

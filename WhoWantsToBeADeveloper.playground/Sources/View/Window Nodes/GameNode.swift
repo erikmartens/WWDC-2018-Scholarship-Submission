@@ -35,16 +35,14 @@ class GameNode: SKSpriteNode {
 
     // MARK: - Initialization
 
-    init(gameControllerDelegate: GameControllerDelegate) {
+    init(frame: CGRect, gameControllerDelegate: GameControllerDelegate) {
         
-        self.gameControllerDelegate = gameControllerDelegate
-
         super.init(texture: nil, color: .clear, size: .zero)
 
         /* Additional Configuration */
         isUserInteractionEnabled = true
-        size = CGSize(width: applicationDelegate.aplicationFrame.size.width, height: applicationDelegate.aplicationFrame.size.height)
-        position = CGPoint(x: applicationDelegate.aplicationFrame.midX, y: applicationDelegate.aplicationFrame.midY)
+        size = CGSize(width: frame.size.width, height: frame.size.height)
+        position = CGPoint(x: frame.midX, y: frame.midY)
 
         /* Definitions */
         let questionLabelNodeHeight = size.height * 0.25
@@ -57,10 +55,10 @@ class GameNode: SKSpriteNode {
         let buttonSizeSmall = CGSize(width: size.width / 3 - 4 * horizontalPadding, height: verticalButtonSpace - 4 * verticalPadding)
 
         /* Initialize and configure all properties */
-        self.applicationDelegate = applicationDelegate
+        self.gameControllerDelegate = gameControllerDelegate
 
         backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = applicationDelegate.aplicationFrame.size
+        backgroundImage.size = frame.size
         backgroundImage.zPosition = -1
 
         questionLabel = QuestionLabelNode(size: questionLabelNodeSize, questionNumberLabelText: "", questionLabelText: "", timeLabelText: "") // todo

@@ -38,14 +38,15 @@ class GameController {
     
     // MARK: - Private Helpers
 
+    // force unwrap applicationGameDelegate in method, it should never be nil and if we want to know by crashing
     private func startGame() {
         if gameModel == nil {
             gameModel = GameModel() // todo
         }
         if gameNode == nil {
-            gameNode = GameNode(gameControllerDelegate: self)
+            gameNode = GameNode(frame: applicationGameDelegate!.aplicationFrame, gameControllerDelegate: self)
         }
-        applicationGameDelegate?.presentGame(with: gameNode!)
+        applicationGameDelegate!.presentGame(with: gameNode!)
     }
 
     private func fireTimer() {

@@ -114,7 +114,7 @@ class MainMenuNode: SKSpriteNode {
         }
         
         if startButton.contains(location) {
-            applicationDelegate?.didSelectNode(with: .selectGameMode)
+            applicationDelegate?.didSelectNode(with: .game)
         }
         
         if highscoreButton.contains(location) {
