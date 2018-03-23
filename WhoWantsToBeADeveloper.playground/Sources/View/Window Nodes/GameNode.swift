@@ -43,7 +43,7 @@ class GameNode: SKSpriteNode {
         let verticalButtonSpace = (size.height - questionLabelNodeHeight) / CGFloat(rowsCount)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
-        let buttonSizeRegular = CGSize(width: size.width / 2 - horizontalPadding / 2, height: verticalButtonSpace - verticalPadding)
+        let buttonSizeRegular = CGSize(width: size.width / 2 - horizontalPadding / 4, height: verticalButtonSpace - 2 * verticalPadding)
         let buttonSizeSmall = CGSize(width: size.width / 3 - horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
 
         /* Initialize and configure all properties */
