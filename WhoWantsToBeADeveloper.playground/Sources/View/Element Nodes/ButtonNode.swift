@@ -17,14 +17,26 @@ let kJokerAudienceSelectedTexture = SKTexture(imageNamed: "Images/joker_audience
 
 class ButtonNode: SKShapeNode {
     
-    // MARK: - Properties
+    // MARK: - Public Properties
+    
+    var labelText: String? {
+        get {
+            return labelNode.text
+        }
+        set {
+            labelNode.text = newValue
+        }
+    }
+    
+    
+    // MARK: - Private Properties
     
     private var labelNode: SKLabelNode!
     
     
     // MARK: - Initialization
     
-    init(size: CGSize, labelText: String, backgroundTexture: SKTexture) {
+    init(size: CGSize, labelText: String? = nil, backgroundTexture: SKTexture) {
         
         super.init()
         

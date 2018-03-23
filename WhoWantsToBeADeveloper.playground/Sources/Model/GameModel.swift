@@ -1,10 +1,5 @@
 import Foundation
 
-protocol GameModelDelegate: class {
-    var nextQuestion: QuestionDTO { get }
-    func verifyAnswerOption(_ option: AnswerOption) -> Bool
-}
-
 class GameModel {
     
     // todo: remove dummy question
@@ -13,7 +8,7 @@ class GameModel {
 
     // MARK: - Properties
     
-    fileprivate var currentQuestionIndex: Int
+    fileprivate(set) var currentQuestionIndex: Int
     fileprivate var deliveredQuestionIDs: [Int]
     fileprivate var questions: [QuestionDTO]
     
@@ -38,9 +33,9 @@ class GameModel {
         let questions = [GameModel.question] // todo: get via file storage service
         self.init(currentQuestionIndex: 0, deliveredQuestionIDs: [Int](), questions: questions)
     }
-}
-
-extension GameModel: GameModelDelegate {
+    
+    
+    // MARK: - Public Properties & Functions
     
     var nextQuestion: QuestionDTO {
         var remainingQuestions = questions.filter { question in
@@ -54,8 +49,8 @@ extension GameModel: GameModelDelegate {
         
         currentQuestionIndex += 1
         
-        let randomIndex = Int(arc4random_uniform(UInt32(questions.count)))
-        currentQuestion = questions[randomIndex]
+        let randomIndex = Int(arc4random_uniform(UInt32(remainingQuestions.count)))
+        currentQuestion = remainingQuestions[randomIndex]
         deliveredQuestionIDs.append(currentQuestion.identifier)
         return currentQuestion
     }

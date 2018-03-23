@@ -1,20 +1,12 @@
 import SpriteKit
 
-protocol GameNodeDelegate: class {
-    func configure(with model: GameModel)
-    func updateTimer(with time: Int)
-}
-
 class GameNode: SKSpriteNode {
 
-    // MARK: - Public Properties
-
-    let nodeType: NodeType = .highscores
-
-
     // MARK: - Private Properties
+    // implicitely force unwrap gameControllerDelegate
+    // they should never be nil and if it is we want to know by crashing the app, so we are alerted and can fix it
 
-    private weak var gameControllerDelegate: GameControllerDelegate?
+    private weak var gameControllerDelegate: GameControllerDelegate!
 
     private var questionLabel: QuestionLabelNode!
     private var answerOption_0: ButtonNode!
@@ -51,8 +43,8 @@ class GameNode: SKSpriteNode {
         let verticalButtonSpace = (size.height - questionLabelNodeHeight) / CGFloat(rowsCount)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
-        let buttonSizeRegular = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
-        let buttonSizeSmall = CGSize(width: size.width / 3 - 4 * horizontalPadding, height: verticalButtonSpace - 4 * verticalPadding)
+        let buttonSizeRegular = CGSize(width: size.width / 2 - horizontalPadding / 2, height: verticalButtonSpace - verticalPadding)
+        let buttonSizeSmall = CGSize(width: size.width / 3 - horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
 
         /* Initialize and configure all properties */
         self.gameControllerDelegate = gameControllerDelegate
@@ -61,35 +53,35 @@ class GameNode: SKSpriteNode {
         backgroundImage.size = frame.size
         backgroundImage.zPosition = -1
 
-        questionLabel = QuestionLabelNode(size: questionLabelNodeSize, questionNumberLabelText: "", questionLabelText: "", timeLabelText: "") // todo
+        questionLabel = QuestionLabelNode(size: questionLabelNodeSize)
         let questionLabelCoordinateY = size.height / CGFloat(2) - questionLabelNodeHeight / CGFloat(2)
         questionLabel.position = CGPoint(x: 0, y: questionLabelCoordinateY)
 
         let answerOptionsLeftCoordinateX = -(size.width / 4)
         let answerOptionsRightCoordinateX = size.width / 4
-        let answerOptionsTopCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
-        let answerOptionsBottomCoordinateY: CGFloat = 0
+        let answerOptionsTopCoordinateY = verticalButtonSpace / CGFloat(2)
+        let answerOptionsBottomCoordinateY = -(verticalButtonSpace / CGFloat(2))
         let bottomButtonsCoordinateY = -(verticalButtonSpace + verticalButtonSpace / CGFloat(2))
-        
-        answerOption_0 = ButtonNode(size: buttonSizeRegular, labelText: "Option A", backgroundTexture: kButtonActiveTexture) // todo
+
+        answerOption_0 = ButtonNode(size: buttonSizeRegular, backgroundTexture: kButtonActiveTexture)
         answerOption_0.position = CGPoint(x: answerOptionsLeftCoordinateX, y: answerOptionsTopCoordinateY)
-        
-        answerOption_1 = ButtonNode(size: buttonSizeRegular, labelText: "Option A", backgroundTexture: kButtonActiveTexture) // todo
+
+        answerOption_1 = ButtonNode(size: buttonSizeRegular, backgroundTexture: kButtonActiveTexture)
         answerOption_1.position = CGPoint(x: answerOptionsRightCoordinateX, y: answerOptionsTopCoordinateY)
-        
-        answerOption_2 = ButtonNode(size: buttonSizeRegular, labelText: "Option A", backgroundTexture: kButtonActiveTexture) // todo
+
+        answerOption_2 = ButtonNode(size: buttonSizeRegular, backgroundTexture: kButtonActiveTexture)
         answerOption_2.position = CGPoint(x: answerOptionsLeftCoordinateX, y: answerOptionsBottomCoordinateY)
-        
-        answerOption_3 = ButtonNode(size: buttonSizeRegular, labelText: "Option A", backgroundTexture: kButtonActiveTexture) // todo
+
+        answerOption_3 = ButtonNode(size: buttonSizeRegular, backgroundTexture: kButtonActiveTexture)
         answerOption_3.position = CGPoint(x: answerOptionsRightCoordinateX, y: answerOptionsBottomCoordinateY)
-        
-        jokerFiftyFiftyButton = ButtonNode(size: buttonSizeSmall, labelText: "Classic Mode", backgroundTexture: kJokerFiftyFiftyActiveTexture) // todo
+
+        jokerFiftyFiftyButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kJokerFiftyFiftyActiveTexture)
         jokerFiftyFiftyButton.position = CGPoint(x: -(size.width / 3), y: bottomButtonsCoordinateY)
 
-        jokerAudienceButton = ButtonNode(size: buttonSizeSmall, labelText: "Arcade Mode", backgroundTexture: kJokerAudienceActiveTexture) // todo
+        jokerAudienceButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kJokerAudienceActiveTexture)
         jokerAudienceButton.position = CGPoint(x: 0, y: bottomButtonsCoordinateY)
 
-        pauseButton = ButtonNode(size: buttonSizeSmall, labelText: "Back", backgroundTexture: kButtonPauseActiveTexture) // todo
+        pauseButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kButtonPauseActiveTexture)
         pauseButton.position = CGPoint(x: size.width / 3, y: bottomButtonsCoordinateY)
 
         addChild(questionLabel)
@@ -106,7 +98,25 @@ class GameNode: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
+    // MARK: - Public Properties & Function
+    
+    func configure(with question: QuestionDTO, questionNumber: Int, jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
+        
+        // force unwrap, this should never fail and we want to know if it does, so we can fix the questions-file
+        questionLabel.questionNumberLabelText = "\(questionNumber)"
+        questionLabel.questionLabelText = question.question
+        
+        answerOption_0.labelText = "A: \(question.answerOptions[.optionA]!)"
+        answerOption_1.labelText = "B: \(question.answerOptions[.optionB]!)"
+        answerOption_2.labelText = "C: \(question.answerOptions[.optionC]!)"
+        answerOption_3.labelText = "D: \(question.answerOptions[.optionD]!)"
+    }
+    
+    func updateTimer(with time: Int) { // todo: timeleft
+        questionLabel.timerLabelText = "\(time)"
+    }
+    
 
     // MARK: - UIEvent Handlers
 
@@ -161,47 +171,36 @@ class GameNode: SKSpriteNode {
         let location = touch.location(in: self)
 
         if answerOption_0.contains(location) {
-            gameControllerDelegate?.didSelectAnswerOption(.optionA)
+            gameControllerDelegate.didSelectAnswerOption(.optionA)
         }
         
         if answerOption_1.contains(location) {
-            gameControllerDelegate?.didSelectAnswerOption(.optionB)
+            gameControllerDelegate.didSelectAnswerOption(.optionB)
         }
         
         if answerOption_2.contains(location) {
-            gameControllerDelegate?.didSelectAnswerOption(.optionC)
+            gameControllerDelegate.didSelectAnswerOption(.optionC)
         }
         
         if answerOption_3.contains(location) {
-            gameControllerDelegate?.didSelectAnswerOption(.optionD)
+            gameControllerDelegate.didSelectAnswerOption(.optionD)
         }
         
         if jokerFiftyFiftyButton.contains(location) {
-            gameControllerDelegate?.didSelectJokerOption(.fiftyFifty)
+            gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
         }
         
         if jokerAudienceButton.contains(location) {
-            gameControllerDelegate?.didSelectJokerOption(.audience)
+            gameControllerDelegate.didSelectJokerOption(.audience)
         }
         
         if pauseButton.contains(location) {
-            gameControllerDelegate?.didSelectPause()
+            gameControllerDelegate.didSelectPause()
         }
 
         answerOptionButtons.forEach { $0.fillTexture = kButtonActiveTexture }
         jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
         jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
         pauseButton.fillTexture = kButtonPauseSelectedTexture
-    }
-}
-
-extension GameNode: GameNodeDelegate {
-    
-    func configure(with model: GameModel) {
-        
-    }
-    
-    func updateTimer(with time: Int) {
-        
     }
 }

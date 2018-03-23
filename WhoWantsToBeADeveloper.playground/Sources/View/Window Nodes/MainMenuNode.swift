@@ -85,17 +85,14 @@ class MainMenuNode: SKSpriteNode {
             resumeButton.fillTexture = kButtonSelectedTexture // todo
             return
         }
-        
         if startButton.contains(location) {
             startButton.fillTexture = kButtonSelectedTexture
             return
         }
-        
         if highscoreButton.contains(location) {
             highscoreButton.fillTexture = kButtonSelectedTexture
             return
         }
-        
         if addQuestionButton.contains(location) {
             addQuestionButton.fillTexture = kButtonSelectedTexture
             return
@@ -112,19 +109,15 @@ class MainMenuNode: SKSpriteNode {
         if resumeButton.contains(location) {
             applicationDelegate?.didSelectNode(with: .game) // todo
         }
-        
         if startButton.contains(location) {
             applicationDelegate?.didSelectNode(with: .game)
         }
-        
         if highscoreButton.contains(location) {
             applicationDelegate?.didSelectNode(with: .highscores)
         }
-        
         if addQuestionButton.contains(location) {
             applicationDelegate?.didSelectNode(with: .addQuestion)
         }
-        
         buttons.forEach { $0.fillTexture = kButtonActiveTexture } // todo: resume button texture
     }
 }

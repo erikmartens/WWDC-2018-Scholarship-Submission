@@ -71,7 +71,7 @@ extension ApplicationScene: ApplicationDelegate {
             addChild(mainMenuNode!)
         case .game:
             if gameController == nil {
-                gameController = GameController(applicationGameDelegate: self)
+                gameController = GameController(applicationGameDelegate: self) // game controller init starts game automatically
             }
         case .highscores:
             if highscoresNode == nil {

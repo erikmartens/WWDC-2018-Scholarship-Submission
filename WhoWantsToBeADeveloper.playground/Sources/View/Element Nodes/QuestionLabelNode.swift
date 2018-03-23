@@ -30,7 +30,7 @@ class QuestionLabelNode: SKShapeNode {
     
     // MARK: - Initialization
     
-    init(size: CGSize, questionNumberLabelText: String, questionLabelText: String, timeLabelText: String) {
+    init(size: CGSize, questionNumberLabelText: String? = nil, questionLabelText: String? = nil, timeLabelText: String? = nil) {
         
         super.init()
         
@@ -50,12 +50,15 @@ class QuestionLabelNode: SKShapeNode {
         fillTexture = SKTexture(imageNamed: "Images/label_background")
         
         /* Initialize and configure all properties */
+        questionNumberLabelNode = SKLabelNode(text: questionNumberLabelText)
         questionNumberLabelNode.configure(with: smallLabelPreferredWidth, lines: 1)
         questionNumberLabelNode.position = CGPoint(x: -(largeLabelPreferredWidth + smallLabelPreferredWidth / 2), y: 0)
         
+        questionLabelNode = SKLabelNode(text: questionLabelText)
         questionLabelNode.configure(with: largeLabelPreferredWidth, lines: 2)
         questionLabelNode.position = CGPoint(x: 0, y: 0)
         
+        timerLabelNode = SKLabelNode(text: timeLabelText)
         timerLabelNode.configure(with: smallLabelPreferredWidth, lines: 2)
         timerLabelNode.position = CGPoint(x: -(largeLabelPreferredWidth + smallLabelPreferredWidth / 2), y: 0)
         
