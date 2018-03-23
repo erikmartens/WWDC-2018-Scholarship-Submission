@@ -1,12 +1,5 @@
 import Foundation
 
-enum AnswerOption: Int {
-    case optionA
-    case optionB
-    case optionC
-    case optionD
-}
-
 enum JokerOption: Int {
     case fiftyFifty
     case audience
