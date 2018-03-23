@@ -55,7 +55,7 @@ class QuestionLabelNode: SKShapeNode {
         questionNumberLabelNode.position = CGPoint(x: -(size.width / 2 - (smallLabelPreferredWidth + 2 * padding) / 2), y: 0)
         
         questionLabelNode = SKLabelNode(text: questionLabelText)
-        questionLabelNode.configure(with: largeLabelPreferredWidth, lines: 2)
+        questionLabelNode.configure(with: largeLabelPreferredWidth, lines: 2, fontName: "SanFrancisco-Bold")
         questionLabelNode.position = CGPoint(x: 0, y: 0)
         
         timerLabelNode = SKLabelNode(text: timeLabelText)
@@ -89,9 +89,11 @@ class QuestionLabelNode: SKShapeNode {
 
 fileprivate extension SKLabelNode {
     
-    func configure(with width: CGFloat, lines: Int) {
+    func configure(with width: CGFloat, lines: Int, fontName: String? = nil) {
         preferredMaxLayoutWidth = width
         fontColor = .white
+        fontSize *= 0.75
+        if let fontName = fontName { self.fontName = fontName }
         numberOfLines = lines
         lineBreakMode = .byWordWrapping
         verticalAlignmentMode = .center
