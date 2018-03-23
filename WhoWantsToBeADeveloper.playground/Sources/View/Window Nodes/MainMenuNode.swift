@@ -29,6 +29,8 @@ class MainMenuNode: SKSpriteNode {
     init(applicationDelegate: ApplicationDelegate) {
         super.init(texture: nil, color: .clear, size: .zero)
         
+        // todo: add game logo node with animation
+        
         self.applicationDelegate = applicationDelegate
         
         isUserInteractionEnabled = true

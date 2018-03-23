@@ -46,13 +46,13 @@ class GameController {
     
     fileprivate func configureNextRound() {
         let question = gameModel.nextQuestion
-        let questionNumber = gameModel.currentQuestionIndex + 1
+        let questionNumber = gameModel.currentQuestionIndex
         gameNode.configure(with: question, questionNumber: questionNumber, jokerFiftyFiftyActive: true, jokerAudienceActive: true) // todo: joker active states
         // todo: activate timer
     }
     
     fileprivate func gameOver() {
-        let score = gameModel.currentQuestionIndex + 1
+        let score = gameModel.currentQuestionIndex
         applicationGameDelegate.didCompleteGame(with: score)
     }
 
