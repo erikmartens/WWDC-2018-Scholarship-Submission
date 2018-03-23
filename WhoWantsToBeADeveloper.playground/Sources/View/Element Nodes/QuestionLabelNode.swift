@@ -40,7 +40,7 @@ class QuestionLabelNode: SKShapeNode {
         let pathOriginY = size.height / CGFloat(2)
         let pathRect = CGRect(x: -pathOriginX, y: -pathOriginY, width: size.width, height: size.height)
         let largeLabelPreferredWidth = size.width * 0.6 - padding * 2
-        let smallLabelPreferredWidth = size.width / 0.2 - padding * 2
+        let smallLabelPreferredWidth = size.width * 0.2 - padding * 2
         
         /* Additional Configuration */
         isUserInteractionEnabled = false
@@ -52,7 +52,7 @@ class QuestionLabelNode: SKShapeNode {
         /* Initialize and configure all properties */
         questionNumberLabelNode = SKLabelNode(text: questionNumberLabelText)
         questionNumberLabelNode.configure(with: smallLabelPreferredWidth, lines: 1)
-        questionNumberLabelNode.position = CGPoint(x: -(largeLabelPreferredWidth + smallLabelPreferredWidth / 2), y: 0)
+        questionNumberLabelNode.position = CGPoint(x: -(size.width / 2 - (smallLabelPreferredWidth + 2 * padding) / 2), y: 0)
         
         questionLabelNode = SKLabelNode(text: questionLabelText)
         questionLabelNode.configure(with: largeLabelPreferredWidth, lines: 2)
@@ -60,7 +60,7 @@ class QuestionLabelNode: SKShapeNode {
         
         timerLabelNode = SKLabelNode(text: timeLabelText)
         timerLabelNode.configure(with: smallLabelPreferredWidth, lines: 2)
-        timerLabelNode.position = CGPoint(x: -(largeLabelPreferredWidth + smallLabelPreferredWidth / 2), y: 0)
+        timerLabelNode.position = CGPoint(x: largeLabelPreferredWidth / 2 + (smallLabelPreferredWidth + 2 * padding) / 2, y: 0)
         
         addChild(questionNumberLabelNode)
         addChild(questionLabelNode)

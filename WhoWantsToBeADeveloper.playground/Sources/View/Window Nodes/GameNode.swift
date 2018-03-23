@@ -104,7 +104,7 @@ class GameNode: SKSpriteNode {
     func configure(with question: QuestionDTO, questionNumber: Int, jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
         
         // force unwrap, this should never fail and we want to know if it does, so we can fix the questions-file
-        questionLabel.questionNumberLabelText = "\(questionNumber)"
+        questionLabel.questionNumberLabelText = "Q# \(questionNumber)"
         questionLabel.questionLabelText = question.question
         
         answerOption_0.labelText = "A: \(question.answerOptions[.optionA]!)"
