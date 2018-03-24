@@ -1,0 +1,19 @@
+{
+  "questions": [
+    {
+      "identifier": 84376928932,
+      "question": "First question from json",
+      "answerOptions": [
+        "optionC",
+        "Test JSON C",
+        "optionA",
+        "Test JSON A",
+        "optionB",
+        "Test JSON B",
+        "optionD",
+        "Test JSON D"
+      ],
+      "correctAnswerOption": "optionB"
+    }
+  ]
+}

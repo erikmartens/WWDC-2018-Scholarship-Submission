@@ -38,8 +38,8 @@ class GameModel {
      * This convenience init is used for initiating a new game
      */
     convenience init() {
-        let questions = [GameModel.question] // todo: get via file storage service
-        self.init(currentQuestionIndex: 0, deliveredQuestionIDs: [Int](), questions: questions, jokerFiftyFiftyActive: true, jokerAudienceActive: true)
+        let questionWrapper = FileStorageService.retrieveJson(fromFileWithType: .questions, andDecodeAsType: QuestionArrayWrapper.self)! // force unwrap, this should always succeed and should crash if it doesn't (without questions the game can't run)
+        self.init(currentQuestionIndex: 0, deliveredQuestionIDs: [Int](), questions: questionWrapper.questions, jokerFiftyFiftyActive: true, jokerAudienceActive: true)
     }
     
     

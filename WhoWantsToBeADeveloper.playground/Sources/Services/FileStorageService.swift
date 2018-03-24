@@ -11,14 +11,19 @@ class FileStorageService {
     
     static func storeJson<T: Encodable>(for codable: T, inFileWithType fileType: FileType) {
         
+        guard fileType != .questions else {
+            // this filetype cannot be written to, as it is located inside the main bundle
+            return
+        }
+        
         guard let filePathURL = directoryURLForFile(with: fileType) else {
             print("💥 FileStorageService: Could not construct file path URL.")
             return
         }
-    
+        
         do {
             let data = try JSONEncoder().encode(codable)
-            try data.write(to: filePathURL)
+            try data.write(to: filePathURL, options: [])
         } catch let error {
             print("💥 FileStorageService: Error while writing data to \(filePathURL.path). Error-Description: \(error.localizedDescription)")
         }
@@ -53,11 +58,11 @@ class FileStorageService {
         var filePathUrl: URL?
         switch fileType {
         case .questions:
-            filePathUrl = Bundle.main.url(forResource: "Question", withExtension: fileExtension)
+            filePathUrl = Bundle.main.url(forResource: "Data/Questions", withExtension: fileExtension)
         case .highscores:
-            filePathUrl =  playgroundSharedDataDirectory.appendingPathComponent("Highscores").appendingPathExtension(fileExtension)
+            filePathUrl = playgroundSharedDataDirectory.appendingPathComponent("Highscores").appendingPathExtension(fileExtension)
         case .savegame:
-            filePathUrl =  playgroundSharedDataDirectory.appendingPathComponent("Savegame").appendingPathExtension(fileExtension)
+            filePathUrl = playgroundSharedDataDirectory.appendingPathComponent("Savegame").appendingPathExtension(fileExtension)
         }
         return filePathUrl
     }

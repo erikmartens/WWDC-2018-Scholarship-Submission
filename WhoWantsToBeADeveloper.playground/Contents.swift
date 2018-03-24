@@ -11,7 +11,9 @@ import PlaygroundSupport
  
 With this playful approach to learning [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/) and the basics about devloping for Apple's platforms, anyone who enjoys diving into a new topic via a quiz like fashion, will feel right at home.
  
- > To get started open the live view inside the assistant editor. You can also add your own questions by hacking the `Questions.json` file. You don't need to supply an identifier for your inserted question. This will be automatically generated during the next boot.
+ > __IMPORTANT:__ To use the "_resume game_" and the "_highscores_" feature you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Xcode cannot assist you due to sandboxing.
+
+> __DID YOU KNOW?:__ You can also add your own questions by hacking the `Questions.json` file. You don't need to supply an identifier for your inserted question. This will be automatically generated during the next boot.
  
  __Enjoy and hopefully see you at WWDC 18__ ❤️
  */

@@ -1,10 +1,14 @@
 import Foundation
 
-enum AnswerOption: Int, Codable {
+enum AnswerOption: String, Codable {
     case optionA
     case optionB
     case optionC
     case optionD
+}
+
+struct QuestionArrayWrapper: Codable {
+    var questions: [QuestionDTO]
 }
 
 struct QuestionDTO: Codable {
