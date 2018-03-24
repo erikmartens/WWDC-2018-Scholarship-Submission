@@ -13,11 +13,12 @@ class GameModel {
 
     // MARK: - Properties
     
-    fileprivate(set) var currentQuestionIndex: Int
-    fileprivate var deliveredQuestionIDs: [Int]
-    fileprivate var questions: [QuestionDTO]
-    
-    fileprivate var currentQuestion: QuestionDTO!
+    private(set) var currentQuestionIndex: Int
+    private var deliveredQuestionIDs: [Int]
+    private var questions: [QuestionDTO]
+    private var currentQuestion: QuestionDTO!
+    var jokerFiftyFiftyActive: Bool!
+    var jokerAudienceActive: Bool!
     
     
     // MARK: - Initialization
@@ -25,10 +26,12 @@ class GameModel {
     /**
      * This init is used for restoring a previous game from a save file
      */
-    init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], questions: [QuestionDTO]) {
+    init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], questions: [QuestionDTO], jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
         self.currentQuestionIndex = currentQuestionIndex
         self.deliveredQuestionIDs = deliveredQuestionIDs
         self.questions = questions
+        self.jokerFiftyFiftyActive = jokerFiftyFiftyActive
+        self.jokerAudienceActive = jokerAudienceActive
     }
     
     /**
@@ -36,7 +39,7 @@ class GameModel {
      */
     convenience init() {
         let questions = [GameModel.question] // todo: get via file storage service
-        self.init(currentQuestionIndex: 0, deliveredQuestionIDs: [Int](), questions: questions)
+        self.init(currentQuestionIndex: 0, deliveredQuestionIDs: [Int](), questions: questions, jokerFiftyFiftyActive: true, jokerAudienceActive: true)
     }
     
     

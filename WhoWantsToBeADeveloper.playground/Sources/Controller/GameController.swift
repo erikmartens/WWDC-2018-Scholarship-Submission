@@ -43,14 +43,14 @@ class GameController {
         configureNextRound()
     }
     
-    private func resumeGame() { // todo
-        
+    private func resumeGame() {
+        // todo
     }
     
     fileprivate func configureNextRound() {
         let question = gameModel.nextQuestion
         let questionNumber = gameModel.currentQuestionIndex
-        gameNode.configure(with: question, questionNumber: questionNumber, jokerFiftyFiftyActive: true, jokerAudienceActive: true) // todo: joker active states
+        gameNode.configure(with: question, questionNumber: questionNumber, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
         startRoundTimer()
     }
     
@@ -106,10 +106,12 @@ extension GameController: GameControllerDelegate {
     func didSelectJokerOption(_ option: JokerOption) {
         switch option {
         case .fiftyFifty:
+            gameModel.jokerFiftyFiftyActive = false
             let excludedAnswerOptions = gameModel.jokerFiftyFiftyExcludedAnswerOptions
             gameNode.activateFiftyFiftyJoker(with: excludedAnswerOptions)
         case .audience:
-            break
+            gameModel.jokerAudienceActive = false
+            // todo
         }
     }
     

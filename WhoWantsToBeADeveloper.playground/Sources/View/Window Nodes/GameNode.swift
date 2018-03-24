@@ -25,6 +25,8 @@ class GameNode: SKSpriteNode {
         return [answerOption_0, answerOption_1, answerOption_2, answerOption_3]
     }
     
+    /* Store Current Model Properties for Round */
+    
     private var answerOptionActive_0 = true
     private var answerOptionActive_1 = true
     private var answerOptionActive_2 = true
@@ -207,15 +209,12 @@ class GameNode: SKSpriteNode {
 
         if jokerFiftyFiftyActive && jokerFiftyFiftyButton.contains(location) {
             jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
-            return
         }
         if jokerAudienceActive && jokerAudienceButton.contains(location) {
             jokerAudienceButton.fillTexture = kJokerAudienceSelectedTexture
-            return
         }
         if pauseButton.contains(location) {
             pauseButton.fillTexture = kButtonPauseSelectedTexture
-            return
         }
     }
 
@@ -246,19 +245,15 @@ class GameNode: SKSpriteNode {
             jokerFiftyFiftyActive = false
             jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
-            return
         }
         if jokerAudienceActive && jokerAudienceButton.contains(location) {
             jokerAudienceActive = false
             jokerAudienceButton.fillTexture = kJokerAudienceInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.audience)
-            return
         }
         if pauseButton.contains(location) {
             gameControllerDelegate.didSelectPause()
         }
-        jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
-        jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
         pauseButton.fillTexture = kButtonPauseActiveTexture
     }
 }
