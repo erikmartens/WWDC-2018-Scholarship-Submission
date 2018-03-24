@@ -74,21 +74,6 @@ class QuestionLabelNode: SKShapeNode {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    
-    // MARK: - Public FunctionsaDecoder
-    
-    /**
-     * @param timeLft: remaining time in seconds
-     */
-    func updateTimer(timeLeft: Int) {
-        timerLabelNode.text = "\(timeLeft)" // todo
-        if timeLeft < 10 {
-            timerLabelNode.fontColor = .orange
-            return
-        }
-        timerLabelNode.fontColor = .white
-    }
 }
 
 fileprivate extension SKLabelNode {
