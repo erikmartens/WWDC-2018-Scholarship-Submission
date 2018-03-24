@@ -22,6 +22,9 @@ class GameController {
     private var gameNode: GameNode!
     private var gameModel: GameModel!
     
+    private var roundTimer: Timer!
+    private var timeLeft: TimeInterval = 0
+    
     
     // MARK: - Initialization
     
@@ -48,26 +51,42 @@ class GameController {
         let question = gameModel.nextQuestion
         let questionNumber = gameModel.currentQuestionIndex
         gameNode.configure(with: question, questionNumber: questionNumber, jokerFiftyFiftyActive: true, jokerAudienceActive: true) // todo: joker active states
-        // todo: activate timer
+        startRoundTimer()
     }
     
     fileprivate func gameOver() {
         let score = gameModel.currentQuestionIndex
         applicationGameDelegate.didCompleteGame(with: score)
     }
+    
+    /* Round Timer */
+    
+    private func startRoundTimer() {
+        timeLeft = 30
+        gameNode.updateTimer(with: timeLeft.stringFromTime)
+        roundTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+    }
 
-    private func fireTimer() {
-        //gameNodeDelegate?.updateTimer() // todo
+    @objc private func fireTimer() {
+        timeLeft -= 1
+        if timeLeft <= 0 {
+            timerDidRunOut()
+            return
+        }
+        gameNode.updateTimer(with: timeLeft.stringFromTime)
     }
     
-    @objc private func timerDidRunOut() { // todo
-        
+    @objc private func timerDidRunOut() {
+        roundTimer.invalidate()
+        // todo: send to highscore list
     }
 }
 
 extension GameController: GameControllerDelegate { // todo
     
     func didSelectAnswerOption(_ option: AnswerOption) {
+        roundTimer.invalidate()
+        
         let answeredCorrectly = gameModel.verifyAnswerOption(option)
         guard answeredCorrectly else {
             gameOver()
@@ -82,5 +101,12 @@ extension GameController: GameControllerDelegate { // todo
     
     func didSelectPause() {
         // todo: store game and call applicationGameDelegate method
+    }
+}
+
+fileprivate extension TimeInterval {
+    
+    var stringFromTime: String {
+        return String(format: "%02d : %02d", Int((self/60.0).truncatingRemainder(dividingBy: 60)), Int((self).truncatingRemainder(dividingBy: 60)))
     }
 }

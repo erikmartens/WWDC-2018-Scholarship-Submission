@@ -113,8 +113,8 @@ class GameNode: SKSpriteNode {
         answerOption_3.labelText = "D: \(question.answerOptions[.optionD]!)"
     }
     
-    func updateTimer(with time: Int) { // todo: timeleft
-        questionLabel.timerLabelText = "\(time)"
+    func updateTimer(with timeLeft: String) {
+        questionLabel.timerLabelText = "\(timeLeft)"
     }
     
 
