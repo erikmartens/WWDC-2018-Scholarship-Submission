@@ -1,48 +1,37 @@
 import Foundation
+import PlaygroundSupport
 
-enum StorageLocationType {
-    case documents
-    case applicationSupport
+enum FileType {
+    case questions
+    case highscores
+    case savegame
 }
 
 class FileStorageService {
     
-    // MARK: -  Public Functions
-    
-    static func storeJson<T: Encodable>(forCodable codable: T, inFileWithName fileName: String, toStorageLocation location: StorageLocationType) {
-        guard let destinationDirectoryURL = directoryURL(forLocation: location) else {
-            print("💥 DataStorageService: Could not construct directory url.")
+    static func storeJson<T: Encodable>(for codable: T, inFileWithType fileType: FileType) {
+        
+        guard let filePathURL = directoryURLForFile(with: fileType) else {
+            print("💥 FileStorageService: Could not construct file path URL.")
             return
         }
-        if !FileManager.default.fileExists(atPath: destinationDirectoryURL.path, isDirectory: nil) {
-            do {
-                try FileManager.default.createDirectory(at: destinationDirectoryURL, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print("💥 DataStorageService: Error while creating directory \(destinationDirectoryURL.path). Error-Description: \(error.localizedDescription)")
-                return
-            }
-        }
-        let fileExtension = "json"
-        let filePathURL = destinationDirectoryURL.appendingPathComponent(fileName).appendingPathExtension(fileExtension)
-        
+    
         do {
             let data = try JSONEncoder().encode(codable)
             try data.write(to: filePathURL)
         } catch let error {
-            print("💥 DataStorageService: Error while writing data to \(filePathURL.path). Error-Description: \(error.localizedDescription)")
+            print("💥 FileStorageService: Error while writing data to \(filePathURL.path). Error-Description: \(error.localizedDescription)")
         }
     }
     
-    static func retrieveJson<T: Decodable>(fromFileWithName fileName: String, andDecodeAsType type: T.Type, fromStorageLocation location: StorageLocationType) -> T? {
-        guard let fileBaseURL = directoryURL(forLocation: location) else {
-            print("💥 DataStorageService: Could not construct directory url.")
+    static func retrieveJson<T: Decodable>(fromFileWithType fileType: FileType, andDecodeAsType type: T.Type) -> T? {
+        guard let filePathURL = directoryURLForFile(with: fileType) else {
+            print("💥 FileStorageService: Could not construct file path URL.")
             return nil
         }
-        let fileExtension = "json"
-        let filePathURL = fileBaseURL.appendingPathComponent(fileName).appendingPathExtension(fileExtension)
-        
+    
         if !FileManager.default.fileExists(atPath: filePathURL.path) {
-            print("💥 DataStorageService: File at path \(filePathURL.path) does not exist!")
+            print("💥 FileStorageService: File at path \(filePathURL.path) does not exist!")
             return nil
         }
         do {
@@ -50,7 +39,7 @@ class FileStorageService {
             let model = try JSONDecoder().decode(type, from: data)
             return model
         } catch let error {
-            print("💥 DataStorageService: Error while retrieving data from \(filePathURL.path). Error-Description: \(error.localizedDescription)")
+            print("💥 FileStorageService: Error while retrieving data from \(filePathURL.path). Error-Description: \(error.localizedDescription)")
             return nil
         }
     }
@@ -58,14 +47,18 @@ class FileStorageService {
     
     // MARK: - Private Functions
     
-    static private func directoryURL(forLocation location: StorageLocationType) -> URL? {
-        var fileBaseUrl: URL?
-        switch location {
-        case .documents:
-            fileBaseUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        case .applicationSupport:
-            fileBaseUrl =  FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+    static private func directoryURLForFile(with fileType: FileType) -> URL? {
+        let fileExtension = "json"
+        
+        var filePathUrl: URL?
+        switch fileType {
+        case .questions:
+            filePathUrl = Bundle.main.url(forResource: "Question", withExtension: fileExtension)
+        case .highscores:
+            filePathUrl =  playgroundSharedDataDirectory.appendingPathComponent("Highscores").appendingPathExtension(fileExtension)
+        case .savegame:
+            filePathUrl =  playgroundSharedDataDirectory.appendingPathComponent("Savegame").appendingPathExtension(fileExtension)
         }
-        return fileBaseUrl
+        return filePathUrl
     }
 }
