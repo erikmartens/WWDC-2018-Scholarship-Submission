@@ -104,11 +104,20 @@ extension ApplicationScene: ApplicationGameDelegate {
     }
     
     func didCompleteGame(with score: Int) {
-        if highscoresNode == nil {
-            //highscoresNode = highscoresNode(applicationDelegate: self, score: Int) // todo
+        /* test code -> remove */
+        if mainMenuNode == nil {
+            mainMenuNode = MainMenuNode(applicationDelegate: self)
         }
         removeAllChildren()
-        addChild(highscoresNode!)
+        addChild(mainMenuNode!)
         gameController = nil
+        /* test code -> remove */
+        
+//        if highscoresNode == nil {
+//            //highscoresNode = highscoresNode(applicationDelegate: self, score: Int) // todo
+//        }
+//        removeAllChildren()
+//        addChild(highscoresNode!)
+//        gameController = nil
     }
 }

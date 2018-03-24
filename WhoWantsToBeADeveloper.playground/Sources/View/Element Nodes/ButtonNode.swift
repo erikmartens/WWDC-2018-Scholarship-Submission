@@ -4,6 +4,8 @@ let kButtonActiveTexture = SKTexture(imageNamed: "Images/button_active")
 let kButtonInactiveTexture = SKTexture(imageNamed: "Images/button_inactive")
 let kButtonSelectedTexture = SKTexture(imageNamed: "Images/button_selected")
 let kButtonLoggedTexture = SKTexture(imageNamed: "Images/button_answer_logged")
+let kButtonCorrectTexture = SKTexture(imageNamed: "Images/button_answer_correct")
+let kButtonIncorrectTexture = SKTexture(imageNamed: "Images/button_answer_incorrect")
 
 let kButtonPauseActiveTexture = SKTexture(imageNamed: "Images/button_dropout")
 let kButtonPauseSelectedTexture = SKTexture(imageNamed: "Images/button_dropout_selected")

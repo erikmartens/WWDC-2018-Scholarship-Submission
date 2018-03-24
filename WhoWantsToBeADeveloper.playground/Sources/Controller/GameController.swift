@@ -78,22 +78,38 @@ class GameController {
     
     private func timerDidRunOut() {
         roundTimer.invalidate()
-        // todo: send to highscore list
+        gameOver()
     }
 }
+
+//func markAsAnsweredCorrectly(with answerOption: AnswerOption) {
+//    markAnswerOption(answerOption, usingTexture: kButtonCorrectTexture)
+//}
+//
+//func markAsAnsweredIncorrectly(with chosenOption: AnswerOption, correctOption: AnswerOption) {
+//    markAnswerOption(chosenOption, usingTexture: kButtonIncorrectTexture)
+//    markAnswerOption(correctOption, usingTexture: kButtonCorrectTexture)
+//}
 
 extension GameController: GameControllerDelegate {
     
     func didSelectAnswerOption(_ option: AnswerOption) {
         roundTimer.invalidate()
         
-        let answeredCorrectly = gameModel.verifyAnswerOption(option)
-        guard answeredCorrectly else {
-            gameOver()
-            return
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let answeredCorrectly = self.gameModel.verifyAnswerOption(option)
+            guard answeredCorrectly else {
+                self.gameNode.markAsAnsweredIncorrectly(with: option, correctOption: self.gameModel.correctAnswerOption)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.gameOver()
+                }
+                return
+            }
+            self.gameNode.markAsAnsweredCorrectly(with: option)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.configureNextRound()
+            }
         }
-        // todo: highlight answer right
-        configureNextRound()
     }
     
     func didSelectJokerOption(_ option: JokerOption) {

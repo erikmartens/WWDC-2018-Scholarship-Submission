@@ -55,6 +55,10 @@ class GameModel {
         return currentQuestion
     }
     
+    var correctAnswerOption: AnswerOption {
+        return currentQuestion.correctAnswerOption
+    }
+    
     func verifyAnswerOption(_ option: AnswerOption) -> Bool {
         return currentQuestion.correctAnswerOption == option
     }

@@ -100,6 +100,23 @@ class GameNode: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
+    
+    // MARK: - Private Helpers
+    
+    private func markAnswerOption(_ option: AnswerOption, usingTexture texture: SKTexture) {
+        switch option {
+        case .optionA:
+            answerOption_0.fillTexture = texture
+        case .optionB:
+            answerOption_1.fillTexture = texture
+        case .optionC:
+            answerOption_2.fillTexture = texture
+        case .optionD:
+            answerOption_3.fillTexture = texture
+        }
+    }
+    
+    
     // MARK: - Public Properties & Function
     
     func configure(with question: QuestionDTO, questionNumber: Int, jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
@@ -126,6 +143,15 @@ class GameNode: SKSpriteNode {
             return
         }
         questionLabel.timerLabelFontColor = .orange
+    }
+    
+    func markAsAnsweredCorrectly(with answerOption: AnswerOption) {
+        markAnswerOption(answerOption, usingTexture: kButtonCorrectTexture)
+    }
+    
+    func markAsAnsweredIncorrectly(with chosenOption: AnswerOption, correctOption: AnswerOption) {
+        markAnswerOption(chosenOption, usingTexture: kButtonIncorrectTexture)
+        markAnswerOption(correctOption, usingTexture: kButtonCorrectTexture)
     }
     
 
@@ -162,23 +188,23 @@ class GameNode: SKSpriteNode {
         let location = touch.location(in: self)
 
         if answerOption_0.contains(location) {
-            gameControllerDelegate.didSelectAnswerOption(.optionA)
             answerOption_0.fillTexture = kButtonLoggedTexture
+            gameControllerDelegate.didSelectAnswerOption(.optionA)
         }
         
         if answerOption_1.contains(location) {
-            gameControllerDelegate.didSelectAnswerOption(.optionB)
             answerOption_1.fillTexture = kButtonLoggedTexture
+            gameControllerDelegate.didSelectAnswerOption(.optionB)
         }
         
         if answerOption_2.contains(location) {
-            gameControllerDelegate.didSelectAnswerOption(.optionC)
             answerOption_2.fillTexture = kButtonLoggedTexture
+            gameControllerDelegate.didSelectAnswerOption(.optionC)
         }
         
         if answerOption_3.contains(location) {
-            gameControllerDelegate.didSelectAnswerOption(.optionD)
             answerOption_3.fillTexture = kButtonLoggedTexture
+            gameControllerDelegate.didSelectAnswerOption(.optionD)
         }
         
         if jokerFiftyFiftyButton.contains(location) {
