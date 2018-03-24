@@ -3,6 +3,7 @@ import SpriteKit
 let kButtonActiveTexture = SKTexture(imageNamed: "Images/button_active")
 let kButtonInactiveTexture = SKTexture(imageNamed: "Images/button_inactive")
 let kButtonSelectedTexture = SKTexture(imageNamed: "Images/button_selected")
+let kButtonLoggedTexture = SKTexture(imageNamed: "Images/button_answer_logged")
 
 let kButtonPauseActiveTexture = SKTexture(imageNamed: "Images/button_dropout")
 let kButtonPauseSelectedTexture = SKTexture(imageNamed: "Images/button_dropout_selected")
@@ -20,12 +21,8 @@ class ButtonNode: SKShapeNode {
     // MARK: - Public Properties
     
     var labelText: String? {
-        get {
-            return labelNode.text
-        }
-        set {
-            labelNode.text = newValue
-        }
+        get { return labelNode.text }
+        set { labelNode.text = newValue }
     }
     
     

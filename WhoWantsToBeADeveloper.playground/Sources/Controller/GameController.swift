@@ -76,13 +76,13 @@ class GameController {
         gameNode.updateTimer(with: timeLeft)
     }
     
-    @objc private func timerDidRunOut() {
+    private func timerDidRunOut() {
         roundTimer.invalidate()
         // todo: send to highscore list
     }
 }
 
-extension GameController: GameControllerDelegate { // todo
+extension GameController: GameControllerDelegate {
     
     func didSelectAnswerOption(_ option: AnswerOption) {
         roundTimer.invalidate()
@@ -92,11 +92,12 @@ extension GameController: GameControllerDelegate { // todo
             gameOver()
             return
         }
+        // todo: highlight answer right
         configureNextRound()
     }
     
     func didSelectJokerOption(_ option: JokerOption) {
-        
+        // todo
     }
     
     func didSelectPause() {
