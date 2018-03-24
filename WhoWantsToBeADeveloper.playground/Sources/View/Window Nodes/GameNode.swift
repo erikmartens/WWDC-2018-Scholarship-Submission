@@ -24,6 +24,14 @@ class GameNode: SKSpriteNode {
     private var answerOptionButtons: [ButtonNode] {
         return [answerOption_0, answerOption_1, answerOption_2, answerOption_3]
     }
+    
+    private var answerOptionActive_0 = true
+    private var answerOptionActive_1 = true
+    private var answerOptionActive_2 = true
+    private var answerOptionActive_3 = true
+    
+    private var jokerFiftyFiftyActive: Bool!
+    private var jokerAudienceActive: Bool!
 
 
     // MARK: - Initialization
@@ -116,6 +124,23 @@ class GameNode: SKSpriteNode {
         }
     }
     
+    private func markAnswerOptionInactive(_ option: AnswerOption) {
+        switch option {
+        case .optionA:
+            answerOptionActive_0 = false
+            answerOption_0.fillTexture = kButtonInactiveTexture
+        case .optionB:
+            answerOptionActive_1 = false
+            answerOption_1.fillTexture = kButtonInactiveTexture
+        case .optionC:
+            answerOptionActive_2 = false
+            answerOption_2.fillTexture = kButtonInactiveTexture
+        case .optionD:
+            answerOptionActive_3 = false
+            answerOption_3.fillTexture = kButtonInactiveTexture
+        }
+    }
+    
     
     // MARK: - Public Properties & Function
     
@@ -130,10 +155,26 @@ class GameNode: SKSpriteNode {
         answerOption_2.fillTexture = kButtonActiveTexture
         answerOption_3.fillTexture = kButtonActiveTexture
         
+        answerOptionActive_0 = true
+        answerOptionActive_1 = true
+        answerOptionActive_2 = true
+        answerOptionActive_3 = true
+        
         answerOption_0.labelText = "A: \(question.answerOptions[.optionA]!)"
         answerOption_1.labelText = "B: \(question.answerOptions[.optionB]!)"
         answerOption_2.labelText = "C: \(question.answerOptions[.optionC]!)"
         answerOption_3.labelText = "D: \(question.answerOptions[.optionD]!)"
+        
+        self.jokerFiftyFiftyActive = jokerFiftyFiftyActive
+        self.jokerAudienceActive = jokerAudienceActive
+        
+        jokerFiftyFiftyButton.fillTexture = jokerFiftyFiftyActive ? kJokerFiftyFiftyActiveTexture : kJokerFiftyFiftyInactiveTexture
+        jokerAudienceButton.fillTexture = jokerAudienceActive ? kJokerAudienceActiveTexture : kJokerAudienceInactiveTexture
+    }
+    
+    func activateFiftyFiftyJoker(with excludedAnswerOptions: JokerFiftyExcludedAnswerOptions) {
+        markAnswerOptionInactive(excludedAnswerOptions.firstAnswerOption)
+        markAnswerOptionInactive(excludedAnswerOptions.secondAnswerOption)
     }
     
     func updateTimer(with timeLeft: TimeInterval) {
@@ -164,16 +205,14 @@ class GameNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
 
-        if jokerFiftyFiftyButton.contains(location) {
+        if jokerFiftyFiftyActive && jokerFiftyFiftyButton.contains(location) {
             jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
             return
         }
-        
-        if jokerAudienceButton.contains(location) {
+        if jokerAudienceActive && jokerAudienceButton.contains(location) {
             jokerAudienceButton.fillTexture = kJokerAudienceSelectedTexture
             return
         }
-
         if pauseButton.contains(location) {
             pauseButton.fillTexture = kButtonPauseSelectedTexture
             return
@@ -187,41 +226,40 @@ class GameNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
 
-        if answerOption_0.contains(location) {
+        if answerOptionActive_0 && answerOption_0.contains(location) {
             answerOption_0.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionA)
         }
-        
-        if answerOption_1.contains(location) {
+        if answerOptionActive_1 && answerOption_1.contains(location) {
             answerOption_1.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionB)
         }
-        
-        if answerOption_2.contains(location) {
+        if answerOptionActive_2 && answerOption_2.contains(location) {
             answerOption_2.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionC)
         }
-        
-        if answerOption_3.contains(location) {
+        if answerOptionActive_3 && answerOption_3.contains(location) {
             answerOption_3.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionD)
         }
-        
-        if jokerFiftyFiftyButton.contains(location) {
+        if jokerFiftyFiftyActive && jokerFiftyFiftyButton.contains(location) {
+            jokerFiftyFiftyActive = false
+            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
+            return
         }
-        
-        if jokerAudienceButton.contains(location) {
+        if jokerAudienceActive && jokerAudienceButton.contains(location) {
+            jokerAudienceActive = false
+            jokerAudienceButton.fillTexture = kJokerAudienceInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.audience)
+            return
         }
-        
         if pauseButton.contains(location) {
             gameControllerDelegate.didSelectPause()
         }
-
         jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
         jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
-        pauseButton.fillTexture = kButtonPauseSelectedTexture
+        pauseButton.fillTexture = kButtonPauseActiveTexture
     }
 }
 

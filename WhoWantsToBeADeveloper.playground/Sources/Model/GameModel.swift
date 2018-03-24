@@ -1,5 +1,10 @@
 import Foundation
 
+struct JokerFiftyExcludedAnswerOptions {
+    var firstAnswerOption: AnswerOption
+    var secondAnswerOption: AnswerOption
+}
+
 class GameModel {
     
     // todo: remove dummy question
@@ -57,6 +62,14 @@ class GameModel {
     
     var correctAnswerOption: AnswerOption {
         return currentQuestion.correctAnswerOption
+    }
+    
+    var jokerFiftyFiftyExcludedAnswerOptions: JokerFiftyExcludedAnswerOptions {
+        var excludableAnswerOptions: [AnswerOption] = [.optionA, .optionB, .optionC, .optionD].filter { return $0 != currentQuestion.correctAnswerOption }
+        
+        let randomIndex = Int(arc4random_uniform(UInt32(excludableAnswerOptions.count)))
+        _ = excludableAnswerOptions.remove(at: randomIndex)
+        return JokerFiftyExcludedAnswerOptions(firstAnswerOption: excludableAnswerOptions.first!, secondAnswerOption: excludableAnswerOptions.last!) // force unwrap, this should never be nil (and if we want to know)
     }
     
     func verifyAnswerOption(_ option: AnswerOption) -> Bool {

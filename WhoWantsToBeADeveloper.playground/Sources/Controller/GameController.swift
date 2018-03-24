@@ -82,15 +82,6 @@ class GameController {
     }
 }
 
-//func markAsAnsweredCorrectly(with answerOption: AnswerOption) {
-//    markAnswerOption(answerOption, usingTexture: kButtonCorrectTexture)
-//}
-//
-//func markAsAnsweredIncorrectly(with chosenOption: AnswerOption, correctOption: AnswerOption) {
-//    markAnswerOption(chosenOption, usingTexture: kButtonIncorrectTexture)
-//    markAnswerOption(correctOption, usingTexture: kButtonCorrectTexture)
-//}
-
 extension GameController: GameControllerDelegate {
     
     func didSelectAnswerOption(_ option: AnswerOption) {
@@ -113,7 +104,13 @@ extension GameController: GameControllerDelegate {
     }
     
     func didSelectJokerOption(_ option: JokerOption) {
-        // todo
+        switch option {
+        case .fiftyFifty:
+            let excludedAnswerOptions = gameModel.jokerFiftyFiftyExcludedAnswerOptions
+            gameNode.activateFiftyFiftyJoker(with: excludedAnswerOptions)
+        case .audience:
+            break
+        }
     }
     
     func didSelectPause() {
