@@ -14,10 +14,14 @@ class QuestionLabelNode: SKShapeNode {
         set { questionLabelNode.text = newValue }
     }
     
-    // todo: maybe delete this convenience accessor
     var timerLabelText: String? {
         get { return timerLabelNode.text }
         set { timerLabelNode.text = newValue }
+    }
+    
+    var timerLabelFontColor: UIColor? {
+        get { return timerLabelNode.fontColor }
+        set { timerLabelNode.fontColor = newValue }
     }
     
     

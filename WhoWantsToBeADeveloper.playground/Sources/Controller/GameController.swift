@@ -63,17 +63,17 @@ class GameController {
     
     private func startRoundTimer() {
         timeLeft = 30
-        gameNode.updateTimer(with: timeLeft.stringFromTime)
+        gameNode.updateTimer(with: timeLeft)
         roundTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
     }
 
     @objc private func fireTimer() {
         timeLeft -= 1
-        if timeLeft <= 0 {
+        if timeLeft < 0 {
             timerDidRunOut()
             return
         }
-        gameNode.updateTimer(with: timeLeft.stringFromTime)
+        gameNode.updateTimer(with: timeLeft)
     }
     
     @objc private func timerDidRunOut() {
@@ -101,12 +101,5 @@ extension GameController: GameControllerDelegate { // todo
     
     func didSelectPause() {
         // todo: store game and call applicationGameDelegate method
-    }
-}
-
-fileprivate extension TimeInterval {
-    
-    var stringFromTime: String {
-        return String(format: "%02d : %02d", Int((self/60.0).truncatingRemainder(dividingBy: 60)), Int((self).truncatingRemainder(dividingBy: 60)))
     }
 }

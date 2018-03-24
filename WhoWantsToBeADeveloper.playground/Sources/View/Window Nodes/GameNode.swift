@@ -1,3 +1,4 @@
+import Foundation
 import SpriteKit
 
 class GameNode: SKSpriteNode {
@@ -113,8 +114,13 @@ class GameNode: SKSpriteNode {
         answerOption_3.labelText = "D: \(question.answerOptions[.optionD]!)"
     }
     
-    func updateTimer(with timeLeft: String) {
-        questionLabel.timerLabelText = "\(timeLeft)"
+    func updateTimer(with timeLeft: TimeInterval) {
+        questionLabel.timerLabelText = "\(timeLeft.stringFromTime)"
+        guard timeLeft < 10 else {
+            questionLabel.timerLabelFontColor = .white
+            return
+        }
+        questionLabel.timerLabelFontColor = .orange
     }
     
 
@@ -202,5 +208,12 @@ class GameNode: SKSpriteNode {
         jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
         jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
         pauseButton.fillTexture = kButtonPauseSelectedTexture
+    }
+}
+
+fileprivate extension TimeInterval {
+    
+    var stringFromTime: String {
+        return String(format: "%02d : %02d", Int((self/60.0).truncatingRemainder(dividingBy: 60)), Int((self).truncatingRemainder(dividingBy: 60)))
     }
 }
