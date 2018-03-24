@@ -5,7 +5,7 @@ enum NodeType: Int {
     case mainMenu
     case game
     case highscores
-    case addQuestion
+    case about
 }
 
 protocol ApplicationDelegate: class {
@@ -26,7 +26,7 @@ public class ApplicationScene: SKScene {
     
     private var mainMenuNode: MainMenuNode?
     private var highscoresNode: HighscoresNode?
-    private var questionAdditionNode: QuestionAdditionNode?
+    private var aboutNode: AboutNode?
     
     private var gameController: GameController?
     
@@ -79,7 +79,8 @@ extension ApplicationScene: ApplicationDelegate {
             }
             removeAllChildren()
             addChild(highscoresNode!)
-        case .addQuestion:
+        case .about:
+            // todo
             break
         }
     }

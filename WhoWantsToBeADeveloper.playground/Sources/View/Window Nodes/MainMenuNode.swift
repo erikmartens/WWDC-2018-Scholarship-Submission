@@ -14,13 +14,13 @@ class MainMenuNode: SKSpriteNode {
     private var resumeButton: ButtonNode!
     private var startButton: ButtonNode!
     private var highscoreButton: ButtonNode!
-    private var addQuestionButton: ButtonNode!
+    private var aboutButton: ButtonNode!
     
     private var backgroundImage: SKSpriteNode!
     
     private let buttonsCount = 4
     private var buttons: [ButtonNode] {
-        return [resumeButton, startButton, highscoreButton, addQuestionButton]
+        return [resumeButton, startButton, highscoreButton, aboutButton]
     }
     
     
@@ -58,14 +58,14 @@ class MainMenuNode: SKSpriteNode {
         let highscoreButtonCoordinateY = verticalButtonSpace / CGFloat(2)
         highscoreButton.position = CGPoint(x: 0, y: -highscoreButtonCoordinateY)
         
-        addQuestionButton = ButtonNode(size: buttonSize, labelText: "Add Questions", backgroundTexture: kButtonActiveTexture)
-        let addQuestionButtonCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
-        addQuestionButton.position = CGPoint(x: 0, y: -addQuestionButtonCoordinateY)
+        aboutButton = ButtonNode(size: buttonSize, labelText: "About", backgroundTexture: kButtonActiveTexture)
+        let aboutButtonCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
+        aboutButton.position = CGPoint(x: 0, y: -aboutButtonCoordinateY)
         
         addChild(resumeButton)
         addChild(startButton)
         addChild(highscoreButton)
-        addChild(addQuestionButton)
+        addChild(aboutButton)
         addChild(backgroundImage)
     }
     
@@ -95,8 +95,8 @@ class MainMenuNode: SKSpriteNode {
             highscoreButton.fillTexture = kButtonSelectedTexture
             return
         }
-        if addQuestionButton.contains(location) {
-            addQuestionButton.fillTexture = kButtonSelectedTexture
+        if aboutButton.contains(location) {
+            aboutButton.fillTexture = kButtonSelectedTexture
             return
         }
     }
@@ -117,8 +117,8 @@ class MainMenuNode: SKSpriteNode {
         if highscoreButton.contains(location) {
             applicationDelegate?.didSelectNode(with: .highscores)
         }
-        if addQuestionButton.contains(location) {
-            applicationDelegate?.didSelectNode(with: .addQuestion)
+        if aboutButton.contains(location) {
+            applicationDelegate?.didSelectNode(with: .about)
         }
         buttons.forEach { $0.fillTexture = kButtonActiveTexture } // todo: resume button texture
     }

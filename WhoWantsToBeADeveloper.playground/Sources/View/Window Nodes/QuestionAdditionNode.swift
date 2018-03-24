@@ -1,4 +1,4 @@
 import SpriteKit
 
-class QuestionAdditionNode: SKSpriteNode {
+class AboutNode: SKSpriteNode {
 }

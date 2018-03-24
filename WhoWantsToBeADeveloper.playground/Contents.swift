@@ -13,7 +13,7 @@ With this playful approach to learning [Swift](https://developer.apple.com/libra
  
  > __IMPORTANT:__ To use the "_resume game_" and the "_highscores_" feature you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Xcode cannot assist you due to sandboxing.
 
-> __DID YOU KNOW?:__ You can also add your own questions by hacking the `Questions.json` file. You don't need to supply an identifier for your inserted question. This will be automatically generated during the next boot.
+> __DID YOU KNOW?:__ You can also add your own questions by hacking the `Questions.json` file.
  
  __Enjoy and hopefully see you at WWDC 18__ ❤️
  */
