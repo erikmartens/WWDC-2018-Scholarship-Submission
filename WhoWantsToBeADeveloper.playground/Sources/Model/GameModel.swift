@@ -4,7 +4,7 @@ class GameModel {
     
     // todo: remove dummy question
     static private let answerOptions = [AnswerOption.optionA: "Test A", AnswerOption.optionB: "Test B", AnswerOption.optionC: "Test C", AnswerOption.optionD: "Test D"]
-    static private let question = QuestionDTO(identifier: 126543456, question: "Test Question?", answerOptions: GameModel.answerOptions, correctAnswerOption: AnswerOption.optionA)
+    static private let question = QuestionDTO(identifier: 126543456, question: "Test Question? Test Question? Test Question? Test Question? Test Question? Test Question? Test Question? Test Question? Test Question?", answerOptions: GameModel.answerOptions, correctAnswerOption: AnswerOption.optionA)
 
     // MARK: - Properties
     

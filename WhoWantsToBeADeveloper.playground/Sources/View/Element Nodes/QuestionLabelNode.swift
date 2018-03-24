@@ -43,7 +43,7 @@ class QuestionLabelNode: SKShapeNode {
         let pathOriginX = size.width / CGFloat(2)
         let pathOriginY = size.height / CGFloat(2)
         let pathRect = CGRect(x: -pathOriginX, y: -pathOriginY, width: size.width, height: size.height)
-        let largeLabelPreferredWidth = size.width * 0.6 - padding * 2
+        let largeLabelPreferredWidth = size.width * 0.6
         let smallLabelPreferredWidth = size.width * 0.2 - padding * 2
         
         /* Additional Configuration */
@@ -59,7 +59,7 @@ class QuestionLabelNode: SKShapeNode {
         questionNumberLabelNode.position = CGPoint(x: -(size.width / 2 - (smallLabelPreferredWidth + 2 * padding) / 2), y: 0)
         
         questionLabelNode = SKLabelNode(text: questionLabelText)
-        questionLabelNode.configure(with: largeLabelPreferredWidth, lines: 2, fontName: "SanFrancisco-Bold")
+        questionLabelNode.configure(with: largeLabelPreferredWidth, lines: 2, fontSizeFactor: 0.6, fontName: "SanFrancisco-Bold")
         questionLabelNode.position = CGPoint(x: 0, y: 0)
         
         timerLabelNode = SKLabelNode(text: timeLabelText)
@@ -93,10 +93,10 @@ class QuestionLabelNode: SKShapeNode {
 
 fileprivate extension SKLabelNode {
     
-    func configure(with width: CGFloat, lines: Int, fontName: String? = nil) {
+    func configure(with width: CGFloat, lines: Int, fontSizeFactor: CGFloat = 0.75, fontName: String? = nil) {
         preferredMaxLayoutWidth = width
         fontColor = .white
-        fontSize *= 0.75
+        fontSize *= fontSizeFactor
         if let fontName = fontName { self.fontName = fontName }
         numberOfLines = lines
         lineBreakMode = .byWordWrapping
