@@ -8,8 +8,10 @@ class MainMenuNode: SKSpriteNode {
     
     
     // MARK: - Private Properties
+    // implicitely force unwrap applicationGameDelegate
+    // the delegate should never be nil and if it is we want to know by crashing the app, so we are alerted and can fix it
     
-    private weak var applicationDelegate: ApplicationDelegate?
+    private weak var applicationDelegate: ApplicationDelegate!
     
     private var resumeButton: ButtonNode!
     private var startButton: ButtonNode!
@@ -46,7 +48,8 @@ class MainMenuNode: SKSpriteNode {
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSize = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         
-        resumeButton = ButtonNode(size: buttonSize, labelText: "Resume Game", backgroundTexture: kButtonInactiveTexture) // todo
+        let resumeButtonTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
+        resumeButton = ButtonNode(size: buttonSize, labelText: "Resume Game", backgroundTexture: resumeButtonTexture)
         let resumeButtonCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
         resumeButton.position = CGPoint(x: 0, y: resumeButtonCoordinateY)
         
@@ -108,18 +111,21 @@ class MainMenuNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
         
-        if resumeButton.contains(location) {
-            applicationDelegate?.didSelectNode(with: .game) // todo
+        if applicationDelegate.savegameAvailable && resumeButton.contains(location) {
+            applicationDelegate.didSelectNode(with: .resume)
         }
         if startButton.contains(location) {
-            applicationDelegate?.didSelectNode(with: .game)
+            applicationDelegate.didSelectNode(with: .game)
         }
         if highscoreButton.contains(location) {
-            applicationDelegate?.didSelectNode(with: .highscores)
+            applicationDelegate.didSelectNode(with: .highscores)
         }
         if aboutButton.contains(location) {
-            applicationDelegate?.didSelectNode(with: .about)
+            applicationDelegate.didSelectNode(with: .about)
         }
-        buttons.forEach { $0.fillTexture = kButtonActiveTexture } // todo: resume button texture
+        resumeButton.fillTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
+        startButton.fillTexture = kButtonActiveTexture
+        highscoreButton.fillTexture = kButtonActiveTexture
+        aboutButton.fillTexture = kButtonActiveTexture
     }
 }

@@ -14,9 +14,9 @@ class GameModel {
     // MARK: - Properties
     
     private(set) var currentQuestionIndex: Int
-    private var deliveredQuestionIDs: [Int]
+    private(set) var deliveredQuestionIDs: [Int]
     private var questions: [QuestionDTO]
-    private var currentQuestion: QuestionDTO!
+    private(set) var currentQuestion: QuestionDTO!
     var jokerFiftyFiftyActive: Bool!
     var jokerAudienceActive: Bool!
     
@@ -26,10 +26,12 @@ class GameModel {
     /**
      * This init is used for restoring a previous game from a save file
      */
-    init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], questions: [QuestionDTO], jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
+    init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
+        let questionWrapper = FileStorageService.retrieveJson(fromFileWithType: .questions, andDecodeAsType: QuestionArrayWrapper.self)! // force unwrap, this should always succeed and should crash if it doesn't (without questions the game can't run)
+        
         self.currentQuestionIndex = currentQuestionIndex
         self.deliveredQuestionIDs = deliveredQuestionIDs
-        self.questions = questions
+        self.questions = questionWrapper.questions
         self.jokerFiftyFiftyActive = jokerFiftyFiftyActive
         self.jokerAudienceActive = jokerAudienceActive
     }
@@ -38,8 +40,7 @@ class GameModel {
      * This convenience init is used for initiating a new game
      */
     convenience init() {
-        let questionWrapper = FileStorageService.retrieveJson(fromFileWithType: .questions, andDecodeAsType: QuestionArrayWrapper.self)! // force unwrap, this should always succeed and should crash if it doesn't (without questions the game can't run)
-        self.init(currentQuestionIndex: 0, deliveredQuestionIDs: [Int](), questions: questionWrapper.questions, jokerFiftyFiftyActive: true, jokerAudienceActive: true)
+        self.init(currentQuestionIndex: 0, deliveredQuestionIDs: [Int](), jokerFiftyFiftyActive: true, jokerAudienceActive: true)
     }
     
     

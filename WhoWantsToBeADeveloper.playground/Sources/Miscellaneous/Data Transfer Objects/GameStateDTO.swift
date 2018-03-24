@@ -4,7 +4,7 @@ struct GameStateDTO: Codable {
     var currentQuestionIndex: Int
     var deliveredQuestionIDs: [Int]
     var remainingTime: Int
-    var usedFiftyFiftyJoker: Bool
-    var usedAudienceJoker: Bool
+    var jokerFiftyFiftyActive: Bool
+    var jokerAudienceActive: Bool
 }
 

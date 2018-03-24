@@ -4,19 +4,21 @@ import SpriteKit
 enum NodeType: Int {
     case mainMenu
     case game
+    case resume
     case highscores
     case about
 }
 
 protocol ApplicationDelegate: class {
     var aplicationFrame: CGRect { get }
+    var savegameAvailable: Bool { get }
     func didSelectNode(with nodeType: NodeType)
 }
 
 protocol ApplicationGameDelegate: class {
     var aplicationFrame: CGRect { get }
     func presentGame(with gameNode: GameNode)
-    func didPauseGame(with state: GameStateDTO)
+    func didPauseGame()
     func didCompleteGame(with score: Int)
 }
 
@@ -61,6 +63,10 @@ extension ApplicationScene: ApplicationDelegate {
         }
     }
     
+    var savegameAvailable: Bool {
+        return FileStorageService.retrieveJson(fromFileWithType: .savegame, andDecodeAsType: GameStateDTO.self) != nil
+    }
+    
     func didSelectNode(with nodeType: NodeType) {
         switch nodeType {
         case .mainMenu:
@@ -72,6 +78,12 @@ extension ApplicationScene: ApplicationDelegate {
         case .game:
             if gameController == nil {
                 gameController = GameController(applicationGameDelegate: self) // game controller init starts game automatically
+            }
+        case .resume:
+            // force unwrap savegame, this should not be nil at this point, if it is something went wrong and we need to know by crashing
+            let savegame = FileStorageService.retrieveJson(fromFileWithType: .savegame, andDecodeAsType: GameStateDTO.self)!
+            if gameController == nil {
+                gameController = GameController(applicationGameDelegate: self, gameState: savegame)
             }
         case .highscores:
             if highscoresNode == nil {
@@ -93,12 +105,10 @@ extension ApplicationScene: ApplicationGameDelegate {
         addChild(gameNode)
     }
     
-    func didPauseGame(with state: GameStateDTO) {
+    func didPauseGame() {
         if mainMenuNode == nil {
             mainMenuNode = MainMenuNode(applicationDelegate: self)
         }
-        // todo store game state
-        // activate resume button
         removeAllChildren()
         addChild(mainMenuNode!)
         gameController = nil

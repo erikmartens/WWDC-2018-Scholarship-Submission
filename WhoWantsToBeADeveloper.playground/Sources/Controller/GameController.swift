@@ -33,6 +33,11 @@ class GameController {
         startGame()
     }
     
+    init(applicationGameDelegate: ApplicationGameDelegate, gameState: GameStateDTO) {
+        self.applicationGameDelegate = applicationGameDelegate
+        resumeGame(with: gameState)
+    }
+    
     
     // MARK: - Private Helpers
     
@@ -43,14 +48,35 @@ class GameController {
         configureNextRound()
     }
     
-    private func resumeGame() {
-        // todo
+    private func resumeGame(with gameState: GameStateDTO) {
+        
+        gameModel = GameModel(currentQuestionIndex: gameState.currentQuestionIndex,
+                              deliveredQuestionIDs: gameState.deliveredQuestionIDs,
+                              jokerFiftyFiftyActive: gameState.jokerFiftyFiftyActive,
+                              jokerAudienceActive: gameState.jokerAudienceActive)
+        gameNode = GameNode(frame: applicationGameDelegate.aplicationFrame, gameControllerDelegate: self)
+        applicationGameDelegate.presentGame(with: gameNode)
+        
+        let questionNumber = gameModel.currentQuestionIndex
+        gameNode.configure(with: gameModel.currentQuestion, questionNumber: questionNumber, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        startRoundTimer()
+    }
+    
+    fileprivate func storeGameState() {
+        let gameState = GameStateDTO(currentQuestionIndex: gameModel.currentQuestionIndex,
+                                     deliveredQuestionIDs: gameModel.deliveredQuestionIDs,
+                                     remainingTime: Int(timeLeft),
+                                     jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive,
+                                     jokerAudienceActive: gameModel.jokerAudienceActive)
+        FileStorageService.storeJson(for: gameState, inFileWithType: .savegame)
     }
     
     fileprivate func configureNextRound() {
         let question = gameModel.nextQuestion
         let questionNumber = gameModel.currentQuestionIndex
         gameNode.configure(with: question, questionNumber: questionNumber, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        
+        timeLeft = 30
         startRoundTimer()
     }
     
@@ -62,7 +88,6 @@ class GameController {
     /* Round Timer */
     
     private func startRoundTimer() {
-        timeLeft = 30
         gameNode.updateTimer(with: timeLeft)
         roundTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
     }
@@ -116,6 +141,7 @@ extension GameController: GameControllerDelegate {
     }
     
     func didSelectPause() {
-        // todo: store game and call applicationGameDelegate method
+        storeGameState()
+        applicationGameDelegate.didPauseGame()
     }
 }
