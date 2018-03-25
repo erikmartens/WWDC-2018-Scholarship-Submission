@@ -1,11 +1,6 @@
 import SpriteKit
 
-class MainMenuNode: SKSpriteNode {
-    
-    // MARK: - Public Properties
-    
-    let nodeType: NodeType = .mainMenu
-    
+class MainMenuNode: SKSpriteNode {    
     
     // MARK: - Private Properties
     // implicitely force unwrap applicationGameDelegate

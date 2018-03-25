@@ -1,11 +1,6 @@
 import SpriteKit
 
-class HighscoresNode: SKSpriteNode {
-    
-    // MARK: - Public Properties
-    
-    let nodeType: NodeType = .highscores
-    
+class HighscoresNode: SKSpriteNode {    
     
     // MARK: - Private Properties
     
