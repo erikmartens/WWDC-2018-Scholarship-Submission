@@ -86,8 +86,8 @@ class MainMenuNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
         
-        if resumeButton.contains(location) {
-            resumeButton.fillTexture = kButtonSelectedTexture // todo
+        if applicationDelegate.savegameAvailable && resumeButton.contains(location) {
+            resumeButton.fillTexture = kButtonSelectedTexture
             return
         }
         if startButton.contains(location) {

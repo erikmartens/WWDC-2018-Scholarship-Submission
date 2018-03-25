@@ -3,8 +3,8 @@ import SpriteKit
 
 enum NodeType: Int {
     case mainMenu
-    case game
     case resume
+    case game
     case highscores
     case about
 }
@@ -64,7 +64,7 @@ extension ApplicationScene: ApplicationDelegate {
     }
     
     var savegameAvailable: Bool {
-        return FileStorageService.retrieveJson(fromFileWithType: .savegame, andDecodeAsType: GameStateDTO.self) != nil
+        return FileStorageService.savegame != nil
     }
     
     func didSelectNode(with nodeType: NodeType) {
@@ -75,15 +75,16 @@ extension ApplicationScene: ApplicationDelegate {
             }
             removeAllChildren()
             addChild(mainMenuNode!)
+        case .resume:
+            // force unwrap savegame, this should not be nil at this point. If it is something went wrong and we need to know by crashing
+            let savegame = FileStorageService.savegame!
+            FileStorageService.invalidateSavegame()
+            if gameController == nil {
+                gameController = GameController(applicationGameDelegate: self, gameState: savegame)
+            }
         case .game:
             if gameController == nil {
                 gameController = GameController(applicationGameDelegate: self) // game controller init starts game automatically
-            }
-        case .resume:
-            // force unwrap savegame, this should not be nil at this point, if it is something went wrong and we need to know by crashing
-            let savegame = FileStorageService.retrieveJson(fromFileWithType: .savegame, andDecodeAsType: GameStateDTO.self)!
-            if gameController == nil {
-                gameController = GameController(applicationGameDelegate: self, gameState: savegame)
             }
         case .highscores:
             if highscoresNode == nil {

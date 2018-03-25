@@ -11,7 +11,7 @@ import PlaygroundSupport
  
 With this playful approach to learning [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/) and the basics about devloping for Apple's platforms, anyone who enjoys diving into a new topic via a quiz like fashion, will feel right at home.
  
- > __IMPORTANT:__ To use the "_resume game_" and the "_highscores_" feature you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Xcode cannot assist you due to sandboxing.
+ > __IMPORTANT:__ To use the "_Resume Game_" and the "_Highscores_" feature you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Xcode cannot assist you due to sandboxing.
 
 > __DID YOU KNOW?:__ You can also add your own questions by hacking the `Questions.json` file.
  

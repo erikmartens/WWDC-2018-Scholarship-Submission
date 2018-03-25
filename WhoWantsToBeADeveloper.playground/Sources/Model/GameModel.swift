@@ -27,11 +27,12 @@ class GameModel {
      * This init is used for restoring a previous game from a save file
      */
     init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
-        let questionWrapper = FileStorageService.retrieveJson(fromFileWithType: .questions, andDecodeAsType: QuestionArrayWrapper.self)! // force unwrap, this should always succeed and should crash if it doesn't (without questions the game can't run)
-        
         self.currentQuestionIndex = currentQuestionIndex
         self.deliveredQuestionIDs = deliveredQuestionIDs
-        self.questions = questionWrapper.questions
+        questions = FileStorageService.questions! // force unwrap, this should always succeed and should crash if it doesn't (without questions the game can't run)
+        if !deliveredQuestionIDs.isEmpty {
+            currentQuestion = questions.first { return $0.identifier == deliveredQuestionIDs.last! }
+        }
         self.jokerFiftyFiftyActive = jokerFiftyFiftyActive
         self.jokerAudienceActive = jokerAudienceActive
     }

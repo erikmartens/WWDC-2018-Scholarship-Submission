@@ -68,7 +68,7 @@ class GameController {
                                      remainingTime: Int(timeLeft),
                                      jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive,
                                      jokerAudienceActive: gameModel.jokerAudienceActive)
-        FileStorageService.storeJson(for: gameState, inFileWithType: .savegame)
+        FileStorageService.savegame = gameState
     }
     
     fileprivate func configureNextRound() {
