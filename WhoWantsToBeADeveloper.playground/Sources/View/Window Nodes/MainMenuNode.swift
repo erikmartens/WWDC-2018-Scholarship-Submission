@@ -31,11 +31,11 @@ class MainMenuNode: SKSpriteNode {
         self.applicationDelegate = applicationDelegate
         
         isUserInteractionEnabled = true
-        size = CGSize(width: applicationDelegate.aplicationFrame.size.width, height: applicationDelegate.aplicationFrame.size.height)
-        position = CGPoint(x: applicationDelegate.aplicationFrame.midX, y: applicationDelegate.aplicationFrame.midY)
+        size = CGSize(width: applicationDelegate.applicationFrame.size.width, height: applicationDelegate.applicationFrame.size.height)
+        position = CGPoint(x: applicationDelegate.applicationFrame.midX, y: applicationDelegate.applicationFrame.midY)
         
         backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = applicationDelegate.aplicationFrame.size
+        backgroundImage.size = applicationDelegate.applicationFrame.size
         backgroundImage.zPosition = -1
         
         let verticalButtonSpace = size.height / CGFloat(buttonsCount)

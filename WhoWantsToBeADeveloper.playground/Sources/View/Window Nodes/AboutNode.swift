@@ -43,8 +43,8 @@ class AboutNode: SKSpriteNode {
         
         /* Additional Configuration */
         isUserInteractionEnabled = true
-        size = CGSize(width: applicationDelegate.aplicationFrame.size.width, height: applicationDelegate.aplicationFrame.size.height)
-        position = CGPoint(x: applicationDelegate.aplicationFrame.midX, y: applicationDelegate.aplicationFrame.midY)
+        size = CGSize(width: applicationDelegate.applicationFrame.size.width, height: applicationDelegate.applicationFrame.size.height)
+        position = CGPoint(x: applicationDelegate.applicationFrame.midX, y: applicationDelegate.applicationFrame.midY)
         
         /* Definitions */
         let aboutNodeHeight = size.height * 0.85
@@ -59,7 +59,7 @@ class AboutNode: SKSpriteNode {
         self.applicationDelegate = applicationDelegate
         
         backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = applicationDelegate.aplicationFrame.size
+        backgroundImage.size = applicationDelegate.applicationFrame.size
         backgroundImage.zPosition = -1
         
         aboutLabel = LabelNode(size: aboutNodeSize)

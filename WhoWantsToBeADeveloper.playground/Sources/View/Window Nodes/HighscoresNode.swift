@@ -30,8 +30,8 @@ class HighscoresNode: SKSpriteNode {
         
         /* Additional Configuration */
         isUserInteractionEnabled = true
-        size = CGSize(width: applicationDelegate.aplicationFrame.size.width, height: applicationDelegate.aplicationFrame.size.height)
-        position = CGPoint(x: applicationDelegate.aplicationFrame.midX, y: applicationDelegate.aplicationFrame.midY)
+        size = CGSize(width: applicationDelegate.applicationFrame.size.width, height: applicationDelegate.applicationFrame.size.height)
+        position = CGPoint(x: applicationDelegate.applicationFrame.midX, y: applicationDelegate.applicationFrame.midY)
         
         /* Definitions */
         let instructionNodeHeight = size.height * 0.25
@@ -47,7 +47,7 @@ class HighscoresNode: SKSpriteNode {
         self.applicationDelegate = applicationDelegate
         
         backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = applicationDelegate.aplicationFrame.size
+        backgroundImage.size = applicationDelegate.applicationFrame.size
         backgroundImage.zPosition = -1
         
         instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Arcade Mode Highscores")

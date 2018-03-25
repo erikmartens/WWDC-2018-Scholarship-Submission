@@ -50,7 +50,7 @@ class GameController {
     
     private func startGame() {
         gameModel = GameModel()
-        gameNode = GameNode(frame: applicationGameDelegate.aplicationFrame, gameControllerDelegate: self)
+        gameNode = GameNode(frame: applicationGameDelegate.applicationFrame, gameControllerDelegate: self)
         applicationGameDelegate.presentNode(gameNode)
         configureNextRound()
     }
@@ -58,7 +58,7 @@ class GameController {
     fileprivate func gameOver() {
         let score = gameModel.currentQuestionIndex
         if registerHighscoreNode == nil {
-            registerHighscoreNode = RegisterHighscoreNode(frame: applicationGameDelegate.aplicationFrame, highscoreControllerDelegate: self, score: score)
+            registerHighscoreNode = RegisterHighscoreNode(frame: applicationGameDelegate.applicationFrame, highscoreControllerDelegate: self, score: score)
         }
         applicationGameDelegate.presentNode(registerHighscoreNode!)
     }
@@ -77,7 +77,7 @@ class GameController {
                               deliveredQuestionIDs: savegame.deliveredQuestionIDs,
                               jokerFiftyFiftyActive: savegame.jokerFiftyFiftyActive,
                               jokerAudienceActive: savegame.jokerAudienceActive)
-        gameNode = GameNode(frame: applicationGameDelegate.aplicationFrame, gameControllerDelegate: self)
+        gameNode = GameNode(frame: applicationGameDelegate.applicationFrame, gameControllerDelegate: self)
         applicationGameDelegate.presentNode(gameNode)
         
         let questionNumber = gameModel.currentQuestionIndex

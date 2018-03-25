@@ -10,13 +10,13 @@ enum NodeType: Int {
 }
 
 protocol ApplicationDelegate: class {
-    var aplicationFrame: CGRect { get }
+    var applicationFrame: CGRect { get }
     var savegameAvailable: Bool { get }
     func didSelectNode(with nodeType: NodeType)
 }
 
 protocol ApplicationGameDelegate: class {
-    var aplicationFrame: CGRect { get }
+    var applicationFrame: CGRect { get }
     func presentNode(_ node: SKSpriteNode)
     func didPauseGame()
     func presentNameEntryAlertController(completionHandler: @escaping ((String?) -> Void))
@@ -73,7 +73,7 @@ public class ApplicationScene: SKScene {
 
 extension ApplicationScene: ApplicationDelegate {
     
-    var aplicationFrame: CGRect {
+    var applicationFrame: CGRect {
         get {
             return frame
         }
