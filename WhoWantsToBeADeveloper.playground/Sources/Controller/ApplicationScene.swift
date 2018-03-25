@@ -104,6 +104,8 @@ extension ApplicationScene: ApplicationDelegate {
             }
             removeAllChildren()
             addChild(highscoresNode!)
+            let highscores = FileStorageService.highscores ?? [HighscoreDTO]()
+            highscoresNode!.configure(with: highscores)
         case .about:
             if aboutNode == nil {
                 aboutNode = AboutNode(applicationDelegate: self)

@@ -7,11 +7,7 @@ class HighscoresNode: SKSpriteNode {
     private weak var applicationDelegate: ApplicationDelegate?
     
     private var instructionLabel: LabelNode!
-    private var labelNode_0: HighscoreLabelNode!
-    private var labelNode_1: HighscoreLabelNode!
-    private var labelNode_2: HighscoreLabelNode!
-    private var labelNode_3: HighscoreLabelNode!
-    private var labelNode_4: HighscoreLabelNode!
+    private var highscoresLabelNode: HighscoreLabelNode!
     private var backButton: ButtonNode!
     
     private var backgroundImage: SKSpriteNode!
@@ -40,7 +36,7 @@ class HighscoresNode: SKSpriteNode {
         let verticalButtonSpace = (size.height - instructionNodeHeight) / CGFloat(elementsCount)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
-        let buttonSizeRegular = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
+        let highscoresLabelSize = CGSize(width: size.width - horizontalPadding / 2, height: size.height * 0.6)
         let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         
         /* Initialize and configure all properties */
@@ -50,46 +46,32 @@ class HighscoresNode: SKSpriteNode {
         backgroundImage.size = applicationDelegate.applicationFrame.size
         backgroundImage.zPosition = -1
         
-        instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Arcade Mode Highscores")
+        instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Top 5 Highscores")
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
         instructionLabel.position = CGPoint(x: 0, y: instructionLabelCoordinateY)
         
-        labelNode_0 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test1", dateLabelText: "01.01.1990", scoreLabelText: "99")
-        let labelNodeCoordinateY_0 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
-        labelNode_0.position = CGPoint(x: 0, y: labelNodeCoordinateY_0)
-        
-        labelNode_1 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test2", dateLabelText: "01.01.1990", scoreLabelText: "99")
-        let labelNodeCoordinateY_1 = verticalButtonSpace / CGFloat(2)
-        labelNode_1.position = CGPoint(x: 0, y: labelNodeCoordinateY_1)
-        
-        labelNode_2 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test3", dateLabelText: "01.01.1990", scoreLabelText: "99")
-        let labelNodeCoordinateY_2 = verticalButtonSpace / CGFloat(2)
-        labelNode_2.position = CGPoint(x: 0, y: -labelNodeCoordinateY_2)
-        
-        labelNode_3 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test4", dateLabelText: "01.01.1990", scoreLabelText: "99")
-        let labelNodeCoordinateY_3 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
-        labelNode_3.position = CGPoint(x: 0, y: -labelNodeCoordinateY_3)
-        
-        labelNode_4 = HighscoreLabelNode(size: buttonSizeRegular, namelabelText: "Test5", dateLabelText: "01.01.1990", scoreLabelText: "99")
-        let labelNodeCoordinateY_4 = verticalButtonSpace * 2 + verticalButtonSpace / CGFloat(2)
-        labelNode_4.position = CGPoint(x: 0, y: -labelNodeCoordinateY_4)
+        highscoresLabelNode = HighscoreLabelNode(size: highscoresLabelSize)
+        let highscoresLabelNodeCoordinateY = verticalButtonSpace / CGFloat(2)
+        highscoresLabelNode.position = CGPoint(x: 0, y: -highscoresLabelNodeCoordinateY)
         
         backButton = ButtonNode(size: buttonSizeSmall, labelText: "Back", backgroundTexture: kButtonActiveTexture)
         let backButtonCoordinateY = verticalButtonSpace * 3 + verticalButtonSpace / CGFloat(2)
         backButton.position = CGPoint(x: 0, y: -backButtonCoordinateY)
         
         addChild(instructionLabel)
-        addChild(labelNode_0)
-        addChild(labelNode_1)
-        addChild(labelNode_2)
-        addChild(labelNode_3)
-        addChild(labelNode_4)
+        addChild(highscoresLabelNode)
         addChild(backButton)
         addChild(backgroundImage)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    // MARK: - Public Functions
+    
+    func configure(with highscores: [HighscoreDTO]) {
+        highscoresLabelNode.configure(with: highscores)
     }
     
     
@@ -120,7 +102,6 @@ class HighscoresNode: SKSpriteNode {
             applicationDelegate?.didSelectNode(with: .mainMenu)
             return
         }
-        
         buttons.forEach { $0.fillTexture = kButtonActiveTexture }
     }
 }

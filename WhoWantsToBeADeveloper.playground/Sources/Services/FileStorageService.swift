@@ -20,7 +20,7 @@ class FileStorageService {
     
     static var highscores: [HighscoreDTO]? {
         get {
-            let highscoreWrapper = FileStorageService.retrieveJson(fromFileWithType: .questions, andDecodeAsType: HighscoreArrayWrapper.self)
+            let highscoreWrapper = FileStorageService.retrieveJson(fromFileWithType: .highscores, andDecodeAsType: HighscoreArrayWrapper.self)
             return highscoreWrapper?.highscores
         }
     }
