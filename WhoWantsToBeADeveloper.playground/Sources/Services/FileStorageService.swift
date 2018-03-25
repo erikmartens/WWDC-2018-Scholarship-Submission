@@ -38,9 +38,9 @@ class FileStorageService {
         FileStorageService.storeJson(for: highscoresWrapper, inFileWithType: .highscores)
     }
     
-    static var savegame: GameStateDTO? {
+    static var savegame: SavegameDTO? {
         get {
-            return FileStorageService.retrieveJson(fromFileWithType: .savegame, andDecodeAsType: GameStateDTO.self)
+            return FileStorageService.retrieveJson(fromFileWithType: .savegame, andDecodeAsType: SavegameDTO.self)
         }
         set {
             FileStorageService.storeJson(for: newValue, inFileWithType: .savegame)

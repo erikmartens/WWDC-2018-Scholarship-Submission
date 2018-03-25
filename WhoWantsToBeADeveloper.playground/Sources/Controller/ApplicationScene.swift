@@ -88,7 +88,7 @@ extension ApplicationScene: ApplicationDelegate {
             let savegame = FileStorageService.savegame!
             FileStorageService.invalidateSavegame()
             if gameController == nil {
-                gameController = GameController(applicationGameDelegate: self, gameState: savegame)
+                gameController = GameController(applicationGameDelegate: self, savegame: savegame)
             }
         case .game:
             if gameController == nil {

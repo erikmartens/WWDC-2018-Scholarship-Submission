@@ -33,9 +33,9 @@ class GameController {
         startGame()
     }
     
-    init(applicationGameDelegate: ApplicationGameDelegate, gameState: GameStateDTO) {
+    init(applicationGameDelegate: ApplicationGameDelegate, savegame: SavegameDTO) {
         self.applicationGameDelegate = applicationGameDelegate
-        resumeGame(with: gameState)
+        resumeGame(with: savegame)
     }
     
     
@@ -48,28 +48,28 @@ class GameController {
         configureNextRound()
     }
     
-    private func resumeGame(with gameState: GameStateDTO) {
+    private func resumeGame(with savegame: SavegameDTO) {
         
-        gameModel = GameModel(currentQuestionIndex: gameState.currentQuestionIndex,
-                              deliveredQuestionIDs: gameState.deliveredQuestionIDs,
-                              jokerFiftyFiftyActive: gameState.jokerFiftyFiftyActive,
-                              jokerAudienceActive: gameState.jokerAudienceActive)
+        gameModel = GameModel(currentQuestionIndex: savegame.currentQuestionIndex,
+                              deliveredQuestionIDs: savegame.deliveredQuestionIDs,
+                              jokerFiftyFiftyActive: savegame.jokerFiftyFiftyActive,
+                              jokerAudienceActive: savegame.jokerAudienceActive)
         gameNode = GameNode(frame: applicationGameDelegate.aplicationFrame, gameControllerDelegate: self)
         applicationGameDelegate.presentGame(with: gameNode)
         
         let questionNumber = gameModel.currentQuestionIndex
         gameNode.configure(with: gameModel.currentQuestion, questionNumber: questionNumber, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
-        timeLeft = gameState.remainingTime
+        timeLeft = savegame.remainingTime
         startRoundTimer()
     }
     
     fileprivate func storeGameState() {
-        let gameState = GameStateDTO(currentQuestionIndex: gameModel.currentQuestionIndex,
+        let savegame = SavegameDTO(currentQuestionIndex: gameModel.currentQuestionIndex,
                                      deliveredQuestionIDs: gameModel.deliveredQuestionIDs,
                                      remainingTime: timeLeft,
                                      jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive,
                                      jokerAudienceActive: gameModel.jokerAudienceActive)
-        FileStorageService.savegame = gameState
+        FileStorageService.savegame = savegame
     }
     
     fileprivate func configureNextRound() {

@@ -1,6 +1,6 @@
 import Foundation
 
-struct GameStateDTO: Codable {
+struct SavegameDTO: Codable {
     var currentQuestionIndex: Int
     var deliveredQuestionIDs: [Int]
     var remainingTime: TimeInterval
