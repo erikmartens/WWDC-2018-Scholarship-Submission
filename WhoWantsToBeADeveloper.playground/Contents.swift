@@ -9,11 +9,15 @@ import PlaygroundSupport
  
  My personal journey has taught me that anyone can achieve their goals, when they are taught in a fashion that suits their personal learning style. What's more, breaking the ice is essential. Beginning easy but challenging and increasing the difficulty gradually will trigger the thirst for more, instead of creating frustration.
  
-With this playful approach to learning [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/) and the basics about devloping for Apple's platforms, anyone who enjoys diving into a new topic via a quiz like fashion, will feel right at home.
+With this playful approach to learning [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/) and the basics about devloping for Apple's platforms, anyone who enjoys diving into a new topic via a quiz like fashion, will feel right at home. However this Playground is only limited to your interests. You can learn just about anything else due to the modularity of this Playground (details below).
  
- > __IMPORTANT:__ To use the "_Resume Game_" and the "_Highscores_" feature you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Xcode cannot assist you due to sandboxing.
+ - IMPORTANT:
+To use the "_Resume Game_" and the "_Highscores_" feature you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Playgrounds cannot assist you due to [sandboxing](https://en.wikipedia.org/wiki/Sandbox_(computer_security)). Or you execute the following 2 commands in order in a new _Terminal_ session:
 
-> __DID YOU KNOW?:__ You can also add your own questions by hacking the `Questions.json` file.
+- `cd ./Documents`
+- `mkdir Shared\ Playground\ Data`
+
+> __DID YOU KNOW__: You can also add your own questions by hacking the `Questions.json` file. The use of this human readable format enables you to create your personalized flashcard based learning experience. _Pro Tip_: Keep different files handy, so you can interchange them to study for all of your subjects.
  
  __Enjoy and hopefully see you at WWDC 18__ ❤️
  */
