@@ -27,7 +27,7 @@ class FileStorageService {
     
     static func appendHighscore(_ highscore: HighscoreDTO) {
         var highscores = [HighscoreDTO]()
-        if let previousHighscores = FileStorageService.retrieveJson(fromFileWithType: .questions, andDecodeAsType: HighscoreArrayWrapper.self)?.highscores {
+        if let previousHighscores = FileStorageService.retrieveJson(fromFileWithType: .highscores, andDecodeAsType: HighscoreArrayWrapper.self)?.highscores {
             highscores = previousHighscores
             highscores.append(highscore)
             highscores.sort { return $0.score >= $1.score }
