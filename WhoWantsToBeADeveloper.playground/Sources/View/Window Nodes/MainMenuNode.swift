@@ -72,6 +72,13 @@ class MainMenuNode: SKSpriteNode {
     }
     
     
+    // MARK: - Public Functions
+    
+    func configureResumeAvailable() {
+        resumeButton.fillTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
+    }
+    
+    
     // MARK: - UIEvent Handlers
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -80,7 +80,6 @@ class FileStorageService {
         }
     
         if !FileManager.default.fileExists(atPath: filePathURL.path) {
-            print("💥 FileStorageService: File at path \(filePathURL.path) does not exist!")
             return nil
         }
         do {

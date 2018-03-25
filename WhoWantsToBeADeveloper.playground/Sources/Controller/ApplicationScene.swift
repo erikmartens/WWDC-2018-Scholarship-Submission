@@ -53,6 +53,18 @@ public class ApplicationScene: SKScene {
         }
         addChild(mainMenuNode!)
     }
+    
+    /* Presenting Views */
+    
+    fileprivate func presentMainMenu(completionHandler: (() -> Void)? = nil) {
+        if mainMenuNode == nil {
+            mainMenuNode = MainMenuNode(applicationDelegate: self)
+        }
+        removeAllChildren()
+        addChild(mainMenuNode!)
+        mainMenuNode!.configureResumeAvailable()
+        completionHandler?()
+    }
 }
 
 extension ApplicationScene: ApplicationDelegate {
@@ -70,11 +82,7 @@ extension ApplicationScene: ApplicationDelegate {
     func didSelectNode(with nodeType: NodeType) {
         switch nodeType {
         case .mainMenu:
-            if mainMenuNode == nil {
-                mainMenuNode = MainMenuNode(applicationDelegate: self)
-            }
-            removeAllChildren()
-            addChild(mainMenuNode!)
+            presentMainMenu()
         case .resume:
             // force unwrap savegame, this should not be nil at this point. If it is something went wrong and we need to know by crashing
             let savegame = FileStorageService.savegame!
@@ -107,22 +115,16 @@ extension ApplicationScene: ApplicationGameDelegate {
     }
     
     func didPauseGame() {
-        if mainMenuNode == nil {
-            mainMenuNode = MainMenuNode(applicationDelegate: self)
+        presentMainMenu {
+            self.gameController = nil
         }
-        removeAllChildren()
-        addChild(mainMenuNode!)
-        gameController = nil
     }
     
     func didCompleteGame(with score: Int) {
         /* test code -> remove */
-        if mainMenuNode == nil {
-            mainMenuNode = MainMenuNode(applicationDelegate: self)
+        presentMainMenu {
+            self.gameController = nil
         }
-        removeAllChildren()
-        addChild(mainMenuNode!)
-        gameController = nil
         /* test code -> remove */
         
 //        if highscoresNode == nil {

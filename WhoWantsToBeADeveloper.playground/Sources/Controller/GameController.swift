@@ -142,6 +142,7 @@ extension GameController: GameControllerDelegate {
     }
     
     func didSelectPause() {
+        roundTimer.invalidate()
         storeGameState()
         applicationGameDelegate.didPauseGame()
     }
