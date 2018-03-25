@@ -2,6 +2,20 @@ import SpriteKit
 
 class LabelNode: SKShapeNode {
     
+    // MARK: - Public Properties
+    
+    var labelText: String? {
+        get { return labelNode.text }
+        set { labelNode.text = newValue }
+    }
+    
+    // MARK: - Public Properties
+    
+    var labelAttributedText: NSAttributedString? {
+        get { return labelNode.attributedText }
+        set { labelNode.attributedText = newValue }
+    }
+    
     // MARK: - Properties
     
     private var labelNode: SKLabelNode!
@@ -9,9 +23,9 @@ class LabelNode: SKShapeNode {
     
     // MARK: - Initialization
     
-    init(size: CGSize, labelText: String) {
+    init(size: CGSize, labelText: String? = nil) {
         
-labelNode = SKLabelNode(text: labelText)
+        labelNode = SKLabelNode(text: labelText)
         super.init()
         
         /* Definitions */
@@ -28,7 +42,7 @@ labelNode = SKLabelNode(text: labelText)
         
         /* Initialize and configure all properties */
         labelNode = SKLabelNode(text: labelText)
-        labelNode.preferredMaxLayoutWidth = size.width * 0.98
+        labelNode.preferredMaxLayoutWidth = size.width * 0.95
         labelNode.fontName = "SanFrancisco-Bold"
         labelNode.fontColor = .white
         labelNode.numberOfLines = 2

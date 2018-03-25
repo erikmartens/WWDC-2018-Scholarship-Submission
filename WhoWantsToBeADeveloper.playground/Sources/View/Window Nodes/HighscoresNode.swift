@@ -41,7 +41,7 @@ class HighscoresNode: SKSpriteNode {
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSizeRegular = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
-        let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 4 * verticalPadding)
+        let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         
         /* Initialize and configure all properties */
         self.applicationDelegate = applicationDelegate
