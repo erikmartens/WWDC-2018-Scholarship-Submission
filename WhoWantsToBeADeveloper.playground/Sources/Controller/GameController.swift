@@ -11,6 +11,11 @@ protocol GameControllerDelegate: class {
     func didSelectPause()
 }
 
+protocol HighscoreControllerDelegate: class {
+    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void))
+    func didCompleteHighscoreInput(with playerName: String?)
+}
+
 class GameController {
     
     // MARK: - Private Properties
@@ -24,6 +29,8 @@ class GameController {
     
     private var roundTimer: Timer!
     private var timeLeft: TimeInterval = 0
+    
+    private var registerHighscoreNode: RegisterHighscoreNode?
     
     
     // MARK: - Initialization
@@ -44,32 +51,39 @@ class GameController {
     private func startGame() {
         gameModel = GameModel()
         gameNode = GameNode(frame: applicationGameDelegate.aplicationFrame, gameControllerDelegate: self)
-        applicationGameDelegate.presentGame(with: gameNode)
+        applicationGameDelegate.presentNode(gameNode)
         configureNextRound()
     }
     
+    fileprivate func gameOver() {
+        let score = gameModel.currentQuestionIndex
+        if registerHighscoreNode == nil {
+            registerHighscoreNode = RegisterHighscoreNode(frame: applicationGameDelegate.aplicationFrame, highscoreControllerDelegate: self, score: score)
+        }
+        applicationGameDelegate.presentNode(registerHighscoreNode!)
+    }
+    
+    fileprivate func storeGameState() {
+        let savegame = SavegameDTO(currentQuestionIndex: gameModel.currentQuestionIndex,
+                                   deliveredQuestionIDs: gameModel.deliveredQuestionIDs,
+                                   remainingTime: timeLeft,
+                                   jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive,
+                                   jokerAudienceActive: gameModel.jokerAudienceActive)
+        FileStorageService.savegame = savegame
+    }
+    
     private func resumeGame(with savegame: SavegameDTO) {
-        
         gameModel = GameModel(currentQuestionIndex: savegame.currentQuestionIndex,
                               deliveredQuestionIDs: savegame.deliveredQuestionIDs,
                               jokerFiftyFiftyActive: savegame.jokerFiftyFiftyActive,
                               jokerAudienceActive: savegame.jokerAudienceActive)
         gameNode = GameNode(frame: applicationGameDelegate.aplicationFrame, gameControllerDelegate: self)
-        applicationGameDelegate.presentGame(with: gameNode)
+        applicationGameDelegate.presentNode(gameNode)
         
         let questionNumber = gameModel.currentQuestionIndex
         gameNode.configure(with: gameModel.currentQuestion, questionNumber: questionNumber, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
         timeLeft = savegame.remainingTime
         startRoundTimer()
-    }
-    
-    fileprivate func storeGameState() {
-        let savegame = SavegameDTO(currentQuestionIndex: gameModel.currentQuestionIndex,
-                                     deliveredQuestionIDs: gameModel.deliveredQuestionIDs,
-                                     remainingTime: timeLeft,
-                                     jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive,
-                                     jokerAudienceActive: gameModel.jokerAudienceActive)
-        FileStorageService.savegame = savegame
     }
     
     fileprivate func configureNextRound() {
@@ -81,10 +95,6 @@ class GameController {
         startRoundTimer()
     }
     
-    fileprivate func gameOver() {
-        let score = gameModel.currentQuestionIndex
-        applicationGameDelegate.didCompleteGame(with: score)
-    }
     
     /* Round Timer */
     
@@ -145,5 +155,18 @@ extension GameController: GameControllerDelegate {
         roundTimer.invalidate()
         storeGameState()
         applicationGameDelegate.didPauseGame()
+    }
+}
+
+extension GameController: HighscoreControllerDelegate {
+    
+    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void)) {
+        applicationGameDelegate.presentNameEntryAlertController(completionHandler: completionHandler)
+    }
+    
+    func didCompleteHighscoreInput(with playerName: String?) {
+        let name = (playerName != nil && !playerName!.isEmpty) ? playerName! : "PlayerUnknown"
+        let highscore = HighscoreDTO(score: gameModel.currentQuestionIndex, name: name, date: Date())
+        applicationGameDelegate.didCompleteGame(with: highscore)
     }
 }

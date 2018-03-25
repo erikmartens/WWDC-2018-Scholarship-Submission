@@ -17,26 +17,30 @@ protocol ApplicationDelegate: class {
 
 protocol ApplicationGameDelegate: class {
     var aplicationFrame: CGRect { get }
-    func presentGame(with gameNode: GameNode)
+    func presentNode(_ node: SKSpriteNode)
     func didPauseGame()
-    func didCompleteGame(with score: Int)
+    func presentNameEntryAlertController(completionHandler: @escaping ((String?) -> Void))
+    func didCompleteGame(with highscore: HighscoreDTO)
 }
 
 public class ApplicationScene: SKScene {
     
     // MARK: - Private Properties
     
+    private var encapsulatingView: SKView?
+    
     private var mainMenuNode: MainMenuNode?
     private var highscoresNode: HighscoresNode?
     private var aboutNode: AboutNode?
-    
+
     private var gameController: GameController?
     
     
     // MARK: - Setup
     
     override public func didMove(to view: SKView) {
-        self.size = view.frame.size
+        encapsulatingView = view
+        size = view.frame.size
         run()
     }
     
@@ -112,9 +116,9 @@ extension ApplicationScene: ApplicationDelegate {
 
 extension ApplicationScene: ApplicationGameDelegate {
     
-    func presentGame(with gameNode: GameNode) {
+    func presentNode(_ node: SKSpriteNode) {
         removeAllChildren()
-        addChild(gameNode)
+        addChild(node)
     }
     
     func didPauseGame() {
@@ -123,18 +127,28 @@ extension ApplicationScene: ApplicationGameDelegate {
         }
     }
     
-    func didCompleteGame(with score: Int) {
-        /* test code -> remove */
+    func presentNameEntryAlertController(completionHandler: @escaping ((String?) -> Void)) {
+        let alertController = UIAlertController(title: "Enter Your Name", message: "", preferredStyle: .alert)
+        alertController.addTextField { $0.placeholder = nil }
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+            completionHandler(alertController.textFields?[0].text)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        let rootViewController = encapsulatingView?.window?.rootViewController
+        if rootViewController?.presentedViewController == nil  {
+            rootViewController?.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func didCompleteGame(with highscore: HighscoreDTO) {
+        FileStorageService.appendHighscore(highscore)
         presentMainMenu {
             self.gameController = nil
         }
-        /* test code -> remove */
-        
-//        if highscoresNode == nil {
-//            //highscoresNode = highscoresNode(applicationDelegate: self, score: Int) // todo
-//        }
-//        removeAllChildren()
-//        addChild(highscoresNode!)
-//        gameController = nil
     }
 }
