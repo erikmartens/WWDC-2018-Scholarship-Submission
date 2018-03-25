@@ -28,7 +28,6 @@ class TextEntryNode: SKShapeNode {
         super.init()
         
         /* Definitions */
-        let padding = size.width * 0.05
         let pathOriginX = size.width / CGFloat(2)
         let pathOriginY = size.height / CGFloat(2)
         let pathRect = CGRect(x: -pathOriginX, y: -pathOriginY, width: size.width, height: size.height)
@@ -50,7 +49,7 @@ class TextEntryNode: SKShapeNode {
         enteredTextNode.position = CGPoint(x: 0, y: -(size.height / CGFloat(4)))
         
         addChild(labelNode)
-        addChild(labelNode)
+        addChild(enteredTextNode)
     }
     
     required public init?(coder aDecoder: NSCoder) {

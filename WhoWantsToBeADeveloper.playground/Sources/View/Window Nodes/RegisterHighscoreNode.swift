@@ -33,11 +33,11 @@ class RegisterHighscoreNode: SKSpriteNode {
         let instructionNodeHeight = size.height * 0.25
         let instructionNodeSize = CGSize(width: size.width, height: instructionNodeHeight)
         
-        let enterNameNodeWidth = size.height * 0.75
+        let enterNameNodeWidth = size.width * 0.75
         let enterNameNodeHeight = size.height * 0.25
         let enterNameNodeSize = CGSize(width: enterNameNodeWidth, height: enterNameNodeHeight)
         
-        let verticalButtonSpace = size.height * 0.75 / CGFloat(6)
+        let verticalButtonSpace = (size.height * 0.75) / CGFloat(6)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
@@ -55,16 +55,16 @@ class RegisterHighscoreNode: SKSpriteNode {
         instructionLabel.position = CGPoint(x: 0, y: instructionLabelCoordinateY)
         
         enterNameNode = TextEntryNode(size: enterNameNodeSize, labelNodeText: "Enter Your Name:")
-        let enterNameNodeCoordinateY_0 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
-        enterNameNode.position = CGPoint(x: 0, y: enterNameNodeCoordinateY_0)
+        //let enterNameNodeCoordinateY_0 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
+        enterNameNode.position = CGPoint(x: 0, y: 0)
         
         let bottomButtonsCoordinateY = verticalButtonSpace * 3 + verticalButtonSpace / CGFloat(2)
         
         triggerNameEntryButton = ButtonNode(size: buttonSizeSmall, labelText: "Change Name", backgroundTexture: kButtonActiveTexture)
-        triggerNameEntryButton.position = CGPoint(x: -(size.width / CGFloat(2)), y: -bottomButtonsCoordinateY)
+        triggerNameEntryButton.position = CGPoint(x: -(size.width / CGFloat(4)), y: -bottomButtonsCoordinateY)
         
         saveButton = ButtonNode(size: buttonSizeSmall, labelText: "Save", backgroundTexture: kButtonActiveTexture)
-        saveButton.position = CGPoint(x: size.width / CGFloat(2), y: -bottomButtonsCoordinateY)
+        saveButton.position = CGPoint(x: size.width / CGFloat(4), y: -bottomButtonsCoordinateY)
         
         addChild(instructionLabel)
         addChild(enterNameNode)

@@ -148,6 +148,8 @@ class GameNode: SKSpriteNode {
     
     func configure(with question: QuestionDTO, questionNumber: Int, jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
         
+        isUserInteractionEnabled = true
+        
         // force unwrap, this should never fail and we want to know if it does, so we can fix the questions-file
         questionLabel.questionNumberLabelText = "Q# \(questionNumber)"
         questionLabel.questionLabelText = question.question
@@ -226,18 +228,22 @@ class GameNode: SKSpriteNode {
         let location = touch.location(in: self)
 
         if answerOptionActive_0 && answerOption_0.contains(location) {
+            isUserInteractionEnabled = false
             answerOption_0.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionA)
         }
         if answerOptionActive_1 && answerOption_1.contains(location) {
+            isUserInteractionEnabled = false
             answerOption_1.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionB)
         }
         if answerOptionActive_2 && answerOption_2.contains(location) {
+            isUserInteractionEnabled = false
             answerOption_2.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionC)
         }
         if answerOptionActive_3 && answerOption_3.contains(location) {
+            isUserInteractionEnabled = false
             answerOption_3.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionD)
         }
