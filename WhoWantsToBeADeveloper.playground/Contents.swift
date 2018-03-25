@@ -17,9 +17,9 @@ To use the "_Resume Game_" and the "_Highscores_" feature you need to create a d
 - `cd ./Documents`
 - `mkdir Shared\ Playground\ Data`
 
-> __DID YOU KNOW__: You can also add your own questions by hacking the `Questions.json` file. The use of this human readable format enables you to create your personalized flashcard based learning experience. _Pro Tip_: Keep different files handy, so you can interchange them to study for all of your subjects.
+> __DID YOU KNOW__: You can also add your own questions by hacking the `Questions.json` file. The use of this human readable format enables you to create your personalized flashcard based learning experience. __*Pro Tip*__: Keep different files handy, so you can interchange them to study for all of your subjects.
  
- __Enjoy and hopefully see you at WWDC 18__ ❤️
+ __Enjoy and hopefully see you at WWDC 18__ 💜
  */
 
 // MARK: - Implementation

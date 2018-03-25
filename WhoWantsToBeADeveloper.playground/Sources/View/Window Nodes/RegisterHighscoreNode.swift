@@ -12,8 +12,6 @@ class RegisterHighscoreNode: SKSpriteNode {
     private var triggerNameEntryButton: ButtonNode!
     private var saveButton: ButtonNode!
     
-    private var backgroundImage: SKSpriteNode!
-    
     private var buttons: [ButtonNode] {
         return [triggerNameEntryButton, saveButton]
     }
@@ -28,6 +26,7 @@ class RegisterHighscoreNode: SKSpriteNode {
         isUserInteractionEnabled = true
         size = CGSize(width: frame.size.width, height: frame.size.height)
         position = CGPoint(x: frame.midX, y: frame.midY)
+        texture = SKTexture(imageNamed: "Images/background")
         
         /* Definitions */
         let instructionNodeHeight = size.height * 0.25
@@ -45,10 +44,6 @@ class RegisterHighscoreNode: SKSpriteNode {
         /* Initialize and configure all properties */
         self.highscoreControllerDelegate = highscoreControllerDelegate
         self.score = score
-        
-        backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = frame.size
-        backgroundImage.zPosition = -1
         
         instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Register Your Score")
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
@@ -70,7 +65,6 @@ class RegisterHighscoreNode: SKSpriteNode {
         addChild(enterNameNode)
         addChild(triggerNameEntryButton)
         addChild(saveButton)
-        addChild(backgroundImage)
     }
     
     required init?(coder aDecoder: NSCoder) {

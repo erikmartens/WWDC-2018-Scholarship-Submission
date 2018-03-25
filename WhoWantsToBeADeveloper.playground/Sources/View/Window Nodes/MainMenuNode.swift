@@ -13,8 +13,6 @@ class MainMenuNode: SKSpriteNode {
     private var highscoreButton: ButtonNode!
     private var aboutButton: ButtonNode!
     
-    private var backgroundImage: SKSpriteNode!
-    
     private let buttonsCount = 4
     private var buttons: [ButtonNode] {
         return [resumeButton, startButton, highscoreButton, aboutButton]
@@ -28,20 +26,20 @@ class MainMenuNode: SKSpriteNode {
         
         // todo: add game logo node with animation
         
-        self.applicationDelegate = applicationDelegate
-        
+        /* Additional Configuration */        
         isUserInteractionEnabled = true
         size = CGSize(width: applicationDelegate.applicationFrame.size.width, height: applicationDelegate.applicationFrame.size.height)
         position = CGPoint(x: applicationDelegate.applicationFrame.midX, y: applicationDelegate.applicationFrame.midY)
+        texture = SKTexture(imageNamed: "Images/background")
         
-        backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = applicationDelegate.applicationFrame.size
-        backgroundImage.zPosition = -1
-        
+        /* Definitions */
         let verticalButtonSpace = size.height / CGFloat(buttonsCount)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSize = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
+        
+        /* Initialize and configure all properties */
+        self.applicationDelegate = applicationDelegate
         
         let resumeButtonTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
         resumeButton = ButtonNode(size: buttonSize, labelText: "Resume Game", backgroundTexture: resumeButtonTexture)
@@ -64,7 +62,6 @@ class MainMenuNode: SKSpriteNode {
         addChild(startButton)
         addChild(highscoreButton)
         addChild(aboutButton)
-        addChild(backgroundImage)
     }
     
     required init?(coder aDecoder: NSCoder) {

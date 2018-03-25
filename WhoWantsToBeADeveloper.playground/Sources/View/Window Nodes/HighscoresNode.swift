@@ -10,8 +10,6 @@ class HighscoresNode: SKSpriteNode {
     private var highscoresLabelNode: HighscoreLabelNode!
     private var backButton: ButtonNode!
     
-    private var backgroundImage: SKSpriteNode!
-    
     private let elementsCount =  6
     private var buttons: [ButtonNode] {
         return [backButton]
@@ -28,6 +26,7 @@ class HighscoresNode: SKSpriteNode {
         isUserInteractionEnabled = true
         size = CGSize(width: applicationDelegate.applicationFrame.size.width, height: applicationDelegate.applicationFrame.size.height)
         position = CGPoint(x: applicationDelegate.applicationFrame.midX, y: applicationDelegate.applicationFrame.midY)
+        texture = SKTexture(imageNamed: "Images/background")
         
         /* Definitions */
         let instructionNodeHeight = size.height * 0.25
@@ -41,10 +40,6 @@ class HighscoresNode: SKSpriteNode {
         
         /* Initialize and configure all properties */
         self.applicationDelegate = applicationDelegate
-        
-        backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = applicationDelegate.applicationFrame.size
-        backgroundImage.zPosition = -1
         
         instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Top 5 Highscores")
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
@@ -61,7 +56,6 @@ class HighscoresNode: SKSpriteNode {
         addChild(instructionLabel)
         addChild(highscoresLabelNode)
         addChild(backButton)
-        addChild(backgroundImage)
     }
     
     required init?(coder aDecoder: NSCoder) {

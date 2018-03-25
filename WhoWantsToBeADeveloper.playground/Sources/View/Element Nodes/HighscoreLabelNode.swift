@@ -105,7 +105,7 @@ class HighscoreLabelNode: SKShapeNode {
         for index in 0..<min(highscores.count, 5) {
             nameLabelNodes[index].text = highscores[index].name
             dateLabelNodes[index].text = "\(highscores[index].date)" // todo
-            scoreLabelNodes[index].text = "\(highscores[index].score)" // todo
+            scoreLabelNodes[index].text = "\(highscores[index].score)"
         }
     }
 }

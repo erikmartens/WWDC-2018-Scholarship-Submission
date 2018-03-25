@@ -18,8 +18,6 @@ class GameNode: SKSpriteNode {
     private var jokerAudienceButton: ButtonNode!
     private var pauseButton: ButtonNode!
 
-    private var backgroundImage: SKSpriteNode!
-
     private let rowsCount = 3
     private var answerOptionButtons: [ButtonNode] {
         return [answerOption_0, answerOption_1, answerOption_2, answerOption_3]
@@ -46,6 +44,7 @@ class GameNode: SKSpriteNode {
         isUserInteractionEnabled = true
         size = CGSize(width: frame.size.width, height: frame.size.height)
         position = CGPoint(x: frame.midX, y: frame.midY)
+        texture = SKTexture(imageNamed: "Images/background")
 
         /* Definitions */
         let questionLabelNodeHeight = size.height * 0.25
@@ -59,10 +58,6 @@ class GameNode: SKSpriteNode {
 
         /* Initialize and configure all properties */
         self.gameControllerDelegate = gameControllerDelegate
-
-        backgroundImage = SKSpriteNode(imageNamed: "Images/background")
-        backgroundImage.size = frame.size
-        backgroundImage.zPosition = -1
 
         questionLabel = QuestionLabelNode(size: questionLabelNodeSize)
         let questionLabelCoordinateY = size.height / CGFloat(2) - questionLabelNodeHeight / CGFloat(2)
@@ -103,7 +98,6 @@ class GameNode: SKSpriteNode {
         addChild(jokerFiftyFiftyButton)
         addChild(jokerAudienceButton)
         addChild(pauseButton)
-        addChild(backgroundImage)
     }
 
     required init?(coder aDecoder: NSCoder) {
