@@ -101,8 +101,11 @@ extension ApplicationScene: ApplicationDelegate {
             removeAllChildren()
             addChild(highscoresNode!)
         case .about:
-            // todo
-            break
+            if aboutNode == nil {
+                aboutNode = AboutNode(applicationDelegate: self)
+            }
+            removeAllChildren()
+            addChild(aboutNode!)
         }
     }
 }
