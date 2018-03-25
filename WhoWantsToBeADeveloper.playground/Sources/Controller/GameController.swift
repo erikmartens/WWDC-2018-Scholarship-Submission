@@ -59,13 +59,14 @@ class GameController {
         
         let questionNumber = gameModel.currentQuestionIndex
         gameNode.configure(with: gameModel.currentQuestion, questionNumber: questionNumber, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        timeLeft = gameState.remainingTime
         startRoundTimer()
     }
     
     fileprivate func storeGameState() {
         let gameState = GameStateDTO(currentQuestionIndex: gameModel.currentQuestionIndex,
                                      deliveredQuestionIDs: gameModel.deliveredQuestionIDs,
-                                     remainingTime: Int(timeLeft),
+                                     remainingTime: timeLeft,
                                      jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive,
                                      jokerAudienceActive: gameModel.jokerAudienceActive)
         FileStorageService.savegame = gameState
