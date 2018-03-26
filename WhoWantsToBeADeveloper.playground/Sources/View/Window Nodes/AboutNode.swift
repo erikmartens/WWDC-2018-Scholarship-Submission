@@ -1,11 +1,11 @@
 import SpriteKit
 
-fileprivate let textLines = ["Who Wants to Be a Developer",
+fileprivate let kTextLines = ["Who Wants to Be a Developer",
                              "Created with 💜 by Erik Maximilian Martens\n",
                              "This Playground was built to live on past the WWDC 2018 scholarship application process. When developing the game the idea was always to share it with the community after the judging process had been completed. Hopefully this project will accelerate the personal journeys of those who want to shape the world, by providing a platform and code examples for learning. Therefore the complete code will be open sourced via GitHub. The repository will be subject to the MIT license, meaning anyone can use, modify or redistribute the contents of this project in part or its entirety in any way they please.\n",
                              "👩‍💻 Hope to meet you at the WWDC 18 👨‍💻"]
 
-fileprivate let attributes = [
+fileprivate let kTextAttributes = [
     [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 28),
      NSAttributedStringKey.foregroundColor: UIColor.white,
      NSAttributedStringKey.paragraphStyle: NSMutableParagraphStyle(alignment: .center)],
@@ -61,13 +61,12 @@ class AboutNode: SKSpriteNode {
         let aboutLabelCoordinateY =  size.height / CGFloat(2) - aboutNodeHeight / CGFloat(2)
         aboutLabel.position = CGPoint(x: 0, y: aboutLabelCoordinateY)
         
-        let aboutString = textLines.joined(separator: "\n")
-        let attrbutedAboutString = NSMutableAttributedString(string: aboutString)
-        for index in 0..<textLines.count {
-            attrbutedAboutString.setAttributes(attributes[index], range: (aboutString as NSString).range(of: textLines[index]))
+        let aboutString = kTextLines.joined(separator: "\n")
+        let attributedAboutString = NSMutableAttributedString(string: aboutString)
+        for index in 0..<kTextLines.count {
+            attributedAboutString.setAttributes(kTextAttributes[index], range: (aboutString as NSString).range(of: kTextLines[index]))
         }
-        
-        aboutLabel.labelAttributedText = attrbutedAboutString
+        aboutLabel.labelAttributedText = attributedAboutString
         
         backButton = ButtonNode(size: buttonSizeSmall, labelText: "Back", backgroundTexture: kButtonActiveTexture)
         let backButtonCoordinateY = verticalButtonSpace * 3 + verticalButtonSpace / CGFloat(2)

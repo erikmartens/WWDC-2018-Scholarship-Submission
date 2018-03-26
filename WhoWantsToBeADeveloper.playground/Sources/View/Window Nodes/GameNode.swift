@@ -140,12 +140,12 @@ class GameNode: SKSpriteNode {
     
     // MARK: - Public Properties & Function
     
-    func configure(with question: QuestionDTO, questionNumber: Int, jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
+    func configure(with question: QuestionDTO, questionIndex: Int, jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
         
         isUserInteractionEnabled = true
         
         // force unwrap, this should never fail and we want to know if it does, so we can fix the questions-file
-        questionLabel.questionNumberLabelText = "Q# \(questionNumber)"
+        questionLabel.questionNumberLabelText = "Q# \(questionIndex + 1)"
         questionLabel.questionLabelText = question.question
         
         answerOption_0.fillTexture = kButtonActiveTexture

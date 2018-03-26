@@ -6,10 +6,6 @@ struct JokerFiftyExcludedAnswerOptions {
 }
 
 class GameModel {
-    
-    // todo: remove dummy question
-    static private let answerOptions = [AnswerOption.optionA: "Test A", AnswerOption.optionB: "Test B", AnswerOption.optionC: "Test C", AnswerOption.optionD: "Test D"]
-    static private let question = QuestionDTO(identifier: 126543456, question: "Test Question? Test Question? Test Question? Test Question? Test Question? Test Question? Test Question? Test Question? Test Question?", answerOptions: GameModel.answerOptions, correctAnswerOption: AnswerOption.optionA)
 
     // MARK: - Properties
     
@@ -41,7 +37,7 @@ class GameModel {
      * This convenience init is used for initiating a new game
      */
     convenience init() {
-        self.init(currentQuestionIndex: 0, deliveredQuestionIDs: [Int](), jokerFiftyFiftyActive: true, jokerAudienceActive: true)
+        self.init(currentQuestionIndex: -1, deliveredQuestionIDs: [Int](), jokerFiftyFiftyActive: true, jokerAudienceActive: true)
     }
     
     

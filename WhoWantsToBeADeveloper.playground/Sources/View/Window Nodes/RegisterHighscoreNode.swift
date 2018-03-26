@@ -1,5 +1,17 @@
 import SpriteKit
 
+fileprivate let kTitleText = "Game Over"
+
+fileprivate let kTitleTextAttributes = [
+    [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 28),
+     NSAttributedStringKey.foregroundColor: UIColor.white,
+     NSAttributedStringKey.paragraphStyle: NSMutableParagraphStyle(alignment: .center)],
+    
+    [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16),
+     NSAttributedStringKey.foregroundColor: UIColor.white,
+     NSAttributedStringKey.paragraphStyle: NSMutableParagraphStyle(alignment: .center)]
+]
+
 class RegisterHighscoreNode: SKSpriteNode {
     
     // MARK: - Private Properties
@@ -45,9 +57,17 @@ class RegisterHighscoreNode: SKSpriteNode {
         self.highscoreControllerDelegate = highscoreControllerDelegate
         self.score = score
         
-        instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Register Your Score")
+        instructionLabel = LabelNode(size: instructionNodeSize)
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
         instructionLabel.position = CGPoint(x: 0, y: instructionLabelCoordinateY)
+        let pluralModifierString = score != 1 ? "s" : ""
+        let texts = [kTitleText, String(format: "You Answered %d Question%@", score, pluralModifierString)]
+        let instructionString = texts.joined(separator: "\n")
+        let attributedInstructionString = NSMutableAttributedString(string: instructionString)
+        for index in 0..<texts.count {
+            attributedInstructionString.setAttributes(kTitleTextAttributes[index], range: (instructionString as NSString).range(of: texts[index]))
+        }
+        instructionLabel.labelAttributedText = attributedInstructionString
         
         enterNameNode = TextEntryNode(size: enterNameNodeSize, labelNodeText: "Enter Your Name:")
         //let enterNameNodeCoordinateY_0 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)

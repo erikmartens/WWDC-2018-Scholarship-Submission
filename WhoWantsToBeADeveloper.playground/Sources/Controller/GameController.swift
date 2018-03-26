@@ -80,16 +80,16 @@ class GameController {
         gameNode = GameNode(frame: applicationGameDelegate.applicationFrame, gameControllerDelegate: self)
         applicationGameDelegate.presentNode(gameNode)
         
-        let questionNumber = gameModel.currentQuestionIndex
-        gameNode.configure(with: gameModel.currentQuestion, questionNumber: questionNumber, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        let questionIndex = gameModel.currentQuestionIndex
+        gameNode.configure(with: gameModel.currentQuestion, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
         timeLeft = savegame.remainingTime
         startRoundTimer()
     }
     
     fileprivate func configureNextRound() {
         let question = gameModel.nextQuestion
-        let questionNumber = gameModel.currentQuestionIndex
-        gameNode.configure(with: question, questionNumber: questionNumber, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        let questionIndex = gameModel.currentQuestionIndex
+        gameNode.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
         
         timeLeft = 30
         startRoundTimer()
@@ -166,7 +166,7 @@ extension GameController: HighscoreControllerDelegate {
     
     func didCompleteHighscoreInput(with playerName: String?) {
         let name = (playerName != nil && !playerName!.isEmpty) ? playerName! : "PlayerUnknown"
-        let highscore = HighscoreDTO(score: gameModel.currentQuestionIndex, name: name, date: Date())
+        let highscore = HighscoreDTO(score: gameModel.currentQuestionIndex + 1, name: name, date: Date())
         applicationGameDelegate.didCompleteGame(with: highscore)
     }
 }
