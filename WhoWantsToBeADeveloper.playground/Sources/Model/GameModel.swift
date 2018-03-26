@@ -19,10 +19,8 @@ class GameModel {
     
     // MARK: - Initialization
     
-    /**
-     * This init is used for restoring a previous game from a save file
-     */
-    init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
+    
+    private init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
         self.currentQuestionIndex = currentQuestionIndex
         self.deliveredQuestionIDs = deliveredQuestionIDs
         questions = FileStorageService.questions! // force unwrap, this should always succeed and should crash if it doesn't (without questions the game can't run)
@@ -31,6 +29,13 @@ class GameModel {
         }
         self.jokerFiftyFiftyActive = jokerFiftyFiftyActive
         self.jokerAudienceActive = jokerAudienceActive
+    }
+    
+    /**
+     * This init is used for restoring a previous game from a save file
+     */
+    convenience init(savegame: SaveGameDTO) {
+        self.init(currentQuestionIndex: savegame.currentQuestionIndex, deliveredQuestionIDs: savegame.deliveredQuestionIDs, jokerFiftyFiftyActive: savegame.jokerFiftyFiftyActive, jokerAudienceActive: savegame.jokerAudienceActive)
     }
     
     /**

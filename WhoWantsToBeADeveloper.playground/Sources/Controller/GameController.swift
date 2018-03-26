@@ -19,13 +19,12 @@ protocol HighscoreControllerDelegate: class {
 class GameController {
     
     // MARK: - Private Properties
-    // implicitely force unwrap applicationGameDelegate, gameNode & gameModel
-    // they should never be nil and if it is we want to know by crashing the app, so we are alerted and can fix it
     
-    private weak var applicationGameDelegate: ApplicationGameDelegate!
-
-    private var gameNode: GameNode!
-    private var gameModel: GameModel!
+    private weak var applicationDelegate: ApplicationDelegate!
+    private var savegame: SavegameDTO?
+    
+    private var gameScene: GameScene
+    private var gameModel: GameModel
     
     private var roundTimer: Timer!
     private var timeLeft: TimeInterval = 0
@@ -35,25 +34,35 @@ class GameController {
     
     // MARK: - Initialization
     
-    init(applicationGameDelegate: ApplicationGameDelegate) {
+    init(applicationDelegate: ApplicationDelegate, savegame: SavegameDTO?) {
         self.applicationGameDelegate = applicationGameDelegate
-        startGame()
+        
+        gameScene = GameScene(gameControllerDelegate: self)
+        
+        if let savegame = savegame {
+            gameModel = GameModel(currentQuestionIndex: savegame.currentQuestionIndex,
+                                  deliveredQuestionIDs: savegame.deliveredQuestionIDs,
+                                  jokerFiftyFiftyActive: savegame.jokerFiftyFiftyActive,
+                                  jokerAudienceActive: savegame.jokerAudienceActive)
+            timeLeft = savegame.remainingTime
+        } else {
+            gameModel = GameModel()
+            timeLeft = 30
+        }
+        gameScene = GameScene(gameControllerDelegate: self)
+        
     }
     
-    init(applicationGameDelegate: ApplicationGameDelegate, savegame: SavegameDTO) {
-        self.applicationGameDelegate = applicationGameDelegate
-        resumeGame(with: savegame)
+    
+    // MARK: - Public Functions
+    
+    public func startGame() {
+        applicationGameDelegate.presentScene(&gameScene)
+        configureNextRound(timeLeft: timeLeft)
     }
     
     
     // MARK: - Private Helpers
-    
-    private func startGame() {
-        gameModel = GameModel()
-        gameNode = GameNode(frame: applicationGameDelegate.applicationFrame, gameControllerDelegate: self)
-        applicationGameDelegate.presentNode(gameNode)
-        configureNextRound()
-    }
     
     fileprivate func gameOver() {
         let score = gameModel.currentQuestionIndex
@@ -72,26 +81,12 @@ class GameController {
         FileStorageService.savegame = savegame
     }
     
-    private func resumeGame(with savegame: SavegameDTO) {
-        gameModel = GameModel(currentQuestionIndex: savegame.currentQuestionIndex,
-                              deliveredQuestionIDs: savegame.deliveredQuestionIDs,
-                              jokerFiftyFiftyActive: savegame.jokerFiftyFiftyActive,
-                              jokerAudienceActive: savegame.jokerAudienceActive)
-        gameNode = GameNode(frame: applicationGameDelegate.applicationFrame, gameControllerDelegate: self)
-        applicationGameDelegate.presentNode(gameNode)
-        
-        let questionIndex = gameModel.currentQuestionIndex
-        gameNode.configure(with: gameModel.currentQuestion, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
-        timeLeft = savegame.remainingTime
-        startRoundTimer()
-    }
-    
-    fileprivate func configureNextRound() {
+    fileprivate func configureNextRound(with timeLeft: TimeInterval = 30) {
         let question = gameModel.nextQuestion
         let questionIndex = gameModel.currentQuestionIndex
-        gameNode.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        gameScene.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
         
-        timeLeft = 30
+        self.timeLeft = timeLeft
         startRoundTimer()
     }
     
@@ -99,7 +94,7 @@ class GameController {
     /* Round Timer */
     
     private func startRoundTimer() {
-        gameNode.updateTimer(with: timeLeft)
+        gameScene.updateTimer(with: timeLeft)
         roundTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
     }
 
@@ -109,7 +104,7 @@ class GameController {
             timerDidRunOut()
             return
         }
-        gameNode.updateTimer(with: timeLeft)
+        gameScene.updateTimer(with: timeLeft)
     }
     
     private func timerDidRunOut() {
@@ -126,13 +121,13 @@ extension GameController: GameControllerDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let answeredCorrectly = self.gameModel.verifyAnswerOption(option)
             guard answeredCorrectly else {
-                self.gameNode.markAsAnsweredIncorrectly(with: option, correctOption: self.gameModel.correctAnswerOption)
+                self.gameScene.markAsAnsweredIncorrectly(with: option, correctOption: self.gameModel.correctAnswerOption)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.gameOver()
                 }
                 return
             }
-            self.gameNode.markAsAnsweredCorrectly(with: option)
+            self.gameScene.markAsAnsweredCorrectly(with: option)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.configureNextRound()
             }
@@ -144,7 +139,7 @@ extension GameController: GameControllerDelegate {
         case .fiftyFifty:
             gameModel.jokerFiftyFiftyActive = false
             let excludedAnswerOptions = gameModel.jokerFiftyFiftyExcludedAnswerOptions
-            gameNode.activateFiftyFiftyJoker(with: excludedAnswerOptions)
+            gameScene.activateFiftyFiftyJoker(with: excludedAnswerOptions)
         case .audience:
             gameModel.jokerAudienceActive = false
             // todo

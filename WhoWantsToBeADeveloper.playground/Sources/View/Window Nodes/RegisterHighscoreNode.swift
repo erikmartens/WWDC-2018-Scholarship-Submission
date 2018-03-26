@@ -92,7 +92,7 @@ class RegisterHighscoreNode: SKSpriteNode {
     }
     
     
-    // MARK: - UIEvent Handlers
+    // MARK: - Event Handlers
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
@@ -123,5 +123,19 @@ class RegisterHighscoreNode: SKSpriteNode {
             highscoreControllerDelegate.didCompleteHighscoreInput(with: enterNameNode.enteredText)
         }
         buttons.forEach { $0.fillTexture = kButtonActiveTexture }
+    }
+    
+    override func keyDown(with event: NSEvent) {
+        print(event.keyCode)
+//        switch event.keyCode {
+//        case 0:
+//        case 1:
+//        case 2:
+//        case 13:
+//        case 31:
+//        case 49: // space
+//        default:
+//            break
+//        }
     }
 }
