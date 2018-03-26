@@ -102,9 +102,13 @@ class HighscoreLabelNode: SKShapeNode {
     // MARK: - Public Functions
     
     func configure(with highscores: [HighscoreDTO]) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        
         for index in 0..<min(highscores.count, 5) {
             nameLabelNodes[index].text = highscores[index].name
-            dateLabelNodes[index].text = "\(highscores[index].date)" // todo
+            dateLabelNodes[index].text = "\(dateFormatter.string(from: highscores[index].date))" // todo
             scoreLabelNodes[index].text = "\(highscores[index].score)"
         }
     }
