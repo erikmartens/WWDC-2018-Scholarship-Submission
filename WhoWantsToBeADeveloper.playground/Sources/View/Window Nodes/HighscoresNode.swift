@@ -59,7 +59,7 @@ class HighscoresNode: SKSpriteNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init?(coder:) is not implemented")
     }
     
     // MARK: - Public Functions
