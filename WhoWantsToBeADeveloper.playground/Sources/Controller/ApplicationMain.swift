@@ -3,7 +3,7 @@ import SpriteKit
 enum SceneType {
     case mainMenu
     case game(SaveGameDTO?)
-    case registerHighscore
+    case registerHighscore(Int)
     case highscores
     case about
 }
@@ -60,7 +60,7 @@ extension ApplicationMain: ApplicationDelegate {
                 gameController = savegame != nil ? GameController(savegame: savegame!) : GameModel()
             }
             gameController.startGame()
-        case .registerHighscore:
+        case .registerHighscore(let score):
             break
         case .highscores:
             break

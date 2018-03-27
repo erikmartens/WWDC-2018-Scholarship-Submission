@@ -6,7 +6,7 @@ class MainMenuNode: SKSpriteNode {
     // implicitely force unwrap applicationGameDelegate
     // the delegate should never be nil and if it is we want to know by crashing the app, so we are alerted and can fix it
     
-    private weak var applicationDelegate: ApplicationDelegate!
+    private weak var mainMenuControllerDelegate: MainMenuControllerDelegate!
     
     private var resumeButton: ButtonNode!
     private var startButton: ButtonNode!
@@ -21,7 +21,7 @@ class MainMenuNode: SKSpriteNode {
     
     // MARK: - Initialization
     
-    init(applicationDelegate: ApplicationDelegate) {
+    init(mainMenuControllerDelegate: MainMenuControllerDelegate) {
         super.init(texture: nil, color: .clear, size: .zero)
         
         // todo: add game logo node with animation
@@ -79,13 +79,12 @@ class MainMenuNode: SKSpriteNode {
     // MARK: - UIEvent Handlers
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         guard let touch = touches.first else {
             return
         }
         let location = touch.location(in: self)
         
-        if applicationDelegate.savegameAvailable && resumeButton.contains(location) {
+        if mainMenuControllerDelegate.savegameAvailable && resumeButton.contains(location) {
             resumeButton.fillTexture = kButtonSelectedTexture
             return
         }
@@ -104,23 +103,22 @@ class MainMenuNode: SKSpriteNode {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         guard let touch = touches.first else {
             return
         }
         let location = touch.location(in: self)
         
-        if applicationDelegate.savegameAvailable && resumeButton.contains(location) {
-            applicationDelegate.didSelectNode(with: .resume)
+        if mainMenuControllerDelegate.savegameAvailable && resumeButton.contains(location) {
+            mainMenuControllerDelegate.didTapMenuButton(with: .resumeGame)
         }
         if startButton.contains(location) {
-            applicationDelegate.didSelectNode(with: .game)
+            mainMenuControllerDelegate.didTapMenuButton(with: .startGame)
         }
         if highscoreButton.contains(location) {
-            applicationDelegate.didSelectNode(with: .highscores)
+            mainMenuControllerDelegate.didTapMenuButton(with: .presentHighscores)
         }
         if aboutButton.contains(location) {
-            applicationDelegate.didSelectNode(with: .about)
+            mainMenuControllerDelegate.didTapMenuButton(with: .presentAbout)
         }
         resumeButton.fillTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
         startButton.fillTexture = kButtonActiveTexture

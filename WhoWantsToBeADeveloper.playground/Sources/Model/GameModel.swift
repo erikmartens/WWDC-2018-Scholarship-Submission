@@ -13,12 +13,11 @@ class GameModel {
     private(set) var deliveredQuestionIDs: [Int]
     private var questions: [QuestionDTO]
     private(set) var currentQuestion: QuestionDTO!
-    var jokerFiftyFiftyActive: Bool!
-    var jokerAudienceActive: Bool!
+    var jokerFiftyFiftyActive: Bool
+    var jokerAudienceActive: Bool
     
     
     // MARK: - Initialization
-    
     
     private init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
         self.currentQuestionIndex = currentQuestionIndex
