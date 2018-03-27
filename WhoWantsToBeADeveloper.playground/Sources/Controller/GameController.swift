@@ -11,11 +11,6 @@ protocol GameControllerDelegate: class {
     func didSelectPause()
 }
 
-protocol HighscoreControllerDelegate: class {
-    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void))
-    func didCompleteHighscoreInput(with playerName: String?)
-}
-
 class GameController {
     
     // MARK: - Private Properties
@@ -27,8 +22,6 @@ class GameController {
     
     private var roundTimer: Timer!
     private var timeLeft: TimeInterval = 0
-    
-    //private var registerHighscoreNode: RegisterHighscoreNode?
     
     
     // MARK: - Initialization
@@ -61,9 +54,6 @@ class GameController {
     
     fileprivate func gameOver() {
         let score = gameModel.currentQuestionIndex
-//        if registerHighscoreNode == nil {
-//            registerHighscoreNode = RegisterHighscoreNode(frame: applicationGameDelegate.applicationFrame, highscoreControllerDelegate: self, score: score)
-//        }
         applicationDelegate.moveToScene(with: .registerHighscore(score))
     }
     
@@ -147,17 +137,3 @@ extension GameController: GameControllerDelegate {
         applicationDelegate.moveToScene(with: .mainMenu)
     }
 }
-
-extension GameController: HighscoreControllerDelegate {
-
-    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void)) {
-        //applicationDelegate.presentNameEntryAlertController(completionHandler: completionHandler)
-    }
-
-    func didCompleteHighscoreInput(with playerName: String?) {
-//        let name = (playerName != nil && !playerName!.isEmpty) ? playerName! : "PlayerUnknown"
-//        let highscore = HighscoreDTO(score: gameModel.currentQuestionIndex + 1, name: name, date: Date())
-//        applicationDelegate.didCompleteGame(with: highscore)
-    }
-}
-

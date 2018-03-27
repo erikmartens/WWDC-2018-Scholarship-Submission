@@ -21,6 +21,7 @@ public class ApplicationMainController: NSObject {
     
     private var mainMenuController: MainMenuController?
     private var gameController: GameController?
+    private var registerHighscoreController: RegisterHighscoreController?
     private var highscoresController: HighscoresController?
     private var aboutController: AboutController?
     
@@ -61,7 +62,10 @@ extension ApplicationMainController: ApplicationDelegate {
             }
             gameController!.startGame()
         case .registerHighscore(let score):
-            break
+            if registerHighscoreController == nil {
+                registerHighscoreController = RegisterHighscoreController(applicationDelegate: self, score: score)
+            }
+            registerHighscoreController!.startRegisterHighscore()
         case .highscores:
             if highscoresController == nil {
                 highscoresController = HighscoresController(applicationDelegate: self)
