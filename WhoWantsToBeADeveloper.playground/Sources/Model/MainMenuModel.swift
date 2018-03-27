@@ -7,9 +7,4 @@ class MainMenuModel {
     var savegame: SavegameDTO? {
         return FileStorageService.savegame
     }
-    
-    
-    // MARK: - Initialization
-    
-//    init() {}
 }

@@ -21,10 +21,7 @@ public class ApplicationMainController: NSObject {
     
     private var mainMenuController: MainMenuController?
     private var gameController: GameController?
-    
-    private var registerHighscoreScene: SKScene?
-    private var highscoresScene: SKScene?
-    private var aboutScene: SKScene?
+    private var highscoresController: HighscoresController?
     
     
     // MARK: - Initialization
@@ -65,7 +62,10 @@ extension ApplicationMainController: ApplicationDelegate {
         case .registerHighscore(let score):
             break
         case .highscores:
-            break
+            if highscoresController == nil {
+                highscoresController = HighscoresController(applicationDelegate: self)
+            }
+            highscoresController!.startHighscores()
         case .about:
             break
         }

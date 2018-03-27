@@ -4,7 +4,7 @@ class HighscoresNode: SKSpriteNode {
     
     // MARK: - Private Properties
     
-    private weak var applicationDelegate: ApplicationDelegate!
+    private weak var highscoresControllerDelegate: HighscoresControllerDelegate!
     
     private var instructionLabel: LabelNode!
     private var highscoresLabelNode: HighscoreLabelNode!
@@ -18,7 +18,7 @@ class HighscoresNode: SKSpriteNode {
     
     // MARK: - Initialization
     
-    init(frame: CGRect, applicationDelegate: ApplicationDelegate) {
+    init(frame: CGRect, highscoresControllerDelegate: HighscoresControllerDelegate) {
         
         super.init(texture: nil, color: .clear, size: .zero)
         
@@ -39,7 +39,7 @@ class HighscoresNode: SKSpriteNode {
         let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         
         /* Initialize and configure all properties */
-        self.applicationDelegate = applicationDelegate
+        self.highscoresControllerDelegate = highscoresControllerDelegate
         
         instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Top 5 Highscores")
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
@@ -80,7 +80,6 @@ class HighscoresNode: SKSpriteNode {
         
         if backButton.contains(location) {
             backButton.fillTexture = kButtonSelectedTexture
-            return
         }
     }
     
@@ -93,8 +92,7 @@ class HighscoresNode: SKSpriteNode {
         
         if backButton.contains(location) {
             backButton.fillTexture = kButtonActiveTexture
-            applicationDelegate.moveToScene(with: .mainMenu)
-            return
+            highscoresControllerDelegate.didTapBackButton()
         }
         buttons.forEach { $0.fillTexture = kButtonActiveTexture }
     }
