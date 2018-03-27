@@ -25,8 +25,6 @@ To use the "_Resume Game_" and the "_Highscores_" feature you need to create a d
 // MARK: - Implementation
 
 // the game is best played with a 2:1 aspect ratio
-
-
 let frameWidth = UIScreen.main.bounds.width
 let frameHeight = UIScreen.main.bounds.width / 2
 let applicationFrame = CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight)
@@ -35,4 +33,6 @@ let applicationView = SKView(frame: applicationFrame)
 PlaygroundPage.current.liveView = applicationView
 
 let mainController = ApplicationMainController(view: applicationView)
-mainController.run()
+mainController.runApplication()
+
+

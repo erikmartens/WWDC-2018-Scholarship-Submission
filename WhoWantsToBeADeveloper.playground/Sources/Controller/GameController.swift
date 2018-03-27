@@ -11,10 +11,10 @@ protocol GameControllerDelegate: class {
     func didSelectPause()
 }
 
-//protocol HighscoreControllerDelegate: class {
-//    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void))
-//    func didCompleteHighscoreInput(with playerName: String?)
-//}
+protocol HighscoreControllerDelegate: class {
+    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void))
+    func didCompleteHighscoreInput(with playerName: String?)
+}
 
 class GameController {
     
@@ -28,7 +28,7 @@ class GameController {
     private var roundTimer: Timer!
     private var timeLeft: TimeInterval = 0
     
-    private var registerHighscoreNode: RegisterHighscoreNode?
+    //private var registerHighscoreNode: RegisterHighscoreNode?
     
     
     // MARK: - Initialization
@@ -37,7 +37,6 @@ class GameController {
         self.applicationDelegate = applicationDelegate
         
         gameScene = GameScene()
-        gameScene.gameControllerDelegate = self
         
         if let savegame = savegame {
             gameModel = GameModel(savegame: savegame)
@@ -52,6 +51,7 @@ class GameController {
     // MARK: - Public Functions
     
     func startGame() {
+        gameScene.gameControllerDelegate = self
         applicationDelegate.presentScene(gameScene)
         configureNextRound(with: timeLeft)
     }
@@ -148,16 +148,16 @@ extension GameController: GameControllerDelegate {
     }
 }
 
-//extension GameController: HighscoreControllerDelegate {
-//
-//    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void)) {
-//        applicationDelegate.presentNameEntryAlertController(completionHandler: completionHandler)
-//    }
-//
-//    func didCompleteHighscoreInput(with playerName: String?) {
+extension GameController: HighscoreControllerDelegate {
+
+    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void)) {
+        //applicationDelegate.presentNameEntryAlertController(completionHandler: completionHandler)
+    }
+
+    func didCompleteHighscoreInput(with playerName: String?) {
 //        let name = (playerName != nil && !playerName!.isEmpty) ? playerName! : "PlayerUnknown"
 //        let highscore = HighscoreDTO(score: gameModel.currentQuestionIndex + 1, name: name, date: Date())
 //        applicationDelegate.didCompleteGame(with: highscore)
-//    }
-//}
+    }
+}
 

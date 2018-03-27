@@ -13,6 +13,8 @@ class MainMenuNode: SKSpriteNode {
     private var highscoreButton: ButtonNode!
     private var aboutButton: ButtonNode!
     
+    private var resumeAvailable: Bool!
+    
     private let buttonsCount = 4
     private var buttons: [ButtonNode] {
         return [resumeButton, startButton, highscoreButton, aboutButton]
@@ -39,10 +41,9 @@ class MainMenuNode: SKSpriteNode {
         let buttonSize = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         
         /* Initialize and configure all properties */
-        self.applicationDelegate = applicationDelegate
+        self.mainMenuControllerDelegate = mainMenuControllerDelegate
         
-        let resumeButtonTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
-        resumeButton = ButtonNode(size: buttonSize, labelText: "Resume Game", backgroundTexture: resumeButtonTexture)
+        resumeButton = ButtonNode(size: buttonSize, labelText: "Resume Game") // texture set via external configuration
         let resumeButtonCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
         resumeButton.position = CGPoint(x: 0, y: resumeButtonCoordinateY)
         
@@ -71,8 +72,9 @@ class MainMenuNode: SKSpriteNode {
     
     // MARK: - Public Functions
     
-    func configureResumeAvailable() {
-        resumeButton.fillTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
+    func configureResumeAvailable(_ available: Bool) {
+        resumeAvailable = available
+        resumeButton.fillTexture = available ? kButtonActiveTexture : kButtonInactiveTexture
     }
     
     
@@ -84,7 +86,7 @@ class MainMenuNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
         
-        if mainMenuControllerDelegate.savegameAvailable && resumeButton.contains(location) {
+        if resumeAvailable && resumeButton.contains(location) {
             resumeButton.fillTexture = kButtonSelectedTexture
             return
         }
@@ -108,11 +110,11 @@ class MainMenuNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
         
-        if mainMenuControllerDelegate.savegameAvailable && resumeButton.contains(location) {
+        if resumeAvailable && resumeButton.contains(location) {
             mainMenuControllerDelegate.didTapMenuButton(with: .resumeGame)
         }
         if startButton.contains(location) {
-            mainMenuControllerDelegate.didTapMenuButton(with: .startGame)
+            mainMenuControllerDelegate.didTapMenuButton(with: .newGame)
         }
         if highscoreButton.contains(location) {
             mainMenuControllerDelegate.didTapMenuButton(with: .presentHighscores)
@@ -120,7 +122,7 @@ class MainMenuNode: SKSpriteNode {
         if aboutButton.contains(location) {
             mainMenuControllerDelegate.didTapMenuButton(with: .presentAbout)
         }
-        resumeButton.fillTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
+        resumeButton.fillTexture = resumeAvailable ? kButtonActiveTexture : kButtonInactiveTexture
         startButton.fillTexture = kButtonActiveTexture
         highscoreButton.fillTexture = kButtonActiveTexture
         aboutButton.fillTexture = kButtonActiveTexture

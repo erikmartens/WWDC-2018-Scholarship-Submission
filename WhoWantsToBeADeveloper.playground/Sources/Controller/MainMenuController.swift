@@ -8,7 +8,6 @@ enum ButtonType {
 }
 
 protocol MainMenuControllerDelegate: class {
-    var savegameAvailable: Bool { get }
     func didTapMenuButton(with type: ButtonType)
 }
 
@@ -18,37 +17,37 @@ class MainMenuController {
     
     private weak var applicationDelegate: ApplicationDelegate!
     
-    private var mainMenuScene: GameScene
-    private var mainMenuModel: GameModel
+    private var mainMenuScene: MainMenuScene
+    private var mainMenuModel: MainMenuModel
     
     
     // MARK: - Initialization
     
     init(applicationDelegate: ApplicationDelegate) {
         self.applicationDelegate = applicationDelegate
-        mainMenuScene = MainMenuScene(mainMenuControllerDelegate: self)
+        
+        mainMenuScene = MainMenuScene()
         mainMenuModel = MainMenuModel()
     }
+    
     
     // MARK: - Public Functions
     
     func startMainMenu() {
-        applicationDelegate.presentScene(&mainMenuScene)
+        mainMenuScene.mainMenuControllerDelegate = self
+        applicationDelegate.presentScene(mainMenuScene)
+        mainMenuScene.configureResumeAvailable(mainMenuModel.savegame != nil)
     }
 }
 
 extension MainMenuController: MainMenuControllerDelegate {
-    
-    var savegameAvailable: Bool {
-        return mainMenuModel.savegame != nil
-    }
     
     func didTapMenuButton(with type: ButtonType) {
         switch type {
         case .resumeGame:
             applicationDelegate.moveToScene(with: .game(mainMenuModel.savegame!))
         case .newGame:
-            applicationDelegate.moveToScene(with: .game)
+            applicationDelegate.moveToScene(with: .game(nil))
         case .presentHighscores:
             applicationDelegate.moveToScene(with: .highscores)
         case .presentAbout:

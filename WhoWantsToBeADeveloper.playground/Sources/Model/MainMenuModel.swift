@@ -11,5 +11,5 @@ class MainMenuModel {
     
     // MARK: - Initialization
     
-    init() {}
+//    init() {}
 }

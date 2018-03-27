@@ -35,7 +35,7 @@ class ButtonNode: SKShapeNode {
     
     // MARK: - Initialization
     
-    init(size: CGSize, labelText: String? = nil, backgroundTexture: SKTexture) {
+    init(size: CGSize, labelText: String? = nil, backgroundTexture: SKTexture? = nil) {
         
         super.init()
         

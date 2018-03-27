@@ -4,7 +4,7 @@ class HighscoresNode: SKSpriteNode {
     
     // MARK: - Private Properties
     
-    private weak var applicationDelegate: ApplicationDelegate?
+    private weak var applicationDelegate: ApplicationDelegate!
     
     private var instructionLabel: LabelNode!
     private var highscoresLabelNode: HighscoreLabelNode!
@@ -18,14 +18,14 @@ class HighscoresNode: SKSpriteNode {
     
     // MARK: - Initialization
     
-    init(applicationDelegate: ApplicationDelegate) {
+    init(frame: CGRect, applicationDelegate: ApplicationDelegate) {
         
         super.init(texture: nil, color: .clear, size: .zero)
         
         /* Additional Configuration */
         isUserInteractionEnabled = true
-        size = CGSize(width: applicationDelegate.applicationFrame.size.width, height: applicationDelegate.applicationFrame.size.height)
-        position = CGPoint(x: applicationDelegate.applicationFrame.midX, y: applicationDelegate.applicationFrame.midY)
+        size = CGSize(width: frame.size.width, height: frame.size.height)
+        position = CGPoint(x: frame.midX, y: frame.midY)
         texture = SKTexture(imageNamed: "Images/background")
         
         /* Definitions */
@@ -93,7 +93,7 @@ class HighscoresNode: SKSpriteNode {
         
         if backButton.contains(location) {
             backButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .mainMenu)
+            applicationDelegate.moveToScene(with: .mainMenu)
             return
         }
         buttons.forEach { $0.fillTexture = kButtonActiveTexture }

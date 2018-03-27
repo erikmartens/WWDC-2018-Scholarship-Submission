@@ -13,15 +13,14 @@ protocol ApplicationDelegate: class {
     func presentScene(_ scene: SKScene)
 }
 
-class ApplicationMainController {
+class ApplicationMainController: NSObject {
     
     // MARK: - Properties
     
     private let view: SKView
     
-    private var gameController: GameController?
-    
     private var mainMenuController: MainMenuController?
+    private var gameController: GameController?
     
     private var registerHighscoreScene: SKScene?
     private var highscoresScene: SKScene?
@@ -41,7 +40,7 @@ class ApplicationMainController {
      * Starts the game
      * The initial scene is always the main menu
      */
-    public func run() {
+    public func runApplication() {
         if mainMenuController == nil {
             mainMenuController = MainMenuController(applicationDelegate: self)
         }
@@ -57,12 +56,12 @@ extension ApplicationMainController: ApplicationDelegate {
             if mainMenuController == nil {
                 mainMenuController = MainMenuController(applicationDelegate: self)
             }
-            mainMenuController.startMainMenue()
+            mainMenuController!.startMainMenu()
         case .game(let savegame):
             if gameController == nil {
                 gameController = GameController(applicationDelegate: self, savegame: savegame)
             }
-            gameController.startGame()
+            gameController!.startGame()
         case .registerHighscore(let score):
             break
         case .highscores:

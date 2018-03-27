@@ -124,18 +124,4 @@ class RegisterHighscoreNode: SKSpriteNode {
         }
         buttons.forEach { $0.fillTexture = kButtonActiveTexture }
     }
-    
-    override func keyDown(with event: NSEvent) {
-        print(event.keyCode)
-//        switch event.keyCode {
-//        case 0:
-//        case 1:
-//        case 2:
-//        case 13:
-//        case 31:
-//        case 49: // space
-//        default:
-//            break
-//        }
-    }
 }

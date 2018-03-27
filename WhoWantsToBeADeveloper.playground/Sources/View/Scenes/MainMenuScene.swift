@@ -16,8 +16,15 @@ class MainMenuScene: SKScene {
     
     override public func didMove(to view: SKView) {
         size = view.frame.size
+        
         mainMenuNode = MainMenuNode(frame: view.frame, mainMenuControllerDelegate: mainMenuControllerDelegate)
         addChild(mainMenuNode)
-        mainMenuNode.configureResumeAvailable()
+    }
+    
+    
+    // MAKR: - Public Functions
+    
+    func configureResumeAvailable(_ available: Bool) {
+        mainMenuNode.configureResumeAvailable(available)
     }
 }

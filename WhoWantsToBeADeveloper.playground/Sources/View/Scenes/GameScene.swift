@@ -16,6 +16,7 @@ class GameScene: SKScene {
     
     override public func didMove(to view: SKView) {
         size = view.frame.size
+        
         gameNode = GameNode(frame: view.frame, gameControllerDelegate: gameControllerDelegate)
         addChild(gameNode)
     }
@@ -24,7 +25,7 @@ class GameScene: SKScene {
     // MARK: - Public Functions
     
     func configure(with question: QuestionDTO, questionIndex: Int, jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
-        gameNode.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        gameNode.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: jokerFiftyFiftyActive, jokerAudienceActive: jokerAudienceActive)
     }
     
     func updateTimer(with timeLeft: TimeInterval) {

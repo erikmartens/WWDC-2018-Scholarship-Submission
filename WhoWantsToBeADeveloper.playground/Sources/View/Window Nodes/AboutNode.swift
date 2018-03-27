@@ -35,14 +35,14 @@ class AboutNode: SKSpriteNode {
     
     // MARK: - Initialization
     
-    init(applicationDelegate: ApplicationDelegate) {
+    init(frame: CGRect, applicationDelegate: ApplicationDelegate) {
         
         super.init(texture: nil, color: .clear, size: .zero)
         
         /* Additional Configuration */
         isUserInteractionEnabled = true
-        size = CGSize(width: applicationDelegate.applicationFrame.size.width, height: applicationDelegate.applicationFrame.size.height)
-        position = CGPoint(x: applicationDelegate.applicationFrame.midX, y: applicationDelegate.applicationFrame.midY)
+        size = CGSize(width: frame.size.width, height: frame.size.height)
+        position = CGPoint(x: frame.midX, y: frame.midY)
         texture = SKTexture(imageNamed: "Images/background")
         
         /* Definitions */
@@ -105,7 +105,7 @@ class AboutNode: SKSpriteNode {
         
         if backButton.contains(location) {
             backButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .mainMenu)
+            //applicationDelegate?.didSelectNode(with: .mainMenu)
             return
         }
         backButton.fillTexture = kButtonActiveTexture
