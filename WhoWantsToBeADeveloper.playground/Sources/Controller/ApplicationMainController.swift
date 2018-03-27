@@ -73,6 +73,9 @@ extension ApplicationMainController: ApplicationDelegate {
     
     func presentScene(_ scene: SKScene) {
         scene.scaleMode = .aspectFit
-        view.presentScene(scene, transition: .fade(withDuration: 1.0))
+        
+        let transition = SKTransition.fade(withDuration: 0.2)
+        transition.pausesOutgoingScene = true
+        view.presentScene(scene, transition: transition)
     }
 }

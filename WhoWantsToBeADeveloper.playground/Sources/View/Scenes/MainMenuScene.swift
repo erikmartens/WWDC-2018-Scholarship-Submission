@@ -14,11 +14,15 @@ class MainMenuScene: SKScene {
     
     // MARK: - Overrides
     
-    override public func didMove(to view: SKView) {
+    override func didMove(to view: SKView) {
         size = view.frame.size
         
         mainMenuNode = MainMenuNode(frame: view.frame, mainMenuControllerDelegate: mainMenuControllerDelegate)
         addChild(mainMenuNode)
+    }
+    
+    override func willMove(from: SKView) {
+        removeAllChildren()
     }
     
     

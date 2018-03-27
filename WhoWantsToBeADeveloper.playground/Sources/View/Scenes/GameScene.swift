@@ -14,11 +14,15 @@ class GameScene: SKScene {
     
     // MARK: - Overrides
     
-    override public func didMove(to view: SKView) {
+    override func didMove(to view: SKView) {
         size = view.frame.size
         
         gameNode = GameNode(frame: view.frame, gameControllerDelegate: gameControllerDelegate)
         addChild(gameNode)
+    }
+    
+    override func willMove(from: SKView) {
+        removeAllChildren()
     }
     
     
