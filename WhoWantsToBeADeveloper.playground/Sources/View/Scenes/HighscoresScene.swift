@@ -28,7 +28,7 @@ class HighscoresScene: SKScene {
     }
     
     
-    // MAKR: - Public Functions
+    // MARK: - Public Functions
     
     func configure(with highscores: [HighscoreDTO]) {
         highscoresNode.configure(with: highscores)

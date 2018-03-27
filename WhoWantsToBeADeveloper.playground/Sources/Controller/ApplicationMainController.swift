@@ -22,6 +22,7 @@ public class ApplicationMainController: NSObject {
     private var mainMenuController: MainMenuController?
     private var gameController: GameController?
     private var highscoresController: HighscoresController?
+    private var aboutController: AboutController?
     
     
     // MARK: - Initialization
@@ -67,7 +68,10 @@ extension ApplicationMainController: ApplicationDelegate {
             }
             highscoresController!.startHighscores()
         case .about:
-            break
+            if aboutController == nil {
+                aboutController = AboutController(applicationDelegate: self)
+            }
+            aboutController!.startAbout()
         }
     }
     

@@ -91,7 +91,6 @@ class HighscoresNode: SKSpriteNode {
         let location = touch.location(in: self)
         
         if backButton.contains(location) {
-            backButton.fillTexture = kButtonActiveTexture
             highscoresControllerDelegate.didTapBackButton()
         }
         buttons.forEach { $0.fillTexture = kButtonActiveTexture }
