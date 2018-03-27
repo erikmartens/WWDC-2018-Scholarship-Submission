@@ -33,7 +33,7 @@ class GameModel {
     /**
      * This init is used for restoring a previous game from a save file
      */
-    convenience init(savegame: SaveGameDTO) {
+    convenience init(savegame: SavegameDTO) {
         self.init(currentQuestionIndex: savegame.currentQuestionIndex, deliveredQuestionIDs: savegame.deliveredQuestionIDs, jokerFiftyFiftyActive: savegame.jokerFiftyFiftyActive, jokerAudienceActive: savegame.jokerAudienceActive)
     }
     

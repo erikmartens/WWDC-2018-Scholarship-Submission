@@ -2,7 +2,7 @@ import SpriteKit
 
 enum SceneType {
     case mainMenu
-    case game(SaveGameDTO?)
+    case game(SavegameDTO?)
     case registerHighscore(Int)
     case highscores
     case about
@@ -54,10 +54,13 @@ extension ApplicationMain: ApplicationDelegate {
     func moveToScene(with type: SceneType) {
         switch type {
         case .mainMenu:
-            break
+            if mainMenuController == nil {
+                mainMenuController = MainMenuController(applicationDelegate: self)
+            }
+            mainMenuController.startMainMenue()
         case .game(let savegame):
             if gameController == nil {
-                gameController = savegame != nil ? GameController(savegame: savegame!) : GameModel()
+                gameController = GameController(applicationDelegate: self, savegame: savegame)
             }
             gameController.startGame()
         case .registerHighscore(let score):
@@ -69,7 +72,7 @@ extension ApplicationMain: ApplicationDelegate {
         }
     }
     
-    func presentScene(_ scene: inout SKScene) {
+    func presentScene(_ scene: SKScene) {
         scene.scaleMode = .aspectFit
         view.presentScene(scene, transition: .fade(withDuration: 1.0))
     }

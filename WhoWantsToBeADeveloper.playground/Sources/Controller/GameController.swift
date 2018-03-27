@@ -36,10 +36,11 @@ class GameController {
     init(applicationDelegate: ApplicationDelegate, savegame: SavegameDTO?) {
         self.applicationDelegate = applicationDelegate
         
-        gameScene = GameScene(gameControllerDelegate: self)
+        gameScene = GameScene()
+        gameScene.gameControllerDelegate = self
         
         if let savegame = savegame {
-            gameModel = GameModel(savegame: SaveGameDTO)
+            gameModel = GameModel(savegame: savegame)
             timeLeft = savegame.remainingTime
             return
         }
@@ -51,8 +52,8 @@ class GameController {
     // MARK: - Public Functions
     
     func startGame() {
-        applicationDelegate.presentScene(&gameScene)
-        configureNextRound(timeLeft: timeLeft)
+        applicationDelegate.presentScene(gameScene)
+        configureNextRound(with: timeLeft)
     }
     
     
@@ -143,7 +144,7 @@ extension GameController: GameControllerDelegate {
     func didSelectPause() {
         roundTimer.invalidate()
         storeGameState()
-        applicationDelegate.didPauseGame()
+        applicationDelegate.moveToScene(with: .mainMenu)
     }
 }
 
