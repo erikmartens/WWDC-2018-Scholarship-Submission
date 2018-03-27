@@ -57,6 +57,7 @@ extension ApplicationMainController: ApplicationDelegate {
             }
             mainMenuController!.startMainMenu()
         case .game(let savegame):
+            FileStorageService.invalidateSavegame()
             if gameController == nil {
                 gameController = GameController(applicationDelegate: self, savegame: savegame)
             }

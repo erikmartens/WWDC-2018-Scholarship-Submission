@@ -98,6 +98,9 @@ class FileStorageService {
             print("💥 FileStorageService: Could not construct file path URL.")
             return false
         }
+        if !FileManager.default.fileExists(atPath: filePathURL.path) {
+            return true
+        }
         do {
             try FileManager.default.removeItem(atPath: filePathURL.path)
             return true
