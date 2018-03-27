@@ -13,7 +13,7 @@ protocol ApplicationDelegate: class {
     func presentScene(_ scene: SKScene)
 }
 
-class ApplicationMainController: NSObject {
+public class ApplicationMainController: NSObject {
     
     // MARK: - Properties
     
@@ -29,7 +29,7 @@ class ApplicationMainController: NSObject {
     
     // MARK: - Initialization
     
-    init(view: SKView) {
+    public init(view: SKView) {
         self.view = view
     }
     

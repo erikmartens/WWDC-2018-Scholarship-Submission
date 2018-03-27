@@ -29,10 +29,9 @@ let frameWidth = UIScreen.main.bounds.width
 let frameHeight = UIScreen.main.bounds.width / 2
 let applicationFrame = CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight)
 let applicationView = SKView(frame: applicationFrame)
+let mainController = ApplicationMainController(view: applicationView)
 
 PlaygroundPage.current.liveView = applicationView
-
-let mainController = ApplicationMainController(view: applicationView)
 mainController.runApplication()
 
 
