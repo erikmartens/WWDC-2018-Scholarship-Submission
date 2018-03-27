@@ -17,7 +17,9 @@ class MainMenuScene: SKScene {
     override func didMove(to view: SKView) {
         size = view.frame.size
         
-        mainMenuNode = MainMenuNode(frame: view.frame, mainMenuControllerDelegate: mainMenuControllerDelegate)
+        if mainMenuNode == nil {
+            mainMenuNode = MainMenuNode(frame: view.frame, mainMenuControllerDelegate: mainMenuControllerDelegate)
+        }
         addChild(mainMenuNode)
     }
     

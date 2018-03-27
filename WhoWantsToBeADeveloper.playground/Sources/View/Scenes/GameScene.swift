@@ -17,7 +17,9 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         size = view.frame.size
         
-        gameNode = GameNode(frame: view.frame, gameControllerDelegate: gameControllerDelegate)
+        if gameNode == nil {
+            gameNode = GameNode(frame: view.frame, gameControllerDelegate: gameControllerDelegate)
+        }
         addChild(gameNode)
     }
     
