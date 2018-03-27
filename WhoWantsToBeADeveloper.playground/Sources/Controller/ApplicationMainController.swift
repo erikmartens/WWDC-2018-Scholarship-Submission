@@ -59,9 +59,9 @@ extension ApplicationMainController: ApplicationDelegate {
         case .game(let savegame):
             FileStorageService.invalidateSavegame()
             if gameController == nil {
-                gameController = GameController(applicationDelegate: self, savegame: savegame)
+                gameController = GameController(applicationDelegate: self)
             }
-            gameController!.startGame()
+            gameController!.startGame(with: savegame)
         case .registerHighscore(let score):
             if registerHighscoreController == nil {
                 registerHighscoreController = RegisterHighscoreController(applicationDelegate: self, score: score)

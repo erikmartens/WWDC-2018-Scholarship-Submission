@@ -26,24 +26,25 @@ class GameController {
     
     // MARK: - Initialization
     
-    init(applicationDelegate: ApplicationDelegate, savegame: SavegameDTO?) {
+    init(applicationDelegate: ApplicationDelegate) {
         self.applicationDelegate = applicationDelegate
         
         gameScene = GameScene()
-        
-        if let savegame = savegame {
-            gameModel = GameModel(savegame: savegame)
-            timeLeft = savegame.remainingTime
-            return
-        }
         gameModel = GameModel()
-        timeLeft = 30
     }
     
     
     // MARK: - Public Functions
     
-    func startGame() {
+    func startGame(with savegame: SavegameDTO?) {
+        if let savegame = savegame {
+            gameModel.configure(with: savegame)
+            timeLeft = savegame.remainingTime
+            return
+        }
+        gameModel = GameModel()
+        timeLeft = 30
+        
         gameScene.gameControllerDelegate = self
         applicationDelegate.presentScene(gameScene)
         configureNextRound(with: timeLeft)

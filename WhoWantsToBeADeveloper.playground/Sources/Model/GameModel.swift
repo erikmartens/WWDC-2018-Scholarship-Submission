@@ -19,6 +19,10 @@ class GameModel {
     
     // MARK: - Initialization
     
+    convenience init() {
+        self.init(currentQuestionIndex: -1, deliveredQuestionIDs: [Int](), jokerFiftyFiftyActive: true, jokerAudienceActive: true)
+    }
+    
     private init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
         self.currentQuestionIndex = currentQuestionIndex
         self.deliveredQuestionIDs = deliveredQuestionIDs
@@ -30,22 +34,19 @@ class GameModel {
         self.jokerAudienceActive = jokerAudienceActive
     }
     
-    /**
-     * This init is used for restoring a previous game from a save file
-     */
-    convenience init(savegame: SavegameDTO) {
-        self.init(currentQuestionIndex: savegame.currentQuestionIndex, deliveredQuestionIDs: savegame.deliveredQuestionIDs, jokerFiftyFiftyActive: savegame.jokerFiftyFiftyActive, jokerAudienceActive: savegame.jokerAudienceActive)
-    }
-    
-    /**
-     * This convenience init is used for initiating a new game
-     */
-    convenience init() {
-        self.init(currentQuestionIndex: -1, deliveredQuestionIDs: [Int](), jokerFiftyFiftyActive: true, jokerAudienceActive: true)
-    }
-    
     
     // MARK: - Public Properties & Functions
+    
+    func configure(with savegame: SavegameDTO) {
+        currentQuestionIndex = savegame.currentQuestionIndex
+        deliveredQuestionIDs = savegame.deliveredQuestionIDs
+        jokerFiftyFiftyActive = savegame.jokerFiftyFiftyActive
+        jokerAudienceActive = savegame.jokerAudienceActive
+        
+        if !deliveredQuestionIDs.isEmpty {
+            currentQuestion = questions.first { return $0.identifier == deliveredQuestionIDs.last! }
+        }
+    }
     
     var nextQuestion: QuestionDTO {
         var remainingQuestions = questions.filter { question in
