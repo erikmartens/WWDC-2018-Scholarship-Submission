@@ -2,9 +2,13 @@ import SpriteKit
 
 class MainMenuScene: SKScene {
     
+    // MARK: - Public Properties
+    
+    weak var mainMenuControllerDelegate: MainMenuControllerDelegate!
+    
+    
     // MARK: - Private Properties
     
-    private weak var mainMenuControllerDelegate: MainMenuControllerDelegate!
     private var mainMenuNode: MainMenuNode!
     
     

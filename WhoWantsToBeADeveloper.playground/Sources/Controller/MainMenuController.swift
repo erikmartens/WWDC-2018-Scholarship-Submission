@@ -7,7 +7,7 @@ enum ButtonType {
     case presentAbout
 }
 
-protocol MainMenuControllerDelegate {
+protocol MainMenuControllerDelegate: class {
     var savegameAvailable: Bool { get }
     func didTapMenuButton(with type: ButtonType)
 }

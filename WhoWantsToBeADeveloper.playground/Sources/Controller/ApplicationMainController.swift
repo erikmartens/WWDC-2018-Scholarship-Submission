@@ -13,7 +13,7 @@ protocol ApplicationDelegate: class {
     func presentScene(_ scene: SKScene)
 }
 
-class ApplicationMain {
+class ApplicationMainController {
     
     // MARK: - Properties
     
@@ -49,7 +49,7 @@ class ApplicationMain {
     }
 }
 
-extension ApplicationMain: ApplicationDelegate {
+extension ApplicationMainController: ApplicationDelegate {
     
     func moveToScene(with type: SceneType) {
         switch type {

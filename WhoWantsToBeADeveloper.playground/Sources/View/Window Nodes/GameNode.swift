@@ -179,36 +179,6 @@ class GameNode: SKSpriteNode {
         questionLabel.timerLabelFontColor = .orange
     }
     
-    func markAnswerOption(_ option: AnswerOption, usingTexture texture: SKTexture) {
-        switch option {
-        case .optionA:
-            answerOption_0.fillTexture = texture
-        case .optionB:
-            answerOption_1.fillTexture = texture
-        case .optionC:
-            answerOption_2.fillTexture = texture
-        case .optionD:
-            answerOption_3.fillTexture = texture
-        }
-    }
-    
-    func markAnswerOptionInactive(_ option: AnswerOption) {
-        switch option {
-        case .optionA:
-            answerOptionActive_0 = false
-            answerOption_0.fillTexture = kButtonInactiveTexture
-        case .optionB:
-            answerOptionActive_1 = false
-            answerOption_1.fillTexture = kButtonInactiveTexture
-        case .optionC:
-            answerOptionActive_2 = false
-            answerOption_2.fillTexture = kButtonInactiveTexture
-        case .optionD:
-            answerOptionActive_3 = false
-            answerOption_3.fillTexture = kButtonInactiveTexture
-        }
-    }
-    
 
     // MARK: - UIEvent Handlers
 

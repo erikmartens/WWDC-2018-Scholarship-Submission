@@ -34,5 +34,5 @@ let applicationView = SKView(frame: applicationFrame)
 
 PlaygroundPage.current.liveView = applicationView
 
-let main = ApplicationMain(view: applicationView)
-main.run()
+let mainController = ApplicationMainController(view: applicationView)
+mainController.run()
