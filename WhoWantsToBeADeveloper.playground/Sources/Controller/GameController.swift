@@ -37,17 +37,18 @@ class GameController {
     // MARK: - Public Functions
     
     func startGame(with savegame: SavegameDTO?) {
-        if let savegame = savegame {
-            gameModel.configure(with: savegame)
-            timeLeft = savegame.remainingTime
+        gameScene.gameControllerDelegate = self
+        
+        guard let savegame = savegame else {
+            gameModel = GameModel()
+            applicationDelegate.presentScene(gameScene)
+            configureNextRound()
             return
         }
-        gameModel = GameModel()
-        timeLeft = 30
-        
-        gameScene.gameControllerDelegate = self
+        gameModel.configure(with: savegame)
+        timeLeft = savegame.remainingTime
         applicationDelegate.presentScene(gameScene)
-        configureNextRound(with: timeLeft)
+        configureResumeRound()
     }
     
     
@@ -65,6 +66,13 @@ class GameController {
                                    jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive,
                                    jokerAudienceActive: gameModel.jokerAudienceActive)
         FileStorageService.savegame = savegame
+    }
+    
+    private func configureResumeRound() {
+        let question = gameModel.currentQuestion!
+        let questionIndex = gameModel.currentQuestionIndex
+        gameScene.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        startRoundTimer()
     }
     
     fileprivate func configureNextRound(with timeLeft: TimeInterval = 30) {
