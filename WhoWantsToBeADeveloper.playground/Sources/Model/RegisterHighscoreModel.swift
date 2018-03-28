@@ -3,12 +3,12 @@ import SpriteKit
 fileprivate let kTitleText = "Game Over"
 
 fileprivate let kTitleTextAttributes = [
-    [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 28),
-     NSAttributedStringKey.foregroundColor: UIColor.white,
+    [NSAttributedStringKey.font: NSFont.boldSystemFont(ofSize: 28),
+     NSAttributedStringKey.foregroundColor: NSColor.white,
      NSAttributedStringKey.paragraphStyle: NSMutableParagraphStyle(alignment: .center)],
     
-    [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16),
-     NSAttributedStringKey.foregroundColor: UIColor.white,
+    [NSAttributedStringKey.font: NSFont.systemFont(ofSize: 16),
+     NSAttributedStringKey.foregroundColor: NSColor.white,
      NSAttributedStringKey.paragraphStyle: NSMutableParagraphStyle(alignment: .center)]
 ]
 

@@ -178,62 +178,58 @@ class GameNode: SKSpriteNode {
 
     // MARK: - UIEvent Handlers
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-        guard let touch = touches.first else {
+    override func mouseDown(with event: NSEvent) {
+        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
+        guard let touchedNode = nodes(at: mousePoint).first else {
             return
         }
-        let location = touch.location(in: self)
-
-        if jokerFiftyFiftyActive && jokerFiftyFiftyButton.contains(location) {
+        if jokerFiftyFiftyActive && touchedNode == jokerFiftyFiftyButton {
             jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
         }
-        if jokerAudienceActive && jokerAudienceButton.contains(location) {
+        if jokerAudienceActive && touchedNode == jokerAudienceButton {
             jokerAudienceButton.fillTexture = kJokerAudienceSelectedTexture
         }
-        if pauseButton.contains(location) {
+        if touchedNode == pauseButton {
             pauseButton.fillTexture = kButtonPauseSelectedTexture
         }
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-        guard let touch = touches.first else {
+    override func mouseUp(with event: NSEvent) {
+        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
+        guard let touchedNode = nodes(at: mousePoint).first else {
             return
         }
-        let location = touch.location(in: self)
-
-        if answerOptionActive_0 && answerOption_0.contains(location) {
+        if answerOptionActive_0 && touchedNode == answerOption_0 {
             isUserInteractionEnabled = false
             answerOption_0.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionA)
         }
-        if answerOptionActive_1 && answerOption_1.contains(location) {
+        if answerOptionActive_1 && touchedNode == answerOption_1 {
             isUserInteractionEnabled = false
             answerOption_1.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionB)
         }
-        if answerOptionActive_2 && answerOption_2.contains(location) {
+        if answerOptionActive_2 && touchedNode == answerOption_2 {
             isUserInteractionEnabled = false
             answerOption_2.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionC)
         }
-        if answerOptionActive_3 && answerOption_3.contains(location) {
+        if answerOptionActive_3 && touchedNode == answerOption_3 {
             isUserInteractionEnabled = false
             answerOption_3.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionD)
         }
-        if jokerFiftyFiftyActive && jokerFiftyFiftyButton.contains(location) {
+        if jokerFiftyFiftyActive && touchedNode == jokerFiftyFiftyButton {
             jokerFiftyFiftyActive = false
             jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
         }
-        if jokerAudienceActive && jokerAudienceButton.contains(location) {
+        if jokerAudienceActive && touchedNode == jokerAudienceButton {
             jokerAudienceActive = false
             jokerAudienceButton.fillTexture = kJokerAudienceInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.audience)
         }
-        if pauseButton.contains(location) {
+        if touchedNode == pauseButton.contains(location) {
             gameControllerDelegate.didSelectPause()
         }
         pauseButton.fillTexture = kButtonPauseActiveTexture

@@ -60,24 +60,22 @@ class AboutNode: SKSpriteNode {
     
     // MARK: - UIEvent Handlers
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
+    override func mouseDown(with event: NSEvent) {
+        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
+        guard let touchedNode = nodes(at: mousePoint).first else {
             return
         }
-        let location = touch.location(in: self)
-        
-        if backButton.contains(location) {
+        if touchedNode == backButton {
             backButton.fillTexture = kButtonSelectedTexture
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
+    override func mouseUp(with event: NSEvent) {
+        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
+        guard let touchedNode = nodes(at: mousePoint).first else {
             return
         }
-        let location = touch.location(in: self)
-        
-        if backButton.contains(location) {
+        if touchedNode == backButton {
             aboutControllerDelegate.didTapBackButton()
         }
         backButton.fillTexture = kButtonActiveTexture

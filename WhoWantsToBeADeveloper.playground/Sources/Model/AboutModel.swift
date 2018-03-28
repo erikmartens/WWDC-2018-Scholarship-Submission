@@ -6,20 +6,20 @@ fileprivate let kTextLines = ["Who Wants to Be a Developer",
                               "👩‍💻 Hope to meet you at the WWDC 18 👨‍💻"]
 
 fileprivate let kTextAttributes = [
-    [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 28),
-     NSAttributedStringKey.foregroundColor: UIColor.white,
+    [NSAttributedStringKey.font: NSFont.boldSystemFont(ofSize: 28),
+     NSAttributedStringKey.foregroundColor: NSColor.white,
      NSAttributedStringKey.paragraphStyle: NSMutableParagraphStyle(alignment: .center)],
     
-    [NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 16),
-     NSAttributedStringKey.foregroundColor: UIColor.white,
+    [NSAttributedStringKey.font: NSFont.systemFont(ofSize: 16),
+     NSAttributedStringKey.foregroundColor: NSColor.white,
      NSAttributedStringKey.paragraphStyle: NSMutableParagraphStyle(alignment: .center)],
     
-    [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
-     NSAttributedStringKey.foregroundColor: UIColor.white,
+    [NSAttributedStringKey.font: NSFont.systemFont(ofSize: 12),
+     NSAttributedStringKey.foregroundColor: NSColor.white,
      NSAttributedStringKey.paragraphStyle: NSMutableParagraphStyle(alignment: .justified)],
     
-    [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16),
-     NSAttributedStringKey.foregroundColor: UIColor.white,
+    [NSAttributedStringKey.font: NSFont.boldSystemFont(ofSize: 16),
+     NSAttributedStringKey.foregroundColor: NSColor.white,
      NSAttributedStringKey.paragraphStyle: NSMutableParagraphStyle(alignment: .center)]
 ]
 

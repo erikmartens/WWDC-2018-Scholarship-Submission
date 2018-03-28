@@ -8,7 +8,7 @@ class RegisterHighscoreNode: SKSpriteNode {
     
     private var instructionLabel: LabelNode!
     private var enterNameNode: TextEntryNode!
-    private var saveButton: ButtonNode!
+    private(set) var saveButton: ButtonNode!
     
     
     // MARK: - Initialization
@@ -61,35 +61,17 @@ class RegisterHighscoreNode: SKSpriteNode {
     }
 
     
-    // MARK: - Public Functions
+    // MARK: - Public Functions & Properties
     
     func configure(with scoreText: NSMutableAttributedString) {
         instructionLabel.labelAttributedText = scoreText
     }
     
-    
-    // MARK: - Event Handlers
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let location = touch.location(in: self)
-        
-        if saveButton.contains(location) {
-            saveButton.fillTexture = kButtonSelectedTexture
-        }
+    func configureEnteredName(with name: String) {
+        enterNameNode.enteredText = name
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let location = touch.location(in: self)
-        
-        if saveButton.contains(location) {
-            registerHighscoreControllerDelegate.didTapSaveButton(withNameEntered: enterNameNode.enteredText ?? "PlayerUnkown")
-        }
-        saveButton.fillTexture = kButtonActiveTexture
+    var enteredName: String? {
+        return enterNameNode.enteredText
     }
 }

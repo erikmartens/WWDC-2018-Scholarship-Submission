@@ -8,10 +8,10 @@ class MainMenuNode: SKSpriteNode {
     
     private weak var mainMenuControllerDelegate: MainMenuControllerDelegate!
     
-    private var resumeButton: ButtonNode!
-    private var startButton: ButtonNode!
-    private var highscoreButton: ButtonNode!
-    private var aboutButton: ButtonNode!
+    private(set) var resumeButton: ButtonNode!
+    private(set) var startButton: ButtonNode!
+    private(set) var highscoreButton: ButtonNode!
+    private(set) var aboutButton: ButtonNode!
     
     private var resumeAvailable: Bool!
     
@@ -75,56 +75,5 @@ class MainMenuNode: SKSpriteNode {
     func configureResumeAvailable(_ available: Bool) {
         resumeAvailable = available
         resumeButton.fillTexture = available ? kButtonActiveTexture : kButtonInactiveTexture
-    }
-    
-    
-    // MARK: - UIEvent Handlers
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let location = touch.location(in: self)
-        
-        if resumeAvailable && resumeButton.contains(location) {
-            resumeButton.fillTexture = kButtonSelectedTexture
-            return
-        }
-        if startButton.contains(location) {
-            startButton.fillTexture = kButtonSelectedTexture
-            return
-        }
-        if highscoreButton.contains(location) {
-            highscoreButton.fillTexture = kButtonSelectedTexture
-            return
-        }
-        if aboutButton.contains(location) {
-            aboutButton.fillTexture = kButtonSelectedTexture
-            return
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let location = touch.location(in: self)
-        
-        if resumeAvailable && resumeButton.contains(location) {
-            mainMenuControllerDelegate.didTapMenuButton(with: .resumeGame)
-        }
-        if startButton.contains(location) {
-            mainMenuControllerDelegate.didTapMenuButton(with: .newGame)
-        }
-        if highscoreButton.contains(location) {
-            mainMenuControllerDelegate.didTapMenuButton(with: .presentHighscores)
-        }
-        if aboutButton.contains(location) {
-            mainMenuControllerDelegate.didTapMenuButton(with: .presentAbout)
-        }
-        resumeButton.fillTexture = resumeAvailable ? kButtonActiveTexture : kButtonInactiveTexture
-        startButton.fillTexture = kButtonActiveTexture
-        highscoreButton.fillTexture = kButtonActiveTexture
-        aboutButton.fillTexture = kButtonActiveTexture
     }
 }
