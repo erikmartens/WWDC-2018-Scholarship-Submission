@@ -64,9 +64,9 @@ extension ApplicationMainController: ApplicationDelegate {
             gameController!.startGame(with: savegame)
         case .registerHighscore(let score):
             if registerHighscoreController == nil {
-                registerHighscoreController = RegisterHighscoreController(applicationDelegate: self, score: score)
+                registerHighscoreController = RegisterHighscoreController(applicationDelegate: self)
             }
-            registerHighscoreController!.startRegisterHighscore()
+            registerHighscoreController!.startRegisterHighscore(with: score)
         case .highscores:
             if highscoresController == nil {
                 highscoresController = HighscoresController(applicationDelegate: self)

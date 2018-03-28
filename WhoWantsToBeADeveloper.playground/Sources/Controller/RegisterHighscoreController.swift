@@ -17,18 +17,20 @@ class RegisterHighscoreController {
     
     // MARK: - Initialization
     
-    init(applicationDelegate: ApplicationDelegate, score: Int) {
+    init(applicationDelegate: ApplicationDelegate) {
         self.applicationDelegate = applicationDelegate
         
         registerHighscoreScene = RegisterHighscoreScene()
-        registerHighscoreModel = RegisterHighscoreModel(score: score)
+        registerHighscoreModel = RegisterHighscoreModel()
     }
     
     
     // MARK: - Public Functions
     
-    func startRegisterHighscore() {
+    func startRegisterHighscore(with score: Int) {
+        registerHighscoreModel.score = score
         registerHighscoreScene.registerHighscoreControllerDelegate = self
+        
         applicationDelegate.presentScene(registerHighscoreScene)
         registerHighscoreScene.configure(with: registerHighscoreModel.scoreText)
     }

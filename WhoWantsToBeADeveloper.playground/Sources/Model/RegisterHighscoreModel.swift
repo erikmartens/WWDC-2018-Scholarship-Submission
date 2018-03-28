@@ -16,7 +16,7 @@ class RegisterHighscoreModel {
     
     // MARK: - Public Properties
     
-    let score: Int
+    var score: Int!
     
     var scoreText: NSMutableAttributedString {
         let pluralModifierString = score != 1 ? "s" : ""
@@ -27,11 +27,5 @@ class RegisterHighscoreModel {
             attributedInstructionString.setAttributes(kTitleTextAttributes[index], range: (instructionString as NSString).range(of: texts[index]))
         }
         return attributedInstructionString
-    }
-    
-    // MARK: - Initialization
-    
-    init(score: Int) {
-        self.score = score
     }
 }
