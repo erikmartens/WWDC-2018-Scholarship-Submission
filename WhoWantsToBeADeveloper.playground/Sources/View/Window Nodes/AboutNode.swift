@@ -7,7 +7,7 @@ class AboutNode: SKSpriteNode {
     private weak var aboutControllerDelegate: AboutControllerDelegate!
     
     private var aboutLabel: LabelNode!
-    private var backButton: ButtonNode!
+    private(set) var backButton: ButtonNode!
     
     
     // MARK: - Initialization
@@ -55,29 +55,5 @@ class AboutNode: SKSpriteNode {
     
     func configure(with aboutText: NSMutableAttributedString) {
         aboutLabel.labelAttributedText = aboutText
-    }
-    
-    
-    // MARK: - UIEvent Handlers
-    
-    override func mouseDown(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
-            return
-        }
-        if touchedNode == backButton {
-            backButton.fillTexture = kButtonSelectedTexture
-        }
-    }
-    
-    override func mouseUp(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
-            return
-        }
-        if touchedNode == backButton {
-            aboutControllerDelegate.didTapBackButton()
-        }
-        backButton.fillTexture = kButtonActiveTexture
     }
 }

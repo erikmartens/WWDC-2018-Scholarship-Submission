@@ -53,16 +53,16 @@ extension RegisterHighscoreController: RegisterHighscoreControllerDelegate {
     
     func didPressKeyboardKey(_ type: KeyType) {
         switch type {
-        case character(let currentName, let char):
+        case .character(let currentName, let char):
             let newName = currentName + char
-            gameScene.configureEnteredName(with: newName)
-        case enter(let currentName):
+            registerHighscoreScene.configureEnteredName(with: newName)
+        case .enter(let currentName):
             let highscore = HighscoreDTO(score: registerHighscoreModel.score, name: currentName, date: Date())
             FileStorageService.appendHighscore(highscore)
             applicationDelegate.moveToScene(with: .mainMenu)
-        case backspace(let currentName):
+        case .backspace(let currentName):
             let newName = currentName.substring(to: currentName.index(before: currentName.endIndex))
-            gameScene.configureEnteredName(with: newName)
+            registerHighscoreScene.configureEnteredName(with: newName)
         }
     }
 }

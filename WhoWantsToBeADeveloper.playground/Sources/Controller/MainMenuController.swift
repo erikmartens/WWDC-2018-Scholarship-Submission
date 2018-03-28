@@ -8,6 +8,7 @@ enum ButtonType {
 }
 
 protocol MainMenuControllerDelegate: class {
+    var resumeAvailable: Bool { get }
     func didTapMenuButton(with type: ButtonType)
 }
 
@@ -41,6 +42,10 @@ class MainMenuController {
 }
 
 extension MainMenuController: MainMenuControllerDelegate {
+    
+    var resumeAvailable: Bool {
+        return mainMenuModel.savegame != nil
+    }
     
     func didTapMenuButton(with type: ButtonType) {
         switch type {

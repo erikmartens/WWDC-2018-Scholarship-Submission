@@ -8,7 +8,7 @@ class HighscoresNode: SKSpriteNode {
     
     private var instructionLabel: LabelNode!
     private var highscoresLabelNode: HighscoreLabelNode!
-    private var backButton: ButtonNode!
+    private(set) var backButton: ButtonNode!
     
     private let elementsCount =  6
     private var buttons: [ButtonNode] {
@@ -66,29 +66,5 @@ class HighscoresNode: SKSpriteNode {
     
     func configure(with highscores: [HighscoreDTO]) {
         highscoresLabelNode.configure(with: highscores)
-    }
-    
-    
-    // MARK: - UIEvent Handlers
-    
-    override func mouseDown(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
-            return
-        }
-        if touchedNode == backButton {
-            backButton.fillTexture = kButtonSelectedTexture
-        }
-    }
-    
-    override func mouseUp(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
-            return
-        }
-        if touchedNode == backButton {
-            highscoresControllerDelegate.didTapBackButton()
-        }
-        buttons.forEach { $0.fillTexture = kButtonActiveTexture }
     }
 }

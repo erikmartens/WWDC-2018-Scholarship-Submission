@@ -67,7 +67,7 @@ class RegisterHighscoreNode: SKSpriteNode {
         instructionLabel.labelAttributedText = scoreText
     }
     
-    func configureEnteredName(with name: String) {
+    func configureEnterNameNode(with name: String) {
         enterNameNode.enteredText = name
     }
     

@@ -13,13 +13,6 @@ class MainMenuNode: SKSpriteNode {
     private(set) var highscoreButton: ButtonNode!
     private(set) var aboutButton: ButtonNode!
     
-    private var resumeAvailable: Bool!
-    
-    private let buttonsCount = 4
-    private var buttons: [ButtonNode] {
-        return [resumeButton, startButton, highscoreButton, aboutButton]
-    }
-    
     
     // MARK: - Initialization
     
@@ -35,7 +28,7 @@ class MainMenuNode: SKSpriteNode {
         texture = SKTexture(imageNamed: "Images/background")
         
         /* Definitions */
-        let verticalButtonSpace = size.height / CGFloat(buttonsCount)
+        let verticalButtonSpace = size.height / CGFloat(4)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSize = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
@@ -73,7 +66,6 @@ class MainMenuNode: SKSpriteNode {
     // MARK: - Public Functions
     
     func configureResumeAvailable(_ available: Bool) {
-        resumeAvailable = available
         resumeButton.fillTexture = available ? kButtonActiveTexture : kButtonInactiveTexture
     }
 }

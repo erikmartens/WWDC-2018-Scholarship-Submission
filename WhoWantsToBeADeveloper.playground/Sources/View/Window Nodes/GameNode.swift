@@ -10,28 +10,20 @@ class GameNode: SKSpriteNode {
     private weak var gameControllerDelegate: GameControllerDelegate!
 
     private var questionLabel: QuestionLabelNode!
-    private var answerOption_0: ButtonNode!
-    private var answerOption_1: ButtonNode!
-    private var answerOption_2: ButtonNode!
-    private var answerOption_3: ButtonNode!
-    private var jokerFiftyFiftyButton: ButtonNode!
-    private var jokerAudienceButton: ButtonNode!
-    private var pauseButton: ButtonNode!
-
-    private let rowsCount = 3
-    private var answerOptionButtons: [ButtonNode] {
-        return [answerOption_0, answerOption_1, answerOption_2, answerOption_3]
-    }
+    private(set) var answerOption_0: ButtonNode!
+    private(set) var answerOption_1: ButtonNode!
+    private(set) var answerOption_2: ButtonNode!
+    private(set) var answerOption_3: ButtonNode!
+    private(set) var jokerFiftyFiftyButton: ButtonNode!
+    private(set) var jokerAudienceButton: ButtonNode!
+    private(set) var pauseButton: ButtonNode!
     
     /* Store Current Model Properties for Round */
     
-    private var answerOptionActive_0 = true
-    private var answerOptionActive_1 = true
-    private var answerOptionActive_2 = true
-    private var answerOptionActive_3 = true
-    
-    private var jokerFiftyFiftyActive: Bool!
-    private var jokerAudienceActive: Bool!
+    private(set) var answerOptionActive_0 = true
+    private(set) var answerOptionActive_1 = true
+    private(set) var answerOptionActive_2 = true
+    private(set) var answerOptionActive_3 = true
 
 
     // MARK: - Initialization
@@ -50,7 +42,7 @@ class GameNode: SKSpriteNode {
         let questionLabelNodeHeight = size.height * 0.25
         let questionLabelNodeSize = CGSize(width: size.width, height: questionLabelNodeHeight)
 
-        let verticalButtonSpace = (size.height - questionLabelNodeHeight) / CGFloat(rowsCount)
+        let verticalButtonSpace = (size.height - questionLabelNodeHeight) / CGFloat(3)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSizeRegular = CGSize(width: size.width / 2 - horizontalPadding / 4, height: verticalButtonSpace - 2 * verticalPadding)
@@ -130,9 +122,6 @@ class GameNode: SKSpriteNode {
         answerOption_2.labelText = "C: \(question.answerOptions[.optionC]!)"
         answerOption_3.labelText = "D: \(question.answerOptions[.optionD]!)"
         
-        self.jokerFiftyFiftyActive = jokerFiftyFiftyActive
-        self.jokerAudienceActive = jokerAudienceActive
-        
         jokerFiftyFiftyButton.fillTexture = jokerFiftyFiftyActive ? kJokerFiftyFiftyActiveTexture : kJokerFiftyFiftyInactiveTexture
         jokerAudienceButton.fillTexture = jokerAudienceActive ? kJokerAudienceActiveTexture : kJokerAudienceInactiveTexture
     }
@@ -174,65 +163,6 @@ class GameNode: SKSpriteNode {
             answerOptionActive_3 = false
             answerOption_3.fillTexture = kButtonInactiveTexture
         }
-    }
-
-    // MARK: - UIEvent Handlers
-
-    override func mouseDown(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
-            return
-        }
-        if jokerFiftyFiftyActive && touchedNode == jokerFiftyFiftyButton {
-            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
-        }
-        if jokerAudienceActive && touchedNode == jokerAudienceButton {
-            jokerAudienceButton.fillTexture = kJokerAudienceSelectedTexture
-        }
-        if touchedNode == pauseButton {
-            pauseButton.fillTexture = kButtonPauseSelectedTexture
-        }
-    }
-
-    override func mouseUp(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
-            return
-        }
-        if answerOptionActive_0 && touchedNode == answerOption_0 {
-            isUserInteractionEnabled = false
-            answerOption_0.fillTexture = kButtonLoggedTexture
-            gameControllerDelegate.didSelectAnswerOption(.optionA)
-        }
-        if answerOptionActive_1 && touchedNode == answerOption_1 {
-            isUserInteractionEnabled = false
-            answerOption_1.fillTexture = kButtonLoggedTexture
-            gameControllerDelegate.didSelectAnswerOption(.optionB)
-        }
-        if answerOptionActive_2 && touchedNode == answerOption_2 {
-            isUserInteractionEnabled = false
-            answerOption_2.fillTexture = kButtonLoggedTexture
-            gameControllerDelegate.didSelectAnswerOption(.optionC)
-        }
-        if answerOptionActive_3 && touchedNode == answerOption_3 {
-            isUserInteractionEnabled = false
-            answerOption_3.fillTexture = kButtonLoggedTexture
-            gameControllerDelegate.didSelectAnswerOption(.optionD)
-        }
-        if jokerFiftyFiftyActive && touchedNode == jokerFiftyFiftyButton {
-            jokerFiftyFiftyActive = false
-            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyInactiveTexture
-            gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
-        }
-        if jokerAudienceActive && touchedNode == jokerAudienceButton {
-            jokerAudienceActive = false
-            jokerAudienceButton.fillTexture = kJokerAudienceInactiveTexture
-            gameControllerDelegate.didSelectJokerOption(.audience)
-        }
-        if touchedNode == pauseButton.contains(location) {
-            gameControllerDelegate.didSelectPause()
-        }
-        pauseButton.fillTexture = kButtonPauseActiveTexture
     }
 }
 

@@ -6,6 +6,8 @@ enum JokerOption: Int {
 }
 
 protocol GameControllerDelegate: class {
+    var jokerFiftyFiftyActive: Bool { get set }
+    var jokerAudienceActive: Bool { get set }
     func didSelectAnswerOption(_ option: AnswerOption)
     func didSelectJokerOption(_ option: JokerOption)
     func didSelectPause()
@@ -109,14 +111,24 @@ class GameController {
 
 extension GameController: GameControllerDelegate {
     
+    var jokerFiftyFiftyActive: Bool {
+        get { return gameModel.jokerFiftyFiftyActive }
+        set { gameModel.jokerFiftyFiftyActive = newValue }
+    }
+    
+    var jokerAudienceActive: Bool {
+        get { return gameModel.jokerAudienceActive }
+        set { gameModel.jokerAudienceActive = newValue }
+    }
+    
     func didSelectAnswerOption(_ option: AnswerOption) {
         roundTimer.invalidate()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             let answeredCorrectly = self.gameModel.verifyAnswerOption(option)
             guard answeredCorrectly else {
                 self.gameScene.markAsAnsweredIncorrectly(with: option, correctOption: self.gameModel.correctAnswerOption)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.gameOver()
                 }
                 return

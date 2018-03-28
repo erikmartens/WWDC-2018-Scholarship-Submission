@@ -35,11 +35,11 @@ class RegisterHighscoreScene: SKScene {
     }
     
     func configureEnteredName(with name: String) {
-        registerHighscoreNode.configureEnteredNameNode(with: name)
+        registerHighscoreNode.configureEnterNameNode(with: name)
     }
     
     
-    // MARK: - Events
+    // MARK: - Input Event Handlers
     
     override func mouseDown(with event: NSEvent) {
         let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
@@ -57,7 +57,7 @@ class RegisterHighscoreScene: SKScene {
             return
         }
         if touchedNode == registerHighscoreNode.saveButton {
-            registerHighscoreControllerDelegate.didTapSaveButton(withNameEntered: enterNameNode.enteredText ?? "PlayerUnkown")
+            registerHighscoreControllerDelegate.didTapSaveButton(withNameEntered: registerHighscoreNode.enteredName ?? "PlayerUnkown")
         }
         registerHighscoreNode.saveButton.fillTexture = kButtonActiveTexture
     }

@@ -33,4 +33,28 @@ class HighscoresScene: SKScene {
     func configure(with highscores: [HighscoreDTO]) {
         highscoresNode.configure(with: highscores)
     }
+    
+    
+    // MARK: - Input Event Handlers
+    
+    override func mouseDown(with event: NSEvent) {
+        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
+        guard let touchedNode = nodes(at: mousePoint).first else {
+            return
+        }
+        if touchedNode == highscoresNode.backButton {
+            highscoresNode.backButton.fillTexture = kButtonSelectedTexture
+        }
+    }
+    
+    override func mouseUp(with event: NSEvent) {
+        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
+        guard let touchedNode = nodes(at: mousePoint).first else {
+            return
+        }
+        if touchedNode == highscoresNode.backButton {
+            highscoresControllerDelegate.didTapBackButton()
+        }
+        highscoresNode.backButton.fillTexture = kButtonActiveTexture
+    }
 }

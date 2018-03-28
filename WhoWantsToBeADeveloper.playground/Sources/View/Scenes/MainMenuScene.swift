@@ -35,14 +35,16 @@ class MainMenuScene: SKScene {
     }
     
     
-    // MARK: - Event Handlers
+    // MARK: - Input Event Handlers
     
     override func mouseDown(with event: NSEvent) {
+        print("mouse down")
         let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
         guard let touchedNode = nodes(at: mousePoint).first else {
             return
         }
-        if resumeAvailable && touchedNode == mainMenuNode.resumeButton {
+        if mainMenuControllerDelegate.resumeAvailable
+            && touchedNode == mainMenuNode.resumeButton {
             mainMenuNode.resumeButton.fillTexture = kButtonSelectedTexture
         }
         if touchedNode == mainMenuNode.startButton {
@@ -57,11 +59,15 @@ class MainMenuScene: SKScene {
     }
     
     override func mouseUp(with event: NSEvent) {
+        print("mouse up")
         let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
         guard let touchedNode = nodes(at: mousePoint).first else {
+            print("returned")
             return
         }
-        if resumeAvailable && touchedNode == mainMenuNode.resumeButton {
+        print("inside")
+        if mainMenuControllerDelegate.resumeAvailable
+            && touchedNode == mainMenuNode.resumeButton {
             mainMenuControllerDelegate.didTapMenuButton(with: .resumeGame)
         }
         if touchedNode == mainMenuNode.startButton {
@@ -73,7 +79,7 @@ class MainMenuScene: SKScene {
         if touchedNode == mainMenuNode.aboutButton {
             mainMenuControllerDelegate.didTapMenuButton(with: .presentAbout)
         }
-        mainMenuNode.resumeButton.fillTexture = resumeAvailable ? kButtonActiveTexture : kButtonInactiveTexture
+        mainMenuNode.resumeButton.fillTexture = mainMenuControllerDelegate.resumeAvailable ? kButtonActiveTexture : kButtonInactiveTexture
         mainMenuNode.startButton.fillTexture = kButtonActiveTexture
         mainMenuNode.highscoreButton.fillTexture = kButtonActiveTexture
         mainMenuNode.aboutButton.fillTexture = kButtonActiveTexture
