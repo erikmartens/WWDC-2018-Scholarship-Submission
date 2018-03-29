@@ -37,22 +37,24 @@ class AboutScene: SKScene {
     
     // MARK: - Input Event Handlers
     
-    override func mouseDown(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
             return
         }
-        if touchedNode == aboutNode.backButton {
+        let location = touch.location(in: self)
+        
+        if aboutNode.backButton.contains(location) {
             aboutNode.backButton.fillTexture = kButtonSelectedTexture
         }
     }
     
-    override func mouseUp(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
             return
         }
-        if touchedNode == aboutNode.backButton {
+        let location = touch.location(in: self)
+        
+        if aboutNode.backButton.contains(location) {
             aboutControllerDelegate.didTapBackButton()
         }
         aboutNode.backButton.fillTexture = kButtonActiveTexture

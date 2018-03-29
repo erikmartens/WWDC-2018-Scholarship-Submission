@@ -37,46 +37,44 @@ class MainMenuScene: SKScene {
     
     // MARK: - Input Event Handlers
     
-    override func mouseDown(with event: NSEvent) {
-        print("mouse down")
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
             return
         }
+        let location = touch.location(in: self)
+        
         if mainMenuControllerDelegate.resumeAvailable
-            && touchedNode == mainMenuNode.resumeButton {
+            && mainMenuNode.resumeButton.contains(location) {
             mainMenuNode.resumeButton.fillTexture = kButtonSelectedTexture
         }
-        if touchedNode == mainMenuNode.startButton {
+        if mainMenuNode.startButton.contains(location) {
             mainMenuNode.startButton.fillTexture = kButtonSelectedTexture
         }
-        if touchedNode == mainMenuNode.highscoreButton {
+        if mainMenuNode.highscoreButton.contains(location) {
             mainMenuNode.highscoreButton.fillTexture = kButtonSelectedTexture
         }
-        if touchedNode == mainMenuNode.aboutButton {
+        if mainMenuNode.aboutButton.contains(location) {
             mainMenuNode.aboutButton.fillTexture = kButtonSelectedTexture
         }
     }
     
-    override func mouseUp(with event: NSEvent) {
-        print("mouse up")
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
-            print("returned")
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
             return
         }
-        print("inside")
+        let location = touch.location(in: self)
+        
         if mainMenuControllerDelegate.resumeAvailable
-            && touchedNode == mainMenuNode.resumeButton {
+            && mainMenuNode.resumeButton.contains(location) {
             mainMenuControllerDelegate.didTapMenuButton(with: .resumeGame)
         }
-        if touchedNode == mainMenuNode.startButton {
+        if mainMenuNode.startButton.contains(location) {
             mainMenuControllerDelegate.didTapMenuButton(with: .newGame)
         }
-        if touchedNode == mainMenuNode.highscoreButton {
+        if mainMenuNode.highscoreButton.contains(location) {
             mainMenuControllerDelegate.didTapMenuButton(with: .presentHighscores)
         }
-        if touchedNode == mainMenuNode.aboutButton {
+        if mainMenuNode.aboutButton.contains(location) {
             mainMenuControllerDelegate.didTapMenuButton(with: .presentAbout)
         }
         mainMenuNode.resumeButton.fillTexture = mainMenuControllerDelegate.resumeAvailable ? kButtonActiveTexture : kButtonInactiveTexture

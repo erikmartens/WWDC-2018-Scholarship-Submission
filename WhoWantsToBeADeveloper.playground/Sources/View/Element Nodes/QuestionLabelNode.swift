@@ -19,7 +19,7 @@ class QuestionLabelNode: SKShapeNode {
         set { timerLabelNode.text = newValue }
     }
     
-    var timerLabelFontColor: NSColor? {
+    var timerLabelFontColor: UIColor? {
         get { return timerLabelNode.fontColor }
         set { timerLabelNode.fontColor = newValue }
     }

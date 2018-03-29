@@ -37,22 +37,24 @@ class HighscoresScene: SKScene {
     
     // MARK: - Input Event Handlers
     
-    override func mouseDown(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
             return
         }
-        if touchedNode == highscoresNode.backButton {
+        let location = touch.location(in: self)
+        
+        if highscoresNode.backButton.contains(location) {
             highscoresNode.backButton.fillTexture = kButtonSelectedTexture
         }
     }
     
-    override func mouseUp(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
             return
         }
-        if touchedNode == highscoresNode.backButton {
+        let location = touch.location(in: self)
+        
+        if highscoresNode.backButton.contains(location) {
             highscoresControllerDelegate.didTapBackButton()
         }
         highscoresNode.backButton.fillTexture = kButtonActiveTexture

@@ -55,66 +55,68 @@ class GameScene: SKScene {
     
     // MARK: - Input Event Handlers
     
-    override func mouseDown(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
             return
         }
+        let location = touch.location(in: self)
+        
         if gameControllerDelegate.jokerFiftyFiftyActive
-            && touchedNode == gameNode.jokerFiftyFiftyButton {
+            && gameNode.contains(location) {
             gameNode.jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
         }
         if gameControllerDelegate.jokerAudienceActive
-            && touchedNode == gameNode.jokerAudienceButton {
+            && gameNode.jokerAudienceButton.contains(location) {
             gameNode.jokerAudienceButton.fillTexture = kJokerAudienceSelectedTexture
         }
-        if touchedNode == gameNode.pauseButton {
+        if gameNode.pauseButton.contains(location) {
             gameNode.pauseButton.fillTexture = kButtonPauseSelectedTexture
         }
     }
     
-    override func mouseUp(with event: NSEvent) {
-        let mousePoint = convertPoint(fromView: CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y))
-        guard let touchedNode = nodes(at: mousePoint).first else {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
             return
         }
+        let location = touch.location(in: self)
+        
         if gameNode.answerOptionActive_0
-            && touchedNode == gameNode.answerOption_0 {
+            && gameNode.answerOption_0.contains(location) {
             gameNode.isUserInteractionEnabled = false
             gameNode.answerOption_0.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionA)
         }
         if gameNode.answerOptionActive_1
-            && touchedNode == gameNode.answerOption_1 {
+            && gameNode.answerOption_1.contains(location) {
             gameNode.isUserInteractionEnabled = false
             gameNode.answerOption_1.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionB)
         }
         if gameNode.answerOptionActive_2
-            && touchedNode == gameNode.answerOption_2 {
+            && gameNode.answerOption_2.contains(location) {
             gameNode.isUserInteractionEnabled = false
             gameNode.answerOption_2.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionC)
         }
         if gameNode.answerOptionActive_3
-            && touchedNode == gameNode.answerOption_3 {
+            && gameNode.answerOption_3.contains(location) {
             gameNode.isUserInteractionEnabled = false
             gameNode.answerOption_3.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionD)
         }
         if gameControllerDelegate.jokerFiftyFiftyActive
-            && touchedNode == gameNode.jokerFiftyFiftyButton {
+            && gameNode.jokerFiftyFiftyButton.contains(location) {
             gameControllerDelegate.jokerFiftyFiftyActive = false
             gameNode.jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
         }
         if gameControllerDelegate.jokerAudienceActive
-            && touchedNode == gameNode.jokerAudienceButton {
+            && gameNode.jokerAudienceButton.contains(location) {
             gameControllerDelegate.jokerAudienceActive = false
             gameNode.jokerAudienceButton.fillTexture = kJokerAudienceInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.audience)
         }
-        if touchedNode == gameNode.pauseButton {
+        if gameNode.pauseButton.contains(location) {
             gameControllerDelegate.didSelectPause()
         }
         gameNode.pauseButton.fillTexture = kButtonPauseActiveTexture
