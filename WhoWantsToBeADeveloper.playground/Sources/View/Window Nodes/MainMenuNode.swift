@@ -19,8 +19,6 @@ class MainMenuNode: SKSpriteNode {
     init(frame: CGRect, mainMenuControllerDelegate: MainMenuControllerDelegate) {
         super.init(texture: nil, color: .clear, size: .zero)
         
-        // todo: add game logo node with animation
-        
         /* Additional Configuration */        
         isUserInteractionEnabled = true
         size = CGSize(width: frame.size.width, height: frame.size.height)

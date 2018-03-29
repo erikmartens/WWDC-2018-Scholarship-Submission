@@ -21,6 +21,10 @@ class RegisterHighscoreScene: SKScene {
             registerHighscoreNode = RegisterHighscoreNode(frame: view.frame, registerHighscoreControllerDelegate: registerHighscoreControllerDelegate)
         }
         addChild(registerHighscoreNode)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.run(SKAction.playSoundFileNamed("Sounds/your_score.wav" , waitForCompletion: false))
+        }
     }
     
     override func willMove(from: SKView) {
