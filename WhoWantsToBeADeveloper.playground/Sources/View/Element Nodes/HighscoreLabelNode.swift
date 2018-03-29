@@ -108,7 +108,7 @@ class HighscoreLabelNode: SKShapeNode {
         
         for index in 0..<min(highscores.count, 5) {
             nameLabelNodes[index].text = highscores[index].name
-            dateLabelNodes[index].text = "\(dateFormatter.string(from: highscores[index].date))" // todo
+            dateLabelNodes[index].text = "\(dateFormatter.string(from: highscores[index].date))"
             scoreLabelNodes[index].text = "\(highscores[index].score)"
         }
     }

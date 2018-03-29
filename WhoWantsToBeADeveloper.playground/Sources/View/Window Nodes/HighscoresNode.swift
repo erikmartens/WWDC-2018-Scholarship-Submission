@@ -4,7 +4,7 @@ class HighscoresNode: SKSpriteNode {
     
     // MARK: - Private Properties
     
-    private weak var applicationDelegate: ApplicationDelegate?
+    private weak var highscoresControllerDelegate: HighscoresControllerDelegate!
     
     private var instructionLabel: LabelNode!
     private var highscoresLabelNode: HighscoreLabelNode!
@@ -18,14 +18,14 @@ class HighscoresNode: SKSpriteNode {
     
     // MARK: - Initialization
     
-    init(applicationDelegate: ApplicationDelegate) {
+    init(frame: CGRect, highscoresControllerDelegate: HighscoresControllerDelegate) {
         
         super.init(texture: nil, color: .clear, size: .zero)
         
         /* Additional Configuration */
         isUserInteractionEnabled = true
-        size = CGSize(width: applicationDelegate.applicationFrame.size.width, height: applicationDelegate.applicationFrame.size.height)
-        position = CGPoint(x: applicationDelegate.applicationFrame.midX, y: applicationDelegate.applicationFrame.midY)
+        size = CGSize(width: frame.size.width, height: frame.size.height)
+        position = CGPoint(x: frame.midX, y: frame.midY)
         texture = SKTexture(imageNamed: "Images/background")
         
         /* Definitions */
@@ -39,7 +39,7 @@ class HighscoresNode: SKSpriteNode {
         let buttonSizeSmall = CGSize(width: size.width / 2 - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         
         /* Initialize and configure all properties */
-        self.applicationDelegate = applicationDelegate
+        self.highscoresControllerDelegate = highscoresControllerDelegate
         
         instructionLabel = LabelNode(size: instructionNodeSize, labelText: "Top 5 Highscores")
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
@@ -69,10 +69,9 @@ class HighscoresNode: SKSpriteNode {
     }
     
     
-    // MARK: - UIEvent Handlers
+    // MARK: - Input Event Handlers
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         guard let touch = touches.first else {
             return
         }
@@ -80,22 +79,18 @@ class HighscoresNode: SKSpriteNode {
         
         if backButton.contains(location) {
             backButton.fillTexture = kButtonSelectedTexture
-            return
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         guard let touch = touches.first else {
             return
         }
         let location = touch.location(in: self)
         
         if backButton.contains(location) {
-            backButton.fillTexture = kButtonActiveTexture
-            applicationDelegate?.didSelectNode(with: .mainMenu)
-            return
+            highscoresControllerDelegate.didTapBackButton()
         }
-        buttons.forEach { $0.fillTexture = kButtonActiveTexture }
+        backButton.fillTexture = kButtonActiveTexture
     }
 }

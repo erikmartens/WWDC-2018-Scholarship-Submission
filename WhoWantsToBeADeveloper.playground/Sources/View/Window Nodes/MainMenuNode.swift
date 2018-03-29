@@ -6,43 +6,35 @@ class MainMenuNode: SKSpriteNode {
     // implicitely force unwrap applicationGameDelegate
     // the delegate should never be nil and if it is we want to know by crashing the app, so we are alerted and can fix it
     
-    private weak var applicationDelegate: ApplicationDelegate!
+    private weak var mainMenuControllerDelegate: MainMenuControllerDelegate!
     
     private var resumeButton: ButtonNode!
     private var startButton: ButtonNode!
     private var highscoreButton: ButtonNode!
     private var aboutButton: ButtonNode!
     
-    private let buttonsCount = 4
-    private var buttons: [ButtonNode] {
-        return [resumeButton, startButton, highscoreButton, aboutButton]
-    }
-    
     
     // MARK: - Initialization
     
-    init(applicationDelegate: ApplicationDelegate) {
+    init(frame: CGRect, mainMenuControllerDelegate: MainMenuControllerDelegate) {
         super.init(texture: nil, color: .clear, size: .zero)
-        
-        // todo: add game logo node with animation
         
         /* Additional Configuration */        
         isUserInteractionEnabled = true
-        size = CGSize(width: applicationDelegate.applicationFrame.size.width, height: applicationDelegate.applicationFrame.size.height)
-        position = CGPoint(x: applicationDelegate.applicationFrame.midX, y: applicationDelegate.applicationFrame.midY)
+        size = CGSize(width: frame.size.width, height: frame.size.height)
+        position = CGPoint(x: frame.midX, y: frame.midY)
         texture = SKTexture(imageNamed: "Images/background")
         
         /* Definitions */
-        let verticalButtonSpace = size.height / CGFloat(buttonsCount)
+        let verticalButtonSpace = size.height / CGFloat(4)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSize = CGSize(width: size.width - 2 * horizontalPadding, height: verticalButtonSpace - 2 * verticalPadding)
         
         /* Initialize and configure all properties */
-        self.applicationDelegate = applicationDelegate
+        self.mainMenuControllerDelegate = mainMenuControllerDelegate
         
-        let resumeButtonTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
-        resumeButton = ButtonNode(size: buttonSize, labelText: "Resume Game", backgroundTexture: resumeButtonTexture)
+        resumeButton = ButtonNode(size: buttonSize, labelText: "Resume Game") // texture set via external configuration
         let resumeButtonCoordinateY = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
         resumeButton.position = CGPoint(x: 0, y: resumeButtonCoordinateY)
         
@@ -71,58 +63,53 @@ class MainMenuNode: SKSpriteNode {
     
     // MARK: - Public Functions
     
-    func configureResumeAvailable() {
-        resumeButton.fillTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
+    func configureResumeAvailable(_ available: Bool) {
+        resumeButton.fillTexture = available ? kButtonActiveTexture : kButtonInactiveTexture
     }
-    
-    
-    // MARK: - UIEvent Handlers
+
+    // MARK: - Input Event Handlers
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         guard let touch = touches.first else {
             return
         }
         let location = touch.location(in: self)
         
-        if applicationDelegate.savegameAvailable && resumeButton.contains(location) {
-            resumeButton.fillTexture = kButtonSelectedTexture
-            return
+        if mainMenuControllerDelegate.resumeAvailable
+            && resumeButton.contains(location) {
+           resumeButton.fillTexture = kButtonSelectedTexture
         }
         if startButton.contains(location) {
             startButton.fillTexture = kButtonSelectedTexture
-            return
         }
         if highscoreButton.contains(location) {
             highscoreButton.fillTexture = kButtonSelectedTexture
-            return
         }
         if aboutButton.contains(location) {
             aboutButton.fillTexture = kButtonSelectedTexture
-            return
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         guard let touch = touches.first else {
             return
         }
         let location = touch.location(in: self)
         
-        if applicationDelegate.savegameAvailable && resumeButton.contains(location) {
-            applicationDelegate.didSelectNode(with: .resume)
+        if mainMenuControllerDelegate.resumeAvailable
+            && resumeButton.contains(location) {
+            mainMenuControllerDelegate.didTapMenuButton(with: .resumeGame)
         }
         if startButton.contains(location) {
-            applicationDelegate.didSelectNode(with: .game)
+            mainMenuControllerDelegate.didTapMenuButton(with: .newGame)
         }
         if highscoreButton.contains(location) {
-            applicationDelegate.didSelectNode(with: .highscores)
+            mainMenuControllerDelegate.didTapMenuButton(with: .presentHighscores)
         }
         if aboutButton.contains(location) {
-            applicationDelegate.didSelectNode(with: .about)
+            mainMenuControllerDelegate.didTapMenuButton(with: .presentAbout)
         }
-        resumeButton.fillTexture = applicationDelegate.savegameAvailable ? kButtonActiveTexture : kButtonInactiveTexture
+        resumeButton.fillTexture = mainMenuControllerDelegate.resumeAvailable ? kButtonActiveTexture : kButtonInactiveTexture
         startButton.fillTexture = kButtonActiveTexture
         highscoreButton.fillTexture = kButtonActiveTexture
         aboutButton.fillTexture = kButtonActiveTexture

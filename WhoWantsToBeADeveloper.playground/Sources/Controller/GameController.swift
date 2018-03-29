@@ -6,61 +6,59 @@ enum JokerOption: Int {
 }
 
 protocol GameControllerDelegate: class {
+    var jokerFiftyFiftyActive: Bool { get set }
+    var jokerAudienceActive: Bool { get set }
     func didSelectAnswerOption(_ option: AnswerOption)
     func didSelectJokerOption(_ option: JokerOption)
     func didSelectPause()
 }
 
-protocol HighscoreControllerDelegate: class {
-    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void))
-    func didCompleteHighscoreInput(with playerName: String?)
-}
-
 class GameController {
     
     // MARK: - Private Properties
-    // implicitely force unwrap applicationGameDelegate, gameNode & gameModel
-    // they should never be nil and if it is we want to know by crashing the app, so we are alerted and can fix it
     
-    private weak var applicationGameDelegate: ApplicationGameDelegate!
-
-    private var gameNode: GameNode!
-    private var gameModel: GameModel!
+    private weak var applicationDelegate: ApplicationDelegate!
+    
+    private var gameScene: GameScene
+    private var gameModel: GameModel
     
     private var roundTimer: Timer!
     private var timeLeft: TimeInterval = 0
     
-    private var registerHighscoreNode: RegisterHighscoreNode?
-    
     
     // MARK: - Initialization
     
-    init(applicationGameDelegate: ApplicationGameDelegate) {
-        self.applicationGameDelegate = applicationGameDelegate
-        startGame()
+    init(applicationDelegate: ApplicationDelegate) {
+        self.applicationDelegate = applicationDelegate
+        
+        gameScene = GameScene()
+        gameModel = GameModel()
     }
     
-    init(applicationGameDelegate: ApplicationGameDelegate, savegame: SavegameDTO) {
-        self.applicationGameDelegate = applicationGameDelegate
-        resumeGame(with: savegame)
+    
+    // MARK: - Public Functions
+    
+    func startGame(with savegame: SavegameDTO?) {
+        gameScene.gameControllerDelegate = self
+        
+        guard let savegame = savegame else {
+            gameModel = GameModel()
+            applicationDelegate.presentScene(gameScene)
+            configureNextRound()
+            return
+        }
+        gameModel.configure(with: savegame)
+        timeLeft = savegame.remainingTime
+        applicationDelegate.presentScene(gameScene)
+        configureResumeRound()
     }
     
     
     // MARK: - Private Helpers
     
-    private func startGame() {
-        gameModel = GameModel()
-        gameNode = GameNode(frame: applicationGameDelegate.applicationFrame, gameControllerDelegate: self)
-        applicationGameDelegate.presentNode(gameNode)
-        configureNextRound()
-    }
-    
     fileprivate func gameOver() {
         let score = gameModel.currentQuestionIndex
-        if registerHighscoreNode == nil {
-            registerHighscoreNode = RegisterHighscoreNode(frame: applicationGameDelegate.applicationFrame, highscoreControllerDelegate: self, score: score)
-        }
-        applicationGameDelegate.presentNode(registerHighscoreNode!)
+        applicationDelegate.moveToScene(with: .registerHighscore(score))
     }
     
     fileprivate func storeGameState() {
@@ -72,26 +70,19 @@ class GameController {
         FileStorageService.savegame = savegame
     }
     
-    private func resumeGame(with savegame: SavegameDTO) {
-        gameModel = GameModel(currentQuestionIndex: savegame.currentQuestionIndex,
-                              deliveredQuestionIDs: savegame.deliveredQuestionIDs,
-                              jokerFiftyFiftyActive: savegame.jokerFiftyFiftyActive,
-                              jokerAudienceActive: savegame.jokerAudienceActive)
-        gameNode = GameNode(frame: applicationGameDelegate.applicationFrame, gameControllerDelegate: self)
-        applicationGameDelegate.presentNode(gameNode)
-        
+    private func configureResumeRound() {
+        let question = gameModel.currentQuestion!
         let questionIndex = gameModel.currentQuestionIndex
-        gameNode.configure(with: gameModel.currentQuestion, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
-        timeLeft = savegame.remainingTime
+        gameScene.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
         startRoundTimer()
     }
     
-    fileprivate func configureNextRound() {
+    fileprivate func configureNextRound(with timeLeft: TimeInterval = 30) {
         let question = gameModel.nextQuestion
         let questionIndex = gameModel.currentQuestionIndex
-        gameNode.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        gameScene.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
         
-        timeLeft = 30
+        self.timeLeft = timeLeft
         startRoundTimer()
     }
     
@@ -99,7 +90,7 @@ class GameController {
     /* Round Timer */
     
     private func startRoundTimer() {
-        gameNode.updateTimer(with: timeLeft)
+        gameScene.updateTimer(with: timeLeft)
         roundTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
     }
 
@@ -109,7 +100,7 @@ class GameController {
             timerDidRunOut()
             return
         }
-        gameNode.updateTimer(with: timeLeft)
+        gameScene.updateTimer(with: timeLeft)
     }
     
     private func timerDidRunOut() {
@@ -120,19 +111,29 @@ class GameController {
 
 extension GameController: GameControllerDelegate {
     
+    var jokerFiftyFiftyActive: Bool {
+        get { return gameModel.jokerFiftyFiftyActive }
+        set { gameModel.jokerFiftyFiftyActive = newValue }
+    }
+    
+    var jokerAudienceActive: Bool {
+        get { return gameModel.jokerAudienceActive }
+        set { gameModel.jokerAudienceActive = newValue }
+    }
+    
     func didSelectAnswerOption(_ option: AnswerOption) {
         roundTimer.invalidate()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             let answeredCorrectly = self.gameModel.verifyAnswerOption(option)
             guard answeredCorrectly else {
-                self.gameNode.markAsAnsweredIncorrectly(with: option, correctOption: self.gameModel.correctAnswerOption)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.gameScene.markAsAnsweredIncorrectly(with: option, correctOption: self.gameModel.correctAnswerOption)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.gameOver()
                 }
                 return
             }
-            self.gameNode.markAsAnsweredCorrectly(with: option)
+            self.gameScene.markAsAnsweredCorrectly(with: option)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.configureNextRound()
             }
@@ -144,7 +145,7 @@ extension GameController: GameControllerDelegate {
         case .fiftyFifty:
             gameModel.jokerFiftyFiftyActive = false
             let excludedAnswerOptions = gameModel.jokerFiftyFiftyExcludedAnswerOptions
-            gameNode.activateFiftyFiftyJoker(with: excludedAnswerOptions)
+            gameScene.activateFiftyFiftyJoker(with: excludedAnswerOptions)
         case .audience:
             gameModel.jokerAudienceActive = false
             // todo
@@ -154,19 +155,6 @@ extension GameController: GameControllerDelegate {
     func didSelectPause() {
         roundTimer.invalidate()
         storeGameState()
-        applicationGameDelegate.didPauseGame()
-    }
-}
-
-extension GameController: HighscoreControllerDelegate {
-    
-    func triggerNameEntryAlertController(completionHandler: @escaping ((String?) -> Void)) {
-        applicationGameDelegate.presentNameEntryAlertController(completionHandler: completionHandler)
-    }
-    
-    func didCompleteHighscoreInput(with playerName: String?) {
-        let name = (playerName != nil && !playerName!.isEmpty) ? playerName! : "PlayerUnknown"
-        let highscore = HighscoreDTO(score: gameModel.currentQuestionIndex + 1, name: name, date: Date())
-        applicationGameDelegate.didCompleteGame(with: highscore)
+        applicationDelegate.moveToScene(with: .mainMenu)
     }
 }

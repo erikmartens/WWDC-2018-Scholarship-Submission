@@ -17,21 +17,13 @@ class GameNode: SKSpriteNode {
     private var jokerFiftyFiftyButton: ButtonNode!
     private var jokerAudienceButton: ButtonNode!
     private var pauseButton: ButtonNode!
-
-    private let rowsCount = 3
-    private var answerOptionButtons: [ButtonNode] {
-        return [answerOption_0, answerOption_1, answerOption_2, answerOption_3]
-    }
     
     /* Store Current Model Properties for Round */
     
-    private var answerOptionActive_0 = true
-    private var answerOptionActive_1 = true
-    private var answerOptionActive_2 = true
-    private var answerOptionActive_3 = true
-    
-    private var jokerFiftyFiftyActive: Bool!
-    private var jokerAudienceActive: Bool!
+    private(set) var answerOptionActive_0 = true
+    private(set) var answerOptionActive_1 = true
+    private(set) var answerOptionActive_2 = true
+    private(set) var answerOptionActive_3 = true
 
 
     // MARK: - Initialization
@@ -50,7 +42,7 @@ class GameNode: SKSpriteNode {
         let questionLabelNodeHeight = size.height * 0.25
         let questionLabelNodeSize = CGSize(width: size.width, height: questionLabelNodeHeight)
 
-        let verticalButtonSpace = (size.height - questionLabelNodeHeight) / CGFloat(rowsCount)
+        let verticalButtonSpace = (size.height - questionLabelNodeHeight) / CGFloat(3)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let buttonSizeRegular = CGSize(width: size.width / 2 - horizontalPadding / 4, height: verticalButtonSpace - 2 * verticalPadding)
@@ -103,40 +95,7 @@ class GameNode: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init?(coder:) is not implemented")
     }
-    
-    
-    // MARK: - Private Helpers
-    
-    private func markAnswerOption(_ option: AnswerOption, usingTexture texture: SKTexture) {
-        switch option {
-        case .optionA:
-            answerOption_0.fillTexture = texture
-        case .optionB:
-            answerOption_1.fillTexture = texture
-        case .optionC:
-            answerOption_2.fillTexture = texture
-        case .optionD:
-            answerOption_3.fillTexture = texture
-        }
-    }
-    
-    private func markAnswerOptionInactive(_ option: AnswerOption) {
-        switch option {
-        case .optionA:
-            answerOptionActive_0 = false
-            answerOption_0.fillTexture = kButtonInactiveTexture
-        case .optionB:
-            answerOptionActive_1 = false
-            answerOption_1.fillTexture = kButtonInactiveTexture
-        case .optionC:
-            answerOptionActive_2 = false
-            answerOption_2.fillTexture = kButtonInactiveTexture
-        case .optionD:
-            answerOptionActive_3 = false
-            answerOption_3.fillTexture = kButtonInactiveTexture
-        }
-    }
-    
+
     
     // MARK: - Public Properties & Function
     
@@ -163,16 +122,8 @@ class GameNode: SKSpriteNode {
         answerOption_2.labelText = "C: \(question.answerOptions[.optionC]!)"
         answerOption_3.labelText = "D: \(question.answerOptions[.optionD]!)"
         
-        self.jokerFiftyFiftyActive = jokerFiftyFiftyActive
-        self.jokerAudienceActive = jokerAudienceActive
-        
         jokerFiftyFiftyButton.fillTexture = jokerFiftyFiftyActive ? kJokerFiftyFiftyActiveTexture : kJokerFiftyFiftyInactiveTexture
         jokerAudienceButton.fillTexture = jokerAudienceActive ? kJokerAudienceActiveTexture : kJokerAudienceInactiveTexture
-    }
-    
-    func activateFiftyFiftyJoker(with excludedAnswerOptions: JokerFiftyExcludedAnswerOptions) {
-        markAnswerOptionInactive(excludedAnswerOptions.firstAnswerOption)
-        markAnswerOptionInactive(excludedAnswerOptions.secondAnswerOption)
     }
     
     func updateTimer(with timeLeft: TimeInterval) {
@@ -184,76 +135,106 @@ class GameNode: SKSpriteNode {
         questionLabel.timerLabelFontColor = .orange
     }
     
-    func markAsAnsweredCorrectly(with answerOption: AnswerOption) {
-        markAnswerOption(answerOption, usingTexture: kButtonCorrectTexture)
+    func markAnswerOption(_ option: AnswerOption, usingTexture texture: SKTexture) {
+        switch option {
+        case .optionA:
+            answerOption_0.fillTexture = texture
+        case .optionB:
+            answerOption_1.fillTexture = texture
+        case .optionC:
+            answerOption_2.fillTexture = texture
+        case .optionD:
+            answerOption_3.fillTexture = texture
+        }
     }
     
-    func markAsAnsweredIncorrectly(with chosenOption: AnswerOption, correctOption: AnswerOption) {
-        markAnswerOption(chosenOption, usingTexture: kButtonIncorrectTexture)
-        markAnswerOption(correctOption, usingTexture: kButtonCorrectTexture)
+    func markAnswerOptionInactive(_ option: AnswerOption) {
+        switch option {
+        case .optionA:
+            answerOptionActive_0 = false
+            answerOption_0.fillTexture = kButtonInactiveTexture
+        case .optionB:
+            answerOptionActive_1 = false
+            answerOption_1.fillTexture = kButtonInactiveTexture
+        case .optionC:
+            answerOptionActive_2 = false
+            answerOption_2.fillTexture = kButtonInactiveTexture
+        case .optionD:
+            answerOptionActive_3 = false
+            answerOption_3.fillTexture = kButtonInactiveTexture
+        }
     }
     
-
-    // MARK: - UIEvent Handlers
-
+    // MARK: - Input Event Handlers
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
         guard let touch = touches.first else {
             return
         }
         let location = touch.location(in: self)
-
-        if jokerFiftyFiftyActive && jokerFiftyFiftyButton.contains(location) {
+        
+        if gameControllerDelegate.jokerFiftyFiftyActive
+            && jokerFiftyFiftyButton.contains(location) {
             jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
         }
-        if jokerAudienceActive && jokerAudienceButton.contains(location) {
+        if gameControllerDelegate.jokerAudienceActive
+            && jokerAudienceButton.contains(location) {
             jokerAudienceButton.fillTexture = kJokerAudienceSelectedTexture
         }
         if pauseButton.contains(location) {
             pauseButton.fillTexture = kButtonPauseSelectedTexture
         }
     }
-
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-
         guard let touch = touches.first else {
             return
         }
         let location = touch.location(in: self)
-
-        if answerOptionActive_0 && answerOption_0.contains(location) {
+        
+        if answerOptionActive_0
+            && answerOption_0.contains(location) {
             isUserInteractionEnabled = false
             answerOption_0.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionA)
         }
-        if answerOptionActive_1 && answerOption_1.contains(location) {
+        if answerOptionActive_1
+            && answerOption_1.contains(location) {
             isUserInteractionEnabled = false
             answerOption_1.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionB)
         }
-        if answerOptionActive_2 && answerOption_2.contains(location) {
+        if answerOptionActive_2
+            && answerOption_2.contains(location) {
             isUserInteractionEnabled = false
             answerOption_2.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionC)
         }
-        if answerOptionActive_3 && answerOption_3.contains(location) {
+        if answerOptionActive_3
+            && answerOption_3.contains(location) {
             isUserInteractionEnabled = false
             answerOption_3.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionD)
         }
-        if jokerFiftyFiftyActive && jokerFiftyFiftyButton.contains(location) {
-            jokerFiftyFiftyActive = false
+        if gameControllerDelegate.jokerFiftyFiftyActive
+            && jokerFiftyFiftyButton.contains(location) {
+            gameControllerDelegate.jokerFiftyFiftyActive = false
             jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
+            return
         }
-        if jokerAudienceActive && jokerAudienceButton.contains(location) {
-            jokerAudienceActive = false
+        if gameControllerDelegate.jokerAudienceActive
+            && jokerAudienceButton.contains(location) {
+            gameControllerDelegate.jokerAudienceActive = false
             jokerAudienceButton.fillTexture = kJokerAudienceInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.audience)
+            return
         }
         if pauseButton.contains(location) {
             gameControllerDelegate.didSelectPause()
         }
+        jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
+        jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
         pauseButton.fillTexture = kButtonPauseActiveTexture
     }
 }

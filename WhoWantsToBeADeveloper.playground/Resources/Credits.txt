@@ -1,0 +1,20 @@
+Graphics Sources:
+-----------------
+
+All graphics were created by the author of this Playground (Erik Maximilian Martens).
+They were inspired by original designs for "Who Wants to Be a Millionaire". Vector files
+will be uploaded as part of this project once this project is open sourced via GitHub.
+They will be subject to the MIT license, just like the rest of the project and its assets,
+excluding the ones not created by the author.
+
+
+Sound Sources:
+--------------
+
+File Name:        correct.wav, incorrect.wav, your_score.wav (same source file for each)
+Title:            "scor corect incorct.wav"
+Artist/Uploader:  "patchen"
+Date Created:     July 5th, 2005
+Provisioner:      Freesound.org
+Source URL:       https://freesound.org/people/patchen/sounds/3411/
+License:          Creative Commons, Attribution License
