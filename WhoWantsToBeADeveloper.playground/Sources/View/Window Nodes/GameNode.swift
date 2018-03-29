@@ -174,7 +174,7 @@ class GameNode: SKSpriteNode {
         let location = touch.location(in: self)
         
         if gameControllerDelegate.jokerFiftyFiftyActive
-            && contains(location) {
+            && jokerFiftyFiftyButton.contains(location) {
             jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
         }
         if gameControllerDelegate.jokerAudienceActive
@@ -221,16 +221,20 @@ class GameNode: SKSpriteNode {
             gameControllerDelegate.jokerFiftyFiftyActive = false
             jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
+            return
         }
         if gameControllerDelegate.jokerAudienceActive
             && jokerAudienceButton.contains(location) {
             gameControllerDelegate.jokerAudienceActive = false
             jokerAudienceButton.fillTexture = kJokerAudienceInactiveTexture
             gameControllerDelegate.didSelectJokerOption(.audience)
+            return
         }
         if pauseButton.contains(location) {
             gameControllerDelegate.didSelectPause()
         }
+        jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
+        jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
         pauseButton.fillTexture = kButtonPauseActiveTexture
     }
 }
