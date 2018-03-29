@@ -1,9 +1,9 @@
 import Foundation
 
-import Foundation
+fileprivate let kPlayNameSubstitute = "PlayerUnknown"
 
 protocol RegisterHighscoreControllerDelegate: class {
-    func didTapSaveButton(withNameEntered name: String)
+    func didTapSaveButton()
 }
 
 class RegisterHighscoreController {
@@ -32,13 +32,14 @@ class RegisterHighscoreController {
         registerHighscoreScene.registerHighscoreControllerDelegate = self
         
         applicationDelegate.presentScene(registerHighscoreScene)
-        registerHighscoreScene.configure(with: registerHighscoreModel.scoreText)
+        registerHighscoreScene.configure(with: registerHighscoreModel.scoreText, name: registerHighscoreModel.playerName ?? kPlayNameSubstitute)
     }
 }
 
 extension RegisterHighscoreController: RegisterHighscoreControllerDelegate {
     
-    func didTapSaveButton(withNameEntered name: String) {
+    func didTapSaveButton() {
+        let name = registerHighscoreModel.playerName ?? kPlayNameSubstitute
         let highscore = HighscoreDTO(score: registerHighscoreModel.score, name: name, date: Date())
         FileStorageService.appendHighscore(highscore)
         applicationDelegate.moveToScene(with: .mainMenu)

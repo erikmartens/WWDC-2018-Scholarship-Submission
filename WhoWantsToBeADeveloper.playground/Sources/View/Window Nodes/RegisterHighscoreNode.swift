@@ -7,7 +7,7 @@ class RegisterHighscoreNode: SKSpriteNode {
     private weak var registerHighscoreControllerDelegate: RegisterHighscoreControllerDelegate!
     
     private var instructionLabel: LabelNode!
-    private var enterNameNode: TextEntryNode!
+    private var nameNode: TextEntryNode!
     private var saveButton: ButtonNode!
     
     
@@ -27,9 +27,9 @@ class RegisterHighscoreNode: SKSpriteNode {
         let instructionNodeHeight = size.height * 0.25
         let instructionNodeSize = CGSize(width: size.width, height: instructionNodeHeight)
         
-        let enterNameNodeWidth = size.width * 0.75
-        let enterNameNodeHeight = size.height * 0.25
-        let enterNameNodeSize = CGSize(width: enterNameNodeWidth, height: enterNameNodeHeight)
+        let nameNodeWidth = size.width * 0.75
+        let nameNodeHeight = size.height * 0.25
+        let nameNodeSize = CGSize(width: nameNodeWidth, height: nameNodeHeight)
         
         let verticalButtonSpace = (size.height * 0.75) / CGFloat(6)
         let horizontalPadding = size.width * 0.1
@@ -43,16 +43,15 @@ class RegisterHighscoreNode: SKSpriteNode {
         let instructionLabelCoordinateY = size.height / CGFloat(2) - instructionNodeHeight / CGFloat(2)
         instructionLabel.position = CGPoint(x: 0, y: instructionLabelCoordinateY)
         
-        enterNameNode = TextEntryNode(size: enterNameNodeSize, labelNodeText: "Enter Your Name:")
-        //let enterNameNodeCoordinateY_0 = verticalButtonSpace + verticalButtonSpace / CGFloat(2)
-        enterNameNode.position = CGPoint(x: 0, y: 0)
+        nameNode = TextEntryNode(size: nameNodeSize, labelNodeText: "Your Name:")
+        nameNode.position = CGPoint(x: 0, y: 0)
         
         saveButton = ButtonNode(size: buttonSizeSmall, labelText: "Save", backgroundTexture: kButtonActiveTexture)
         let saveButtonCoordinateY = verticalButtonSpace * 3 + verticalButtonSpace / CGFloat(2)
         saveButton.position = CGPoint(x: 0, y: -saveButtonCoordinateY)
         
         addChild(instructionLabel)
-        addChild(enterNameNode)
+        addChild(nameNode)
         addChild(saveButton)
     }
     
@@ -63,16 +62,9 @@ class RegisterHighscoreNode: SKSpriteNode {
     
     // MARK: - Public Functions & Properties
     
-    func configure(with scoreText: NSMutableAttributedString) {
+    func configure(with scoreText: NSMutableAttributedString, name: String) {
         instructionLabel.labelAttributedText = scoreText
-    }
-    
-    func configureEnterNameNode(with name: String) {
-        enterNameNode.enteredText = name
-    }
-    
-    var enteredName: String? {
-        return enterNameNode.enteredText
+        nameNode.enteredText = name
     }
     
     
@@ -96,7 +88,7 @@ class RegisterHighscoreNode: SKSpriteNode {
         let location = touch.location(in: self)
         
         if saveButton.contains(location) {
-            registerHighscoreControllerDelegate.didTapSaveButton(withNameEntered: enteredName ?? "PlayerUnkown")
+            registerHighscoreControllerDelegate.didTapSaveButton()
         }
         saveButton.fillTexture = kButtonActiveTexture
     }

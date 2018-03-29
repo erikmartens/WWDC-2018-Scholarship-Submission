@@ -30,11 +30,7 @@ class RegisterHighscoreScene: SKScene {
     
     // MARK: - Public Functions
     
-    func configure(with scoreText: NSMutableAttributedString) {
-        registerHighscoreNode.configure(with: scoreText)
-    }
-    
-    func configureEnteredName(with name: String) {
-        registerHighscoreNode.configureEnterNameNode(with: name)
+    func configure(with scoreText: NSMutableAttributedString, name: String) {
+        registerHighscoreNode.configure(with: scoreText, name: name)
     }
 }

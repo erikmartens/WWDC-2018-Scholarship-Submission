@@ -5,6 +5,7 @@ fileprivate enum FileType {
     case questions
     case highscores
     case savegame
+    case playerName
 }
 
 class FileStorageService {
@@ -51,6 +52,10 @@ class FileStorageService {
         deleteFile(with: .savegame)
     }
     
+    static var playerName: String? {
+        return retrieveText(fromFileWithType: .playerName)
+    }
+    
     
     // MARK: - Private Functions
     
@@ -92,6 +97,24 @@ class FileStorageService {
         }
     }
     
+    private static func retrieveText(fromFileWithType fileType: FileType) -> String? {
+        guard let filePathURL = directoryURLForFile(with: fileType) else {
+            print("💥 FileStorageService: Could not construct file path URL.")
+            return nil
+        }
+        
+        if !FileManager.default.fileExists(atPath: filePathURL.path) {
+            return nil
+        }
+        do {
+            let text = try String(contentsOf: filePathURL, encoding: .utf8)
+            return text
+        } catch let error {
+            print("💥 FileStorageService: Error while retrieving utf8 encoded String from \(filePathURL.path). Error-Description: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
     
     @discardableResult private static func deleteFile(with fileType: FileType) -> Bool {
         guard let filePathURL = directoryURLForFile(with: fileType) else {
@@ -111,16 +134,19 @@ class FileStorageService {
     }
     
     private static func directoryURLForFile(with fileType: FileType) -> URL? {
-        let fileExtension = "json"
+        let fileExtensionJson = "json"
+        let fileExtensionTxt = "txt"
         
         var filePathUrl: URL?
         switch fileType {
         case .questions:
-            filePathUrl = Bundle.main.url(forResource: "Data/Questions", withExtension: fileExtension)
+            filePathUrl = Bundle.main.url(forResource: "Data/Questions", withExtension: fileExtensionJson)
         case .highscores:
-            filePathUrl = playgroundSharedDataDirectory.appendingPathComponent("Highscores").appendingPathExtension(fileExtension)
+            filePathUrl = playgroundSharedDataDirectory.appendingPathComponent("Highscores").appendingPathExtension(fileExtensionJson)
         case .savegame:
-            filePathUrl = playgroundSharedDataDirectory.appendingPathComponent("Savegame").appendingPathExtension(fileExtension)
+            filePathUrl = playgroundSharedDataDirectory.appendingPathComponent("Savegame").appendingPathExtension(fileExtensionJson)
+        case .playerName:
+            filePathUrl = Bundle.main.url(forResource: "Data/PlayerName", withExtension: fileExtensionTxt)
         }
         return filePathUrl
     }

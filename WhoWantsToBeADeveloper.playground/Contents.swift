@@ -14,11 +14,14 @@ You will be learning about object-oriented sowtware development with [Swift](htt
  However in the this Playground is not limited to programming, but to your interests only. Due to its modularity, substituting your own set of questions is trivial. Pursue the instructions below to find out more.
  
  - IMPORTANT:
-To use the "_Resume Game_" and the "_Highscores_" feature you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Playgrounds cannot assist you due to [sandboxing](https://en.wikipedia.org/wiki/Sandbox_(computer_security)). Or you execute the following 2 commands within a new _Terminal_ session:
+In order to use the "_Resume Game_" and "_Highscores_" features you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Playgrounds cannot assist you due to [sandboxing](https://en.wikipedia.org/wiki/Sandbox_(computer_security)). Or you execute the following 2 commands within a new _Terminal_ session:
 
 - `cd ./Documents`
 - `mkdir Shared\ Playground\ Data`
-
+ 
+> __USING YOUR NAME:__
+ If you want to use your own name for highscore entries, you can modify the `PlayerName.txt` file, which is located inside the package contents of this playground at `WhotWantsToBeADeveloper/Resources/Data/PlayerName.txt`
+ 
  > __ADDING YOUR OWN QUESTIONS:__ You can also add your own questions by hacking the `Questions.json` file. The use of this human readable format enables you to create your personalized flashcard based learning experience. __*Pro Tip*__: Keep different files handy, so you can interchange them to study for all of your subjects.
  
  __Enjoy and hopefully see you at WWDC 18__ 💜

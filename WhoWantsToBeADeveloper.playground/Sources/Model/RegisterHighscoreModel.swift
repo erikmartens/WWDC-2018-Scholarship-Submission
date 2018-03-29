@@ -28,4 +28,8 @@ class RegisterHighscoreModel {
         }
         return attributedInstructionString
     }
+
+    var playerName: String? {
+        return FileStorageService.playerName
+    }
 }
