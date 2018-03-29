@@ -4,7 +4,7 @@ import PlaygroundSupport
 /*:
  # Welcome to "Who Wants to Be a Developer"
  
- Dear Player, welcome to this Xcode Playground 🤗
+ __Dear Player, welcome to this Xcode Playground__ 🤗
  
 You will be learning about object-oriented sowtware development with [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/),
  by playing a variation of the popular _Who Wants to Be a Millionaire_ game format. Since I am personally an iOS centered developer, this Playground was built with focus on that platform, both regarding the questions you will find and the underlying code itself.
@@ -19,7 +19,7 @@ In order to use the "_Resume Game_" and "_Highscores_" features you need to crea
 - `cd ./Documents`
 - `mkdir Shared\ Playground\ Data`
  
-> __USING YOUR NAME:__
+> __SETTING A USER NAME:__
  If you want to use your own name for highscore entries, you can modify the `PlayerName.txt` file, which is located inside the package contents of this playground at `WhotWantsToBeADeveloper/Resources/Data/PlayerName.txt`
  
  > __ADDING YOUR OWN QUESTIONS:__ You can also add your own questions by hacking the `Questions.json` file. The use of this human readable format enables you to create your personalized flashcard based learning experience. __*Pro Tip*__: Keep different files handy, so you can interchange them to study for all of your subjects.
