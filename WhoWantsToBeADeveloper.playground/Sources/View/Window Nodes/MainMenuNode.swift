@@ -8,10 +8,10 @@ class MainMenuNode: SKSpriteNode {
     
     private weak var mainMenuControllerDelegate: MainMenuControllerDelegate!
     
-    private(set) var resumeButton: ButtonNode!
-    private(set) var startButton: ButtonNode!
-    private(set) var highscoreButton: ButtonNode!
-    private(set) var aboutButton: ButtonNode!
+    private var resumeButton: ButtonNode!
+    private var startButton: ButtonNode!
+    private var highscoreButton: ButtonNode!
+    private var aboutButton: ButtonNode!
     
     
     // MARK: - Initialization

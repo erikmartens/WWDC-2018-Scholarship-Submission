@@ -10,13 +10,13 @@ class GameNode: SKSpriteNode {
     private weak var gameControllerDelegate: GameControllerDelegate!
 
     private var questionLabel: QuestionLabelNode!
-    private(set) var answerOption_0: ButtonNode!
-    private(set) var answerOption_1: ButtonNode!
-    private(set) var answerOption_2: ButtonNode!
-    private(set) var answerOption_3: ButtonNode!
-    private(set) var jokerFiftyFiftyButton: ButtonNode!
-    private(set) var jokerAudienceButton: ButtonNode!
-    private(set) var pauseButton: ButtonNode!
+    private var answerOption_0: ButtonNode!
+    private var answerOption_1: ButtonNode!
+    private var answerOption_2: ButtonNode!
+    private var answerOption_3: ButtonNode!
+    private var jokerFiftyFiftyButton: ButtonNode!
+    private var jokerAudienceButton: ButtonNode!
+    private var pauseButton: ButtonNode!
     
     /* Store Current Model Properties for Round */
     

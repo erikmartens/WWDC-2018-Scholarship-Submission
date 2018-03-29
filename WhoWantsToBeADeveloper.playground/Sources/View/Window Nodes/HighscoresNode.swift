@@ -8,7 +8,7 @@ class HighscoresNode: SKSpriteNode {
     
     private var instructionLabel: LabelNode!
     private var highscoresLabelNode: HighscoreLabelNode!
-    private(set) var backButton: ButtonNode!
+    private var backButton: ButtonNode!
     
     private let elementsCount =  6
     private var buttons: [ButtonNode] {

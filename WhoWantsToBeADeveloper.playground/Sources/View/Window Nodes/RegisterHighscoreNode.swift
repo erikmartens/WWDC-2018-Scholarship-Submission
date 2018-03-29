@@ -8,7 +8,7 @@ class RegisterHighscoreNode: SKSpriteNode {
     
     private var instructionLabel: LabelNode!
     private var enterNameNode: TextEntryNode!
-    private(set) var saveButton: ButtonNode!
+    private var saveButton: ButtonNode!
     
     
     // MARK: - Initialization

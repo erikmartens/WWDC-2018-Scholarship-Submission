@@ -7,7 +7,7 @@ class AboutNode: SKSpriteNode {
     private weak var aboutControllerDelegate: AboutControllerDelegate!
     
     private var aboutLabel: LabelNode!
-    private(set) var backButton: ButtonNode!
+    private var backButton: ButtonNode!
     
     
     // MARK: - Initialization
