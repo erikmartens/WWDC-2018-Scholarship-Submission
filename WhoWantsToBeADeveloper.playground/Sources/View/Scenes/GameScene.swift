@@ -40,11 +40,17 @@ class GameScene: SKScene {
     
     func markAsAnsweredCorrectly(with answerOption: AnswerOption) {
         gameNode.markAnswerOption(answerOption, usingTexture: kButtonCorrectTexture)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.run(SKAction.playSoundFileNamed("Sounds/correct.wav" , waitForCompletion: false))
+        }
     }
     
     func markAsAnsweredIncorrectly(with chosenOption: AnswerOption, correctOption: AnswerOption) {
         gameNode.markAnswerOption(chosenOption, usingTexture: kButtonIncorrectTexture)
         gameNode.markAnswerOption(correctOption, usingTexture: kButtonCorrectTexture)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.run(SKAction.playSoundFileNamed("Sounds/incorrect.wav" , waitForCompletion: false))
+        }
     }
     
     func activateFiftyFiftyJoker(with excludedAnswerOptions: JokerFiftyExcludedAnswerOptions) {
