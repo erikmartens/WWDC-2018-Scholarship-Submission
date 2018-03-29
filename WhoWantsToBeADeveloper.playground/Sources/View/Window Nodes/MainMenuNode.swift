@@ -68,4 +68,52 @@ class MainMenuNode: SKSpriteNode {
     func configureResumeAvailable(_ available: Bool) {
         resumeButton.fillTexture = available ? kButtonActiveTexture : kButtonInactiveTexture
     }
+
+    // MARK: - Input Event Handlers
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if mainMenuControllerDelegate.resumeAvailable
+            && resumeButton.contains(location) {
+           resumeButton.fillTexture = kButtonSelectedTexture
+        }
+        if startButton.contains(location) {
+            startButton.fillTexture = kButtonSelectedTexture
+        }
+        if highscoreButton.contains(location) {
+            highscoreButton.fillTexture = kButtonSelectedTexture
+        }
+        if aboutButton.contains(location) {
+            aboutButton.fillTexture = kButtonSelectedTexture
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if mainMenuControllerDelegate.resumeAvailable
+            && resumeButton.contains(location) {
+            mainMenuControllerDelegate.didTapMenuButton(with: .resumeGame)
+        }
+        if startButton.contains(location) {
+            mainMenuControllerDelegate.didTapMenuButton(with: .newGame)
+        }
+        if highscoreButton.contains(location) {
+            mainMenuControllerDelegate.didTapMenuButton(with: .presentHighscores)
+        }
+        if aboutButton.contains(location) {
+            mainMenuControllerDelegate.didTapMenuButton(with: .presentAbout)
+        }
+        resumeButton.fillTexture = mainMenuControllerDelegate.resumeAvailable ? kButtonActiveTexture : kButtonInactiveTexture
+        startButton.fillTexture = kButtonActiveTexture
+        highscoreButton.fillTexture = kButtonActiveTexture
+        aboutButton.fillTexture = kButtonActiveTexture
+    }
 }
