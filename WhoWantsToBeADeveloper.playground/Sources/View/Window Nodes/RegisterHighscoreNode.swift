@@ -74,4 +74,30 @@ class RegisterHighscoreNode: SKSpriteNode {
     var enteredName: String? {
         return enterNameNode.enteredText
     }
+    
+    
+    // MARK: - Input Event Handlers
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if saveButton.contains(location) {
+            saveButton.fillTexture = kButtonSelectedTexture
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if saveButton.contains(location) {
+            registerHighscoreControllerDelegate.didTapSaveButton(withNameEntered: enteredName ?? "PlayerUnkown")
+        }
+        saveButton.fillTexture = kButtonActiveTexture
+    }
 }

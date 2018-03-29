@@ -67,4 +67,30 @@ class HighscoresNode: SKSpriteNode {
     func configure(with highscores: [HighscoreDTO]) {
         highscoresLabelNode.configure(with: highscores)
     }
+    
+    
+    // MARK: - Input Event Handlers
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if backButton.contains(location) {
+            backButton.fillTexture = kButtonSelectedTexture
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if backButton.contains(location) {
+            highscoresControllerDelegate.didTapBackButton()
+        }
+        backButton.fillTexture = kButtonActiveTexture
+    }
 }

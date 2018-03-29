@@ -56,4 +56,30 @@ class AboutNode: SKSpriteNode {
     func configure(with aboutText: NSMutableAttributedString) {
         aboutLabel.labelAttributedText = aboutText
     }
+    
+    
+    // MARK: - Input Event Handlers
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if backButton.contains(location) {
+            backButton.fillTexture = kButtonSelectedTexture
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if backButton.contains(location) {
+            aboutControllerDelegate.didTapBackButton()
+        }
+        backButton.fillTexture = kButtonActiveTexture
+    }
 }

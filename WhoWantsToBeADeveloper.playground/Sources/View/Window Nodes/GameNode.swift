@@ -164,6 +164,75 @@ class GameNode: SKSpriteNode {
             answerOption_3.fillTexture = kButtonInactiveTexture
         }
     }
+    
+    // MARK: - Input Event Handlers
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if gameControllerDelegate.jokerFiftyFiftyActive
+            && contains(location) {
+            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
+        }
+        if gameControllerDelegate.jokerAudienceActive
+            && jokerAudienceButton.contains(location) {
+            jokerAudienceButton.fillTexture = kJokerAudienceSelectedTexture
+        }
+        if pauseButton.contains(location) {
+            pauseButton.fillTexture = kButtonPauseSelectedTexture
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if answerOptionActive_0
+            && answerOption_0.contains(location) {
+            isUserInteractionEnabled = false
+            answerOption_0.fillTexture = kButtonLoggedTexture
+            gameControllerDelegate.didSelectAnswerOption(.optionA)
+        }
+        if answerOptionActive_1
+            && answerOption_1.contains(location) {
+            isUserInteractionEnabled = false
+            answerOption_1.fillTexture = kButtonLoggedTexture
+            gameControllerDelegate.didSelectAnswerOption(.optionB)
+        }
+        if answerOptionActive_2
+            && answerOption_2.contains(location) {
+            isUserInteractionEnabled = false
+            answerOption_2.fillTexture = kButtonLoggedTexture
+            gameControllerDelegate.didSelectAnswerOption(.optionC)
+        }
+        if answerOptionActive_3
+            && answerOption_3.contains(location) {
+            isUserInteractionEnabled = false
+            answerOption_3.fillTexture = kButtonLoggedTexture
+            gameControllerDelegate.didSelectAnswerOption(.optionD)
+        }
+        if gameControllerDelegate.jokerFiftyFiftyActive
+            && jokerFiftyFiftyButton.contains(location) {
+            gameControllerDelegate.jokerFiftyFiftyActive = false
+            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyInactiveTexture
+            gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
+        }
+        if gameControllerDelegate.jokerAudienceActive
+            && jokerAudienceButton.contains(location) {
+            gameControllerDelegate.jokerAudienceActive = false
+            jokerAudienceButton.fillTexture = kJokerAudienceInactiveTexture
+            gameControllerDelegate.didSelectJokerOption(.audience)
+        }
+        if pauseButton.contains(location) {
+            gameControllerDelegate.didSelectPause()
+        }
+        pauseButton.fillTexture = kButtonPauseActiveTexture
+    }
 }
 
 fileprivate extension TimeInterval {

@@ -33,30 +33,4 @@ class AboutScene: SKScene {
     func configure(with aboutText: NSMutableAttributedString) {
         aboutNode.configure(with: aboutText)
     }
-    
-    
-    // MARK: - Input Event Handlers
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let location = touch.location(in: self)
-        
-        if aboutNode.backButton.contains(location) {
-            aboutNode.backButton.fillTexture = kButtonSelectedTexture
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let location = touch.location(in: self)
-        
-        if aboutNode.backButton.contains(location) {
-            aboutControllerDelegate.didTapBackButton()
-        }
-        aboutNode.backButton.fillTexture = kButtonActiveTexture
-    }
 }

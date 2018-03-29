@@ -37,30 +37,4 @@ class RegisterHighscoreScene: SKScene {
     func configureEnteredName(with name: String) {
         registerHighscoreNode.configureEnterNameNode(with: name)
     }
-    
-    
-    // MARK: - Input Event Handlers
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let location = touch.location(in: self)
-        
-        if registerHighscoreNode.saveButton.contains(location) {
-            registerHighscoreNode.saveButton.fillTexture = kButtonSelectedTexture
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let location = touch.location(in: self)
-        
-        if registerHighscoreNode.saveButton.contains(location) {
-            registerHighscoreControllerDelegate.didTapSaveButton(withNameEntered: registerHighscoreNode.enteredName ?? "PlayerUnkown")
-        }
-        registerHighscoreNode.saveButton.fillTexture = kButtonActiveTexture
-    }
 }
