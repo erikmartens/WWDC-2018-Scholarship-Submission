@@ -14,7 +14,16 @@ Sound Sources:
 File Name:        correct.wav, incorrect.wav, your_score.wav (same source file for each)
 Title:            "scor corect incorct.wav"
 Artist/Uploader:  "patchen"
-Date Created:     July 5th, 2005
+Date Created:     July 5, 2005
 Provisioner:      Freesound.org
 Source URL:       https://freesound.org/people/patchen/sounds/3411/
 License:          Creative Commons, Attribution License
+
+
+File Name:        level_1.wav
+Title:            "Level 1"
+Artist/Uploader:  "Juhani Junkala"
+Date Created:     April 17, 2016
+Provisioner:      Freesound.org
+Source URL:       https://opengameart.org/content/5-chiptunes-action
+License:          Public Domain Dedication (CC0 1.0 Universal)

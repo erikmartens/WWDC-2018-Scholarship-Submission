@@ -23,7 +23,7 @@ class RegisterHighscoreScene: SKScene {
         addChild(registerHighscoreNode)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-            self.run(SKAction.playSoundFileNamed("Sounds/your_score.wav" , waitForCompletion: false))
+            self.run(SKAction.playSoundFileNamed("Sounds/your_score.wav", waitForCompletion: false))
         }
     }
     

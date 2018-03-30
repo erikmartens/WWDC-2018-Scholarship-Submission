@@ -1,4 +1,5 @@
 import Foundation
+import SpriteKit
 
 enum JokerOption: Int {
     case fiftyFifty
@@ -51,12 +52,15 @@ class GameController {
         timeLeft = savegame.remainingTime
         applicationDelegate.presentScene(gameScene)
         configureResumeRound()
+        
+        gameScene.playGameMusic()
     }
     
     
     // MARK: - Private Helpers
     
     fileprivate func gameOver() {
+        gameScene.stopGameMusic()
         let score = gameModel.currentQuestionIndex
         applicationDelegate.moveToScene(with: .registerHighscore(score))
     }
