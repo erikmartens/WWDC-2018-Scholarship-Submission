@@ -76,7 +76,7 @@ class GameNode: SKSpriteNode {
         jokerButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kJokerFiftyFiftyActiveTexture)
         jokerButton.position = CGPoint(x: 0, y: bottomButtonsCoordinateY)
         
-        deactivateMusicButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kJokerAudienceActiveTexture)
+        deactivateMusicButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kMusicActiveTexture)
         deactivateMusicButton.position = CGPoint(x: -(size.width / 3), y: bottomButtonsCoordinateY)
 
         pauseButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kButtonPauseActiveTexture)
@@ -123,7 +123,7 @@ class GameNode: SKSpriteNode {
         answerOption_3.labelText = "D: \(question.answerOptions[.optionD]!)"
         
         jokerButton.fillTexture = gameControllerDelegate.jokerActive ? kJokerFiftyFiftyActiveTexture : kJokerFiftyFiftyInactiveTexture
-        deactivateMusicButton.fillTexture = gameControllerDelegate.gameMusicActive ? kJokerAudienceActiveTexture : kJokerAudienceInactiveTexture
+        deactivateMusicButton.fillTexture = gameControllerDelegate.gameMusicActive ? kMusicActiveTexture : kMusicInactiveTexture
     }
     
     func updateTimer(with timeLeft: TimeInterval) {
@@ -178,7 +178,7 @@ class GameNode: SKSpriteNode {
             jokerButton.fillTexture = kJokerFiftyFiftySelectedTexture
         }
         if deactivateMusicButton.contains(location) {
-            deactivateMusicButton.fillTexture = kJokerAudienceSelectedTexture
+            deactivateMusicButton.fillTexture = gameControllerDelegate.gameMusicActive ? kMusicInactiveTexture : kMusicActiveTexture
         }
         if pauseButton.contains(location) {
             pauseButton.fillTexture = kButtonPauseSelectedTexture
@@ -230,7 +230,7 @@ class GameNode: SKSpriteNode {
         if jokerButton.fillTexture != kJokerFiftyFiftyInactiveTexture {
             jokerButton.fillTexture = kJokerFiftyFiftyActiveTexture
         }
-        deactivateMusicButton.fillTexture = gameControllerDelegate.gameMusicActive ? kJokerAudienceActiveTexture : kJokerAudienceInactiveTexture
+        deactivateMusicButton.fillTexture = gameControllerDelegate.gameMusicActive ? kMusicActiveTexture : kMusicInactiveTexture
         pauseButton.fillTexture = kButtonPauseActiveTexture
     }
 }
