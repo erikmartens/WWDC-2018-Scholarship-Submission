@@ -233,8 +233,12 @@ class GameNode: SKSpriteNode {
         if pauseButton.contains(location) {
             gameControllerDelegate.didSelectPause()
         }
-        jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
-        jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
+        if jokerFiftyFiftyButton.fillTexture != kJokerFiftyFiftyInactiveTexture {
+            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
+        }
+        if jokerAudienceButton.fillTexture != kJokerAudienceInactiveTexture {
+            jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
+        }
         pauseButton.fillTexture = kButtonPauseActiveTexture
     }
 }
