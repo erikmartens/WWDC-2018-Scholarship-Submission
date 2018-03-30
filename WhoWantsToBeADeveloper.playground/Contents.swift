@@ -14,7 +14,7 @@ You will be learning about object-oriented sowtware development with [Swift](htt
  However in the this Playground is not limited to programming, but to your interests only. Due to its modularity, substituting your own set of questions is trivial. Pursue the instructions below to find out more.
  
  - IMPORTANT:
-In order to use the "_Resume Game_" and "_Highscores_" features you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Playgrounds cannot assist you due to [sandboxing](https://en.wikipedia.org/wiki/Sandbox_(computer_security)). Or you execute the following 2 commands within a new _Terminal_ session:
+In order to use the "_Resume Game_" and "_Highscores_" features you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Playgrounds cannot assist you due to [sandboxing](https://en.wikipedia.org/wiki/Sandbox_(computer_security)). Alternatively you may execute the following 2 commands within a new _Terminal_ session:
 
 - `cd ./Documents`
 - `mkdir Shared\ Playground\ Data`
