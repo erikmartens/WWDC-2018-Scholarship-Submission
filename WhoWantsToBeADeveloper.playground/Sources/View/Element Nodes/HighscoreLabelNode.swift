@@ -53,7 +53,7 @@ class HighscoreLabelNode: SKShapeNode {
         path = CGPath(rect: pathRect, transform: nil)
         strokeColor = .clear
         fillColor = .white
-        fillTexture = SKTexture(imageNamed: "Images/label_background")
+        //fillTexture = SKTexture(imageNamed: "Images/label_background")
         
         /* Configure all Properties */
         let verticalLabelSpace = size.height / 5

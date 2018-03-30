@@ -35,6 +35,7 @@ class AboutNode: SKSpriteNode {
         self.aboutControllerDelegate = aboutControllerDelegate
         
         aboutLabel = LabelNode(size: aboutNodeSize)
+        aboutLabel.fillTexture = SKTexture(imageNamed: "Images/label_background_tall")
         let aboutLabelCoordinateY =  size.height / CGFloat(2) - aboutNodeHeight / CGFloat(2)
         aboutLabel.position = CGPoint(x: 0, y: aboutLabelCoordinateY)
         

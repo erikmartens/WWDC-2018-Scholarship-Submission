@@ -38,5 +38,3 @@ let mainController = ApplicationMainController(view: applicationView)
 
 PlaygroundPage.current.liveView = applicationView
 mainController.runApplication()
-
-

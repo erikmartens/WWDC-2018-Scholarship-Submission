@@ -10,11 +10,6 @@ class HighscoresNode: SKSpriteNode {
     private var highscoresLabelNode: HighscoreLabelNode!
     private var backButton: ButtonNode!
     
-    private let elementsCount =  6
-    private var buttons: [ButtonNode] {
-        return [backButton]
-    }
-    
     
     // MARK: - Initialization
     
@@ -32,7 +27,7 @@ class HighscoresNode: SKSpriteNode {
         let instructionNodeHeight = size.height * 0.25
         let instructionNodeSize = CGSize(width: size.width, height: instructionNodeHeight)
         
-        let verticalButtonSpace = (size.height - instructionNodeHeight) / CGFloat(elementsCount)
+        let verticalButtonSpace = (size.height - instructionNodeHeight) / CGFloat(6)
         let horizontalPadding = size.width * 0.1
         let verticalPadding = verticalButtonSpace * 0.1
         let highscoresLabelSize = CGSize(width: size.width - horizontalPadding / 2, height: size.height * 0.6)
@@ -46,6 +41,7 @@ class HighscoresNode: SKSpriteNode {
         instructionLabel.position = CGPoint(x: 0, y: instructionLabelCoordinateY)
         
         highscoresLabelNode = HighscoreLabelNode(size: highscoresLabelSize)
+        highscoresLabelNode.fillTexture = SKTexture(imageNamed: "Images/label_background_tall")
         let highscoresLabelNodeCoordinateY = verticalButtonSpace / CGFloat(2)
         highscoresLabelNode.position = CGPoint(x: 0, y: -highscoresLabelNodeCoordinateY)
         
