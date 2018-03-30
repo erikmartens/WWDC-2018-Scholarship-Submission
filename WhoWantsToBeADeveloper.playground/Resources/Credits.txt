@@ -20,10 +20,19 @@ Source URL:       https://freesound.org/people/patchen/sounds/3411/
 License:          Creative Commons, Attribution License
 
 
+File Name:        joker.wav
+Title:            "bong.wav"
+Artist/Uploader:  "patchen"
+Date Created:     July 5, 2005
+Provisioner:      Freesound.org
+Source URL:       https://freesound.org/people/patchen/sounds/3403/
+License:          Creative Commons, Attribution License
+
+
 File Name:        level_1.wav
 Title:            "Level 1"
 Artist/Uploader:  "Juhani Junkala"
 Date Created:     April 17, 2016
-Provisioner:      Freesound.org
+Provisioner:      OpenGameArt.org
 Source URL:       https://opengameart.org/content/5-chiptunes-action
 License:          Public Domain Dedication (CC0 1.0 Universal)

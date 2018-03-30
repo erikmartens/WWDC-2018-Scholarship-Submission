@@ -72,5 +72,6 @@ class GameScene: SKScene {
     func activateFiftyFiftyJoker(with excludedAnswerOptions: JokerFiftyExcludedAnswerOptions) {
         gameNode.markAnswerOptionInactive(excludedAnswerOptions.firstAnswerOption)
         gameNode.markAnswerOptionInactive(excludedAnswerOptions.secondAnswerOption)
+        run(SKAction.playSoundFileNamed("Sounds/joker.wav", waitForCompletion: false))
     }
 }
