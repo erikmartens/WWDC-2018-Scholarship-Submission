@@ -36,8 +36,8 @@ class GameScene: SKScene {
     
     // MARK: - Public Functions
     
-    func configure(with question: QuestionDTO, questionIndex: Int, jokerActive: Bool) {
-        gameNode.configure(with: question, questionIndex: questionIndex, jokerActive: jokerActive)
+    func configure(with question: QuestionDTO, questionIndex: Int) {
+        gameNode.configure(with: question, questionIndex: questionIndex)
     }
     
     func playGameMusic() {

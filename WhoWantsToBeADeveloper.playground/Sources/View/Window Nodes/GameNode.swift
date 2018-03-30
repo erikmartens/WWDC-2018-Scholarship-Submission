@@ -99,7 +99,7 @@ class GameNode: SKSpriteNode {
     
     // MARK: - Public Properties & Function
     
-    func configure(with question: QuestionDTO, questionIndex: Int, jokerActive: Bool) {
+    func configure(with question: QuestionDTO, questionIndex: Int) {
         
         isUserInteractionEnabled = true
         
@@ -122,8 +122,8 @@ class GameNode: SKSpriteNode {
         answerOption_2.labelText = "C: \(question.answerOptions[.optionC]!)"
         answerOption_3.labelText = "D: \(question.answerOptions[.optionD]!)"
         
-        jokerButton.fillTexture = jokerActive ? kJokerFiftyFiftyActiveTexture : kJokerFiftyFiftyInactiveTexture
-        deactivateMusicButton.fillTexture = kJokerAudienceActiveTexture
+        jokerButton.fillTexture = gameControllerDelegate.jokerActive ? kJokerFiftyFiftyActiveTexture : kJokerFiftyFiftyInactiveTexture
+        deactivateMusicButton.fillTexture = gameControllerDelegate.gameMusicActive ? kJokerAudienceActiveTexture : kJokerAudienceInactiveTexture
     }
     
     func updateTimer(with timeLeft: TimeInterval) {
@@ -220,7 +220,6 @@ class GameNode: SKSpriteNode {
             gameControllerDelegate.jokerActive = false
             gameControllerDelegate.didSelectJoker()
             jokerButton.fillTexture = kJokerFiftyFiftyInactiveTexture
-            return
         }
         if deactivateMusicButton.contains(location) {
             gameControllerDelegate.didSelectDeactivateMusic()
@@ -231,7 +230,7 @@ class GameNode: SKSpriteNode {
         if jokerButton.fillTexture != kJokerFiftyFiftyInactiveTexture {
             jokerButton.fillTexture = kJokerFiftyFiftyActiveTexture
         }
-        deactivateMusicButton.fillTexture = kJokerAudienceInactiveTexture
+        deactivateMusicButton.fillTexture = gameControllerDelegate.gameMusicActive ? kJokerAudienceActiveTexture : kJokerAudienceInactiveTexture
         pauseButton.fillTexture = kButtonPauseActiveTexture
     }
 }

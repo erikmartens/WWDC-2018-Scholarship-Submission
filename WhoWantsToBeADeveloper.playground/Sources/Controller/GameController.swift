@@ -3,6 +3,7 @@ import SpriteKit
 
 protocol GameControllerDelegate: class {
     var jokerActive: Bool { get set }
+    var gameMusicActive: Bool { get }
     func didSelectAnswerOption(_ option: AnswerOption)
     func didSelectJoker()
     func didSelectPause()
@@ -73,7 +74,7 @@ class GameController {
     private func configureResumeRound() {
         let question = gameModel.currentQuestion!
         let questionIndex = gameModel.currentQuestionIndex
-        gameScene.configure(with: question, questionIndex: questionIndex, jokerActive: gameModel.jokerActive)
+        gameScene.configure(with: question, questionIndex: questionIndex)
         startRoundTimer()
     }
     
@@ -86,7 +87,7 @@ class GameController {
         if gameModel.roundsUntilJokerReactivation == 0 {
             gameModel.jokerActive = true
         }
-        gameScene.configure(with: question, questionIndex: questionIndex, jokerActive: gameModel.jokerActive)
+        gameScene.configure(with: question, questionIndex: questionIndex)
         
         self.timeLeft = timeLeft
         startRoundTimer()
@@ -120,6 +121,10 @@ extension GameController: GameControllerDelegate {
     var jokerActive: Bool {
         get { return gameModel.jokerActive }
         set { gameModel.jokerActive = newValue }
+    }
+    
+    var gameMusicActive: Bool {
+        return musicActive
     }
     
     func didSelectAnswerOption(_ option: AnswerOption) {
@@ -156,6 +161,6 @@ extension GameController: GameControllerDelegate {
     
     func didSelectDeactivateMusic() {
         musicActive = !musicActive
-        gameScene.deactivateGameMusic(musicActive)
+        gameScene.deactivateGameMusic(!musicActive)
     }
 }
