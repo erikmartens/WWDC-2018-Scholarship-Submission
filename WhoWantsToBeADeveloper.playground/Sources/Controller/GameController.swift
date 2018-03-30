@@ -37,6 +37,7 @@ class GameController {
     // MARK: - Public Functions
     
     func startGame(with savegame: SavegameDTO?) {
+        musicActive = true
         gameScene.gameControllerDelegate = self
         
         guard let savegame = savegame else {
