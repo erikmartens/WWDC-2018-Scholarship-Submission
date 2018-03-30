@@ -13,25 +13,25 @@ class GameModel {
     private(set) var deliveredQuestionIDs: [Int]
     private var questions: [QuestionDTO]
     private(set) var currentQuestion: QuestionDTO!
-    var jokerFiftyFiftyActive: Bool
-    var jokerAudienceActive: Bool
+    var jokerActive: Bool
+    var roundsUntilJokerReactivation = 0
     
     
     // MARK: - Initialization
     
     convenience init() {
-        self.init(currentQuestionIndex: -1, deliveredQuestionIDs: [Int](), jokerFiftyFiftyActive: true, jokerAudienceActive: true)
+        self.init(currentQuestionIndex: -1, deliveredQuestionIDs: [Int](), jokerActive: true, roundsUntilJokerReactivation: 0)
     }
     
-    private init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
+    private init(currentQuestionIndex: Int, deliveredQuestionIDs: [Int], jokerActive: Bool, roundsUntilJokerReactivation: Int) {
         self.currentQuestionIndex = currentQuestionIndex
         self.deliveredQuestionIDs = deliveredQuestionIDs
         questions = FileStorageService.questions! // force unwrap, this should always succeed and should crash if it doesn't (without questions the game can't run)
         if !deliveredQuestionIDs.isEmpty {
             currentQuestion = questions.first { return $0.identifier == deliveredQuestionIDs.last! }
         }
-        self.jokerFiftyFiftyActive = jokerFiftyFiftyActive
-        self.jokerAudienceActive = jokerAudienceActive
+        self.jokerActive = jokerActive
+        self.roundsUntilJokerReactivation = roundsUntilJokerReactivation
     }
     
     
@@ -40,8 +40,8 @@ class GameModel {
     func configure(with savegame: SavegameDTO) {
         currentQuestionIndex = savegame.currentQuestionIndex
         deliveredQuestionIDs = savegame.deliveredQuestionIDs
-        jokerFiftyFiftyActive = savegame.jokerFiftyFiftyActive
-        jokerAudienceActive = savegame.jokerAudienceActive
+        jokerActive = savegame.jokerActive
+        roundsUntilJokerReactivation = savegame.roundsUntilJokerReactivation
         
         if !deliveredQuestionIDs.isEmpty {
             currentQuestion = questions.first { return $0.identifier == deliveredQuestionIDs.last! }

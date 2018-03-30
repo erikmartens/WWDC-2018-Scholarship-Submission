@@ -4,7 +4,7 @@ struct SavegameDTO: Codable {
     var currentQuestionIndex: Int
     var deliveredQuestionIDs: [Int]
     var remainingTime: TimeInterval
-    var jokerFiftyFiftyActive: Bool
-    var jokerAudienceActive: Bool
+    var jokerActive: Bool
+    var roundsUntilJokerReactivation: Int
 }
 

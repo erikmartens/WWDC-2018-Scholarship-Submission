@@ -1,17 +1,12 @@
 import Foundation
 import SpriteKit
 
-enum JokerOption: Int {
-    case fiftyFifty
-    case audience
-}
-
 protocol GameControllerDelegate: class {
-    var jokerFiftyFiftyActive: Bool { get set }
-    var jokerAudienceActive: Bool { get set }
+    var jokerActive: Bool { get set }
     func didSelectAnswerOption(_ option: AnswerOption)
-    func didSelectJokerOption(_ option: JokerOption)
+    func didSelectJoker()
     func didSelectPause()
+    func didSelectDeactivateMusic()
 }
 
 class GameController {
@@ -26,6 +21,7 @@ class GameController {
     private var roundTimer: Timer!
     private var timeLeft: TimeInterval = 0
     
+    private var musicActive = true
     
     // MARK: - Initialization
     
@@ -69,22 +65,28 @@ class GameController {
         let savegame = SavegameDTO(currentQuestionIndex: gameModel.currentQuestionIndex,
                                    deliveredQuestionIDs: gameModel.deliveredQuestionIDs,
                                    remainingTime: timeLeft,
-                                   jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive,
-                                   jokerAudienceActive: gameModel.jokerAudienceActive)
+                                   jokerActive: gameModel.jokerActive,
+                                   roundsUntilJokerReactivation: gameModel.roundsUntilJokerReactivation)
         FileStorageService.savegame = savegame
     }
     
     private func configureResumeRound() {
         let question = gameModel.currentQuestion!
         let questionIndex = gameModel.currentQuestionIndex
-        gameScene.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        gameScene.configure(with: question, questionIndex: questionIndex, jokerActive: gameModel.jokerActive)
         startRoundTimer()
     }
     
     fileprivate func configureNextRound(with timeLeft: TimeInterval = 30) {
         let question = gameModel.nextQuestion
         let questionIndex = gameModel.currentQuestionIndex
-        gameScene.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: gameModel.jokerFiftyFiftyActive, jokerAudienceActive: gameModel.jokerAudienceActive)
+        if !jokerActive {
+            gameModel.roundsUntilJokerReactivation -= 1
+        }
+        if gameModel.roundsUntilJokerReactivation == 0 {
+            gameModel.jokerActive = true
+        }
+        gameScene.configure(with: question, questionIndex: questionIndex, jokerActive: gameModel.jokerActive)
         
         self.timeLeft = timeLeft
         startRoundTimer()
@@ -115,14 +117,9 @@ class GameController {
 
 extension GameController: GameControllerDelegate {
     
-    var jokerFiftyFiftyActive: Bool {
-        get { return gameModel.jokerFiftyFiftyActive }
-        set { gameModel.jokerFiftyFiftyActive = newValue }
-    }
-    
-    var jokerAudienceActive: Bool {
-        get { return gameModel.jokerAudienceActive }
-        set { gameModel.jokerAudienceActive = newValue }
+    var jokerActive: Bool {
+        get { return gameModel.jokerActive }
+        set { gameModel.jokerActive = newValue }
     }
     
     func didSelectAnswerOption(_ option: AnswerOption) {
@@ -144,21 +141,21 @@ extension GameController: GameControllerDelegate {
         }
     }
     
-    func didSelectJokerOption(_ option: JokerOption) {
-        switch option {
-        case .fiftyFifty:
-            gameModel.jokerFiftyFiftyActive = false
-            let excludedAnswerOptions = gameModel.jokerFiftyFiftyExcludedAnswerOptions
-            gameScene.activateFiftyFiftyJoker(with: excludedAnswerOptions)
-        case .audience:
-            gameModel.jokerAudienceActive = false
-            // todo
-        }
+    func didSelectJoker() {
+        gameModel.jokerActive = false
+        gameModel.roundsUntilJokerReactivation = 10
+        let excludedAnswerOptions = gameModel.jokerFiftyFiftyExcludedAnswerOptions
+        gameScene.activateJoker(with: excludedAnswerOptions)
     }
     
     func didSelectPause() {
         roundTimer.invalidate()
         storeGameState()
         applicationDelegate.moveToScene(with: .mainMenu)
+    }
+    
+    func didSelectDeactivateMusic() {
+        musicActive = !musicActive
+        gameScene.deactivateGameMusic(musicActive)
     }
 }

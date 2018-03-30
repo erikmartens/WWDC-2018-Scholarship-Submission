@@ -14,8 +14,8 @@ class GameNode: SKSpriteNode {
     private var answerOption_1: ButtonNode!
     private var answerOption_2: ButtonNode!
     private var answerOption_3: ButtonNode!
-    private var jokerFiftyFiftyButton: ButtonNode!
-    private var jokerAudienceButton: ButtonNode!
+    private var jokerButton: ButtonNode!
+    private var deactivateMusicButton: ButtonNode!
     private var pauseButton: ButtonNode!
     
     /* Store Current Model Properties for Round */
@@ -73,11 +73,11 @@ class GameNode: SKSpriteNode {
         answerOption_3 = ButtonNode(size: buttonSizeRegular, backgroundTexture: kButtonActiveTexture)
         answerOption_3.position = CGPoint(x: answerOptionsRightCoordinateX, y: answerOptionsBottomCoordinateY)
 
-        jokerFiftyFiftyButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kJokerFiftyFiftyActiveTexture)
-        jokerFiftyFiftyButton.position = CGPoint(x: -(size.width / 3), y: bottomButtonsCoordinateY)
-
-        jokerAudienceButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kJokerAudienceActiveTexture)
-        jokerAudienceButton.position = CGPoint(x: 0, y: bottomButtonsCoordinateY)
+        jokerButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kJokerFiftyFiftyActiveTexture)
+        jokerButton.position = CGPoint(x: 0, y: bottomButtonsCoordinateY)
+        
+        deactivateMusicButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kJokerAudienceActiveTexture)
+        deactivateMusicButton.position = CGPoint(x: -(size.width / 3), y: bottomButtonsCoordinateY)
 
         pauseButton = ButtonNode(size: buttonSizeSmall, backgroundTexture: kButtonPauseActiveTexture)
         pauseButton.position = CGPoint(x: size.width / 3, y: bottomButtonsCoordinateY)
@@ -87,8 +87,8 @@ class GameNode: SKSpriteNode {
         addChild(answerOption_1)
         addChild(answerOption_2)
         addChild(answerOption_3)
-        addChild(jokerFiftyFiftyButton)
-        addChild(jokerAudienceButton)
+        addChild(jokerButton)
+        addChild(deactivateMusicButton)
         addChild(pauseButton)
     }
 
@@ -99,7 +99,7 @@ class GameNode: SKSpriteNode {
     
     // MARK: - Public Properties & Function
     
-    func configure(with question: QuestionDTO, questionIndex: Int, jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
+    func configure(with question: QuestionDTO, questionIndex: Int, jokerActive: Bool) {
         
         isUserInteractionEnabled = true
         
@@ -122,8 +122,8 @@ class GameNode: SKSpriteNode {
         answerOption_2.labelText = "C: \(question.answerOptions[.optionC]!)"
         answerOption_3.labelText = "D: \(question.answerOptions[.optionD]!)"
         
-        jokerFiftyFiftyButton.fillTexture = jokerFiftyFiftyActive ? kJokerFiftyFiftyActiveTexture : kJokerFiftyFiftyInactiveTexture
-        jokerAudienceButton.fillTexture = jokerAudienceActive ? kJokerAudienceActiveTexture : kJokerAudienceInactiveTexture
+        jokerButton.fillTexture = jokerActive ? kJokerFiftyFiftyActiveTexture : kJokerFiftyFiftyInactiveTexture
+        deactivateMusicButton.fillTexture = kJokerAudienceActiveTexture
     }
     
     func updateTimer(with timeLeft: TimeInterval) {
@@ -173,13 +173,12 @@ class GameNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
         
-        if gameControllerDelegate.jokerFiftyFiftyActive
-            && jokerFiftyFiftyButton.contains(location) {
-            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftySelectedTexture
+        if gameControllerDelegate.jokerActive
+            && jokerButton.contains(location) {
+            jokerButton.fillTexture = kJokerFiftyFiftySelectedTexture
         }
-        if gameControllerDelegate.jokerAudienceActive
-            && jokerAudienceButton.contains(location) {
-            jokerAudienceButton.fillTexture = kJokerAudienceSelectedTexture
+        if deactivateMusicButton.contains(location) {
+            deactivateMusicButton.fillTexture = kJokerAudienceSelectedTexture
         }
         if pauseButton.contains(location) {
             pauseButton.fillTexture = kButtonPauseSelectedTexture
@@ -216,29 +215,23 @@ class GameNode: SKSpriteNode {
             answerOption_3.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionD)
         }
-        if gameControllerDelegate.jokerFiftyFiftyActive
-            && jokerFiftyFiftyButton.contains(location) {
-            gameControllerDelegate.jokerFiftyFiftyActive = false
-            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyInactiveTexture
-            gameControllerDelegate.didSelectJokerOption(.fiftyFifty)
+        if gameControllerDelegate.jokerActive
+            && jokerButton.contains(location) {
+            gameControllerDelegate.jokerActive = false
+            gameControllerDelegate.didSelectJoker()
+            jokerButton.fillTexture = kJokerFiftyFiftyInactiveTexture
             return
         }
-        if gameControllerDelegate.jokerAudienceActive
-            && jokerAudienceButton.contains(location) {
-            gameControllerDelegate.jokerAudienceActive = false
-            jokerAudienceButton.fillTexture = kJokerAudienceInactiveTexture
-            gameControllerDelegate.didSelectJokerOption(.audience)
-            return
+        if deactivateMusicButton.contains(location) {
+            gameControllerDelegate.didSelectDeactivateMusic()
         }
         if pauseButton.contains(location) {
             gameControllerDelegate.didSelectPause()
         }
-        if jokerFiftyFiftyButton.fillTexture != kJokerFiftyFiftyInactiveTexture {
-            jokerFiftyFiftyButton.fillTexture = kJokerFiftyFiftyActiveTexture
+        if jokerButton.fillTexture != kJokerFiftyFiftyInactiveTexture {
+            jokerButton.fillTexture = kJokerFiftyFiftyActiveTexture
         }
-        if jokerAudienceButton.fillTexture != kJokerAudienceInactiveTexture {
-            jokerAudienceButton.fillTexture = kJokerAudienceActiveTexture
-        }
+        deactivateMusicButton.fillTexture = kJokerAudienceInactiveTexture
         pauseButton.fillTexture = kButtonPauseActiveTexture
     }
 }

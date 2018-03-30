@@ -36,12 +36,17 @@ class GameScene: SKScene {
     
     // MARK: - Public Functions
     
-    func configure(with question: QuestionDTO, questionIndex: Int, jokerFiftyFiftyActive: Bool, jokerAudienceActive: Bool) {
-        gameNode.configure(with: question, questionIndex: questionIndex, jokerFiftyFiftyActive: jokerFiftyFiftyActive, jokerAudienceActive: jokerAudienceActive)
+    func configure(with question: QuestionDTO, questionIndex: Int, jokerActive: Bool) {
+        gameNode.configure(with: question, questionIndex: questionIndex, jokerActive: jokerActive)
     }
     
     func playGameMusic() {
         gameMusicNode.run(.play())
+    }
+    
+    func deactivateGameMusic(_ deactivate: Bool) {
+        let volume: Float = deactivate ? 0 : 1
+        gameMusicNode.run(.changeVolume(to: volume, duration: 0))
     }
     
     func stopGameMusic() {
@@ -69,7 +74,7 @@ class GameScene: SKScene {
         }
     }
     
-    func activateFiftyFiftyJoker(with excludedAnswerOptions: JokerFiftyExcludedAnswerOptions) {
+    func activateJoker(with excludedAnswerOptions: JokerFiftyExcludedAnswerOptions) {
         gameNode.markAnswerOptionInactive(excludedAnswerOptions.firstAnswerOption)
         gameNode.markAnswerOptionInactive(excludedAnswerOptions.secondAnswerOption)
         run(SKAction.playSoundFileNamed("Sounds/joker.wav", waitForCompletion: false))
