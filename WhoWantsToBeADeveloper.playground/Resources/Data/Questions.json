@@ -77,18 +77,48 @@
                   },
                   {
                   "identifier": 111116,
-                  "question": "Which of the following snippets declaring a constant will not compile?",
+                  "question": "With Swift the following is always necessary:",
                   "answerOptions": [
                                     "optionA",
-                                    "let myConstant: String",
+                                    "finishing a line with semicolon",
                                     "optionB",
-                                    "let myConstant = \"d\"",
+                                    "assigning a type to a variable declaration",
                                     "optionC",
-                                    "let myConstant: String = \"d\"",
+                                    "declaring a function inside a class",
                                     "optionD",
-                                    "const myConstant: String = \"d\""
+                                    "closing a comment opened via \"/*\""
                                     ],
                   "correctAnswerOption": "optionD"
+                  },
+                  {
+                  "identifier": 111117,
+                  "question": "A 32-bit floating point value (Float) can store up to ... decimal places?",
+                  "answerOptions": [
+                                    "optionA",
+                                    "4",
+                                    "optionB",
+                                    "6",
+                                    "optionC",
+                                    "10",
+                                    "optionD",
+                                    "16"
+                                    ],
+                  "correctAnswerOption": "optionB"
+                  },
+                  {
+                  "identifier": 111118,
+                  "question": "A 64-bit floating point value (Double) can have up to ... decimal digits?",
+                  "answerOptions": [
+                                    "optionA",
+                                    "7",
+                                    "optionB",
+                                    "15",
+                                    "optionC",
+                                    "31",
+                                    "optionD",
+                                    "63"
+                                    ],
+                  "correctAnswerOption": "optionB"
                   }
                   ]
 }
