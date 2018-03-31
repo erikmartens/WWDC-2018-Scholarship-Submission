@@ -74,6 +74,21 @@
                                     "const myConstant: String = \"d\""
                                     ],
                   "correctAnswerOption": "optionD"
+                  },
+                  {
+                  "identifier": 111116,
+                  "question": "Which of the following snippets declaring a constant will not compile?",
+                  "answerOptions": [
+                                    "optionA",
+                                    "let myConstant: String",
+                                    "optionB",
+                                    "let myConstant = \"d\"",
+                                    "optionC",
+                                    "let myConstant: String = \"d\"",
+                                    "optionD",
+                                    "const myConstant: String = \"d\""
+                                    ],
+                  "correctAnswerOption": "optionD"
                   }
                   ]
 }

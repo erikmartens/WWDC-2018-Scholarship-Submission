@@ -173,6 +173,22 @@ class GameNode: SKSpriteNode {
         }
         let location = touch.location(in: self)
         
+        if answerOptionActive_0
+            && answerOption_0.contains(location) {
+            answerOption_0.fillTexture = kButtonSelectedTexture
+        }
+        if answerOptionActive_1
+            && answerOption_1.contains(location) {
+            answerOption_1.fillTexture = kButtonSelectedTexture
+        }
+        if answerOptionActive_2
+            && answerOption_2.contains(location) {
+            answerOption_2.fillTexture = kButtonSelectedTexture
+        }
+        if answerOptionActive_3
+            && answerOption_3.contains(location) {
+            answerOption_3.fillTexture = kButtonSelectedTexture
+        }
         if gameControllerDelegate.jokerActive
             && jokerButton.contains(location) {
             jokerButton.fillTexture = kJokerFiftyFiftySelectedTexture
@@ -196,24 +212,28 @@ class GameNode: SKSpriteNode {
             isUserInteractionEnabled = false
             answerOption_0.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionA)
+            return
         }
         if answerOptionActive_1
             && answerOption_1.contains(location) {
             isUserInteractionEnabled = false
             answerOption_1.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionB)
+            return
         }
         if answerOptionActive_2
             && answerOption_2.contains(location) {
             isUserInteractionEnabled = false
             answerOption_2.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionC)
+            return
         }
         if answerOptionActive_3
             && answerOption_3.contains(location) {
             isUserInteractionEnabled = false
             answerOption_3.fillTexture = kButtonLoggedTexture
             gameControllerDelegate.didSelectAnswerOption(.optionD)
+            return
         }
         if gameControllerDelegate.jokerActive
             && jokerButton.contains(location) {
@@ -223,6 +243,18 @@ class GameNode: SKSpriteNode {
         }
         if deactivateMusicButton.contains(location) {
             gameControllerDelegate.didSelectDeactivateMusic()
+        }
+        if answerOptionActive_0 {
+            answerOption_0.fillTexture = kButtonActiveTexture
+        }
+        if answerOptionActive_1 {
+            answerOption_1.fillTexture = kButtonActiveTexture
+        }
+        if answerOptionActive_2 {
+            answerOption_2.fillTexture = kButtonActiveTexture
+        }
+        if answerOptionActive_3 {
+            answerOption_3.fillTexture = kButtonActiveTexture
         }
         if pauseButton.contains(location) {
             gameControllerDelegate.didSelectPause()
