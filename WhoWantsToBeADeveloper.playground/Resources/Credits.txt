@@ -6,6 +6,13 @@ by the author. They will be subject to their respective licences as detailed bel
 remains with the original authors.
 
 
+Question Sources:
+-----------------
+
+Questions were derived from the Swift Programming Language Description available via
+https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language.
+
+
 Graphics Sources:
 -----------------
 

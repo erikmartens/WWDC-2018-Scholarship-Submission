@@ -34,7 +34,7 @@ class ButtonNode: SKShapeNode {
     
     // MARK: - Initialization
     
-    init(size: CGSize, labelText: String? = nil, backgroundTexture: SKTexture? = nil) {
+    init(size: CGSize, labelText: String? = nil, backgroundTexture: SKTexture? = nil, textSizeFactor: CGFloat = 0.75) {
         
         super.init()
         
@@ -54,7 +54,7 @@ class ButtonNode: SKShapeNode {
         labelNode.preferredMaxLayoutWidth = size.width * 0.98
         labelNode.fontName = "SanFrancisco-Bold"
         labelNode.fontColor = .white
-        labelNode.fontSize *= 0.75
+        labelNode.fontSize *= textSizeFactor
         labelNode.numberOfLines = 1
         labelNode.lineBreakMode = .byTruncatingTail
         labelNode.verticalAlignmentMode = .center

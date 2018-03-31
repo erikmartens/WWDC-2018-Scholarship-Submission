@@ -2,33 +2,78 @@
     "questions": [
                   {
                   "identifier": 111111,
-                  "question": "First question from json",
+                  "question": "Swift provides the fundamental types Int, Float, Double, Bool and ...",
                   "answerOptions": [
                                     "optionA",
-                                    "Test JSON A",
+                                    "Char",
                                     "optionB",
-                                    "Test JSON B",
+                                    "String",
                                     "optionC",
-                                    "Test JSON C",
+                                    "Blob",
                                     "optionD",
-                                    "Test JSON D"
+                                    "Stack"
                                     ],
                   "correctAnswerOption": "optionB"
                   },
                   {
                   "identifier": 111112,
-                  "question": "Another test",
+                  "question": "Which of the following is not one of the three fundamental collection types found in Swift?",
                   "answerOptions": [
                                     "optionA",
-                                    "Blah",
+                                    "Array",
                                     "optionB",
-                                    "Blah Blah",
+                                    "Set",
                                     "optionC",
-                                    "Blah Blah Blah",
+                                    "Queue",
                                     "optionD",
-                                    "Blah Blah Blah Blah"
+                                    "Dictionary"
                                     ],
                   "correctAnswerOption": "optionC"
+                  },
+                  {
+                  "identifier": 111113,
+                  "question": "Which of the following snippets is not correctly declaring a variable?",
+                  "answerOptions": [
+                                    "optionA",
+                                    "var myVariable: Int",
+                                    "optionB",
+                                    "int myVariable = 1",
+                                    "optionC",
+                                    "var myVariable = 1",
+                                    "optionD",
+                                    "var myVariable, anotherVariable: Int"
+                                    ],
+                  "correctAnswerOption": "optionB"
+                  },
+                  {
+                  "identifier": 111114,
+                  "question": "One of the following is not a valid name for a variable",
+                  "answerOptions": [
+                                    "optionA",
+                                    "myVariable",
+                                    "optionB",
+                                    "1-variable",
+                                    "optionC",
+                                    "😎👍",
+                                    "optionD",
+                                    "myVariable_1"
+                                    ],
+                  "correctAnswerOption": "optionB"
+                  },
+                  {
+                  "identifier": 111115,
+                  "question": "Which of the following snippets declaring a constant will not compile?",
+                  "answerOptions": [
+                                    "optionA",
+                                    "let myConstant: String",
+                                    "optionB",
+                                    "let myConstant = \"d\"",
+                                    "optionC",
+                                    "let myConstant: String = \"d\"",
+                                    "optionD",
+                                    "const myConstant: String = \"d\""
+                                    ],
+                  "correctAnswerOption": "optionD"
                   }
                   ]
 }
