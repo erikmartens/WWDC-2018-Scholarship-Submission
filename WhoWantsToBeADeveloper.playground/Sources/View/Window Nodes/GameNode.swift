@@ -20,10 +20,10 @@ class GameNode: SKSpriteNode {
     
     /* Store Current Model Properties for Round */
     
-    private(set) var answerOptionActive_0 = true
-    private(set) var answerOptionActive_1 = true
-    private(set) var answerOptionActive_2 = true
-    private(set) var answerOptionActive_3 = true
+    private var answerOptionActive_0 = true
+    private var answerOptionActive_1 = true
+    private var answerOptionActive_2 = true
+    private var answerOptionActive_3 = true
 
 
     // MARK: - Initialization
