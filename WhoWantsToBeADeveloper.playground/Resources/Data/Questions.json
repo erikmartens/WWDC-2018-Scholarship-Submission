@@ -5,11 +5,11 @@
                   "question": "First question from json",
                   "answerOptions": [
                                     "optionA",
-                                    "Test JSON C",
-                                    "optionB",
                                     "Test JSON A",
-                                    "optionC",
+                                    "optionB",
                                     "Test JSON B",
+                                    "optionC",
+                                    "Test JSON C",
                                     "optionD",
                                     "Test JSON D"
                                     ],

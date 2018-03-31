@@ -6,7 +6,7 @@ import PlaygroundSupport
  
  __Dear Player, welcome to this Xcode Playground__ 🤗
  
-You will be learning about object-oriented sowtware development with [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/),
+You will be learning about object-oriented software development with [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/),
  by playing a variation of the popular _Who Wants to Be a Millionaire_ game format. Since I am personally an iOS centered developer, this Playground was built with focus on that platform, both regarding the questions you will find and the underlying code itself.
  
  My personal journey has taught me that anyone can achieve their goals, when their urge to find out more and being involved is tickled. Breaking the ice is essential. Beginning easy but challenging and then increasing the difficulty gradually will trigger the thirst for more, instead of creating frustration. This Playground aims at emulating such an experience. If you have 3 minutes everyday to play and to answer some questions, you will solidify your knowledge and be inspired to dig deeper. Once you're ready, dive into the underlying code of the Playground and modify it to your liking.
