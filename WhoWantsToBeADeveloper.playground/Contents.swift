@@ -4,17 +4,16 @@ import PlaygroundSupport
 /*:
  # Welcome to "Who Wants to Be a Developer"
  
- __Dear Player, welcome to this Xcode Playground__ 🤗
+ ### Dear Player, welcome to this Xcode Playground 🤗
  
-You will be learning about object-oriented software development with [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/),
- by playing a variation of the popular _Who Wants to Be a Millionaire_ game format. Since I am personally an iOS centered developer, this Playground was built with focus on that platform, both regarding the questions you will find and the underlying code itself.
+ My personal journey has taught me that anyone can achieve their goals when their urge to find out more is tickled. Breaking the ice is essential. Beginning easy but challenging and increasing the difficulty gradually will create motivation, instead of frustration. This Playground aims at emulating such an experience.
  
- My personal journey has taught me that anyone can achieve their goals, when their urge to find out more and being involved is tickled. Breaking the ice is essential. Beginning easy but challenging and then increasing the difficulty gradually will trigger the thirst for more, instead of creating frustration. This Playground aims at emulating such an experience. If you have 3 minutes everyday to play and to answer some questions, you will solidify your knowledge and be inspired to dig deeper. Once you're ready, dive into the underlying code of the Playground and modify it to your liking.
+You will be learning about object-oriented software development with [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/), by playing a variation of the popular _Who Wants to Be a Millionaire_ game format. This Playground is aimed at those who are just beginning to learn to code and want to solidify their knowledge in a playful way. Three minutes every day will already make a difference. Once you become more experienced you can dive into the underlying code itself and start altering the program to your liking or extend its functionality.
  
- However in the this Playground is not limited to programming, but to your interests only. Due to its modularity, substituting your own set of questions is trivial. Pursue the instructions below to find out more.
+ However, this Playground is not limited to programming, but to your interests only. Due to its modularity, substituting your own set of questions is trivial. Pursue the instructions below to find out more.
  
  - IMPORTANT:
-In order to use the "_Resume Game_" and "_Highscores_" features you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Playgrounds cannot assist you due to [sandboxing](https://en.wikipedia.org/wiki/Sandbox_(computer_security)). Alternatively you may execute the following 2 commands within a new _Terminal_ session:
+In order to use the "_Resume Game_" and "_Highscores_" features you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Playgrounds cannot assist you due to [sandboxing](https://en.wikipedia.org/wiki/Sandbox_(computer_security)). Alternatively, you may execute the following 2 commands within a new _Terminal_ session:
 
 - `cd ./Documents`
 - `mkdir Shared\ Playground\ Data`
@@ -24,7 +23,7 @@ In order to use the "_Resume Game_" and "_Highscores_" features you need to crea
  
  > __ADDING YOUR OWN QUESTIONS:__ You can also add your own questions by hacking the `Questions.json` file. The use of this human readable format enables you to create your personalized flashcard based learning experience. __*Pro Tip*__: Keep different files handy, so you can interchange them to study for all of your subjects.
  
- __Enjoy and hopefully see you at WWDC 18__ 💜
+ ### Enjoy and hopefully see you at WWDC 18 💜
  */
 
 // MARK: - Implementation
