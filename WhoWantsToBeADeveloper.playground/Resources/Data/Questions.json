@@ -77,6 +77,21 @@
                   },
                   {
                   "identifier": 111116,
+                  "question": "In order to ouput to Xcodes \"console\" the global function ... is used.",
+                  "answerOptions": [
+                                    "optionA",
+                                    "printLine(_:separator:terminator:)",
+                                    "optionB",
+                                    "printOut(_:separator:terminator:)",
+                                    "optionC",
+                                    "print(_:separator:terminator:)",
+                                    "optionD",
+                                    "println(_:separator:terminator:)"
+                                    ],
+                  "correctAnswerOption": "optionC"
+                  },
+                  {
+                  "identifier": 111117,
                   "question": "With Swift the following is always necessary:",
                   "answerOptions": [
                                     "optionA",
@@ -91,7 +106,37 @@
                   "correctAnswerOption": "optionD"
                   },
                   {
-                  "identifier": 111117,
+                  "identifier": 111118,
+                  "question": "The integer types Int and UInt exist with different size versions. There is 8, 16, 32 and: ",
+                  "answerOptions": [
+                                    "optionA",
+                                    "2",
+                                    "optionB",
+                                    "4",
+                                    "optionC",
+                                    "64",
+                                    "optionD",
+                                    "128"
+                                    ],
+                  "correctAnswerOption": "optionC"
+                  },
+                  {
+                  "identifier": 111119,
+                  "question": "Swift has the signed and unsigned integer types Int and UInt. On a 32-bit system they are actually:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "Int16 and UInt16",
+                                    "optionB",
+                                    "Int32 and UInt32",
+                                    "optionC",
+                                    "Int64 and UInt64",
+                                    "optionD",
+                                    "Int64 and UInt64"
+                                    ],
+                  "correctAnswerOption": "optionB"
+                  },
+                  {
+                  "identifier": 111120,
                   "question": "A 32-bit floating point value (Float) can store up to ... decimal places?",
                   "answerOptions": [
                                     "optionA",
@@ -106,7 +151,7 @@
                   "correctAnswerOption": "optionB"
                   },
                   {
-                  "identifier": 111118,
+                  "identifier": 111121,
                   "question": "A 64-bit floating point value (Double) can have up to ... decimal digits?",
                   "answerOptions": [
                                     "optionA",
@@ -121,7 +166,22 @@
                   "correctAnswerOption": "optionB"
                   },
                   {
-                  "identifier": 111119,
+                  "identifier": 111122,
+                  "question": "The type of variable-declaration \"var myValue = 1.01\" is inferred as:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "Int",
+                                    "optionB",
+                                    "UInt",
+                                    "optionC",
+                                    "Float",
+                                    "optionD",
+                                    "Double"
+                                    ],
+                  "correctAnswerOption": "optionD"
+                  },
+                  {
+                  "identifier": 111123,
                   "question": "When declaring a variable or constant with a value, the Swift compiler automatically knows its type. This is called:",
                   "answerOptions": [
                                     "optionA",
