@@ -1,15 +1,15 @@
 Notice:
 -------
 
-All assets of this project will be subject to the MIT license, excluding the ones not created
-by the author. They will be subject to their respective licences as detailed below. Ownership
-remains with the original authors.
+All assets of this project will be subject to the MIT license, excluding the ones not created by the
+author. They will be subject to their respective licences as detailed below. Ownership remains with
+the original authors.
 
 
 Question Sources:
 -----------------
 
-Questions were derived from the Swift Programming Language Description available via
+Questions were derived from the Swift Programming Language Description (Basics Chapter) available via
 https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language.
 
 
