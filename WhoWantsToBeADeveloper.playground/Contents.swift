@@ -10,7 +10,7 @@ import PlaygroundSupport
  
 You will be learning about object-oriented software development with [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/), by playing a variation of the popular _Who Wants to Be a Millionaire_ game format. This Playground is aimed at those who are just beginning to learn to code and want to solidify their knowledge in a playful way. Three minutes every day will already make a difference. The questions should inspire you to do some additional reading. Once you become more experienced you can dive into the underlying code itself and start altering the program to your liking or extend its functionality.
  
- However, this Playground is not limited to programming, but to your interests only. Due to its modularity, substituting your own set of questions is trivial. Pursue the instructions below to find out more.
+ However, this Playground is not limited to programming, but to your interests only. Due to its modularity, substituting your own set of questions is trivial. Creating your questions will already help you practice a new topic. Pursue the instructions below to find out more.
  
  - IMPORTANT:
 In order to use the "_Resume Game_" and "_Highscores_" features you need to create a directory with the name `Shared Playground Data` inside `~/Documents`. This directory needs to be created manually, Playgrounds cannot assist you due to [sandboxing](https://en.wikipedia.org/wiki/Sandbox_(computer_security)). Alternatively, you may execute the following 2 commands within a new _Terminal_ session:
