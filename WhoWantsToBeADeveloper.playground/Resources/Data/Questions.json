@@ -194,6 +194,21 @@
                                     "type analysis"
                                     ],
                   "correctAnswerOption": "optionA"
+                  },
+                  {
+                  "identifier": 111124,
+                  "question": "Variables and constants can be declared as optionals, meaning they:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "are not necessary in later code",
+                                    "optionB",
+                                    "may or may not hold a value",
+                                    "optionC",
+                                    "can change their type",
+                                    "optionD",
+                                    "their name can be reused"
+                                    ],
+                  "correctAnswerOption": "optionB"
                   }
                   ]
 }
