@@ -1,11 +1,17 @@
+Notice:
+-------
+
+All assets of this project will be subject to the MIT license, excluding the ones not created
+by the author. They will be subject to their respective licences as detailed below. Ownership
+remains with the original authors.
+
+
 Graphics Sources:
 -----------------
 
 All graphics were created by the author of this Playground (Erik Maximilian Martens).
-They were inspired by original designs for "Who Wants to Be a Millionaire". Vector files
-will be uploaded as part of this project once this project is open sourced via GitHub.
-They will be subject to the MIT license, just like the rest of the project and its assets,
-excluding the ones not created by the author.
+They were inspired by original designs for "Who Wants to Be a Millionaire". After exporting
+png files the tool available at http://compresspng.com was used to reduce file sizes.
 
 
 Sound Sources:
