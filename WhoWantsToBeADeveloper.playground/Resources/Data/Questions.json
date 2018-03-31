@@ -119,6 +119,21 @@
                                     "63"
                                     ],
                   "correctAnswerOption": "optionB"
+                  },
+                  {
+                  "identifier": 111119,
+                  "question": "When declaring a variable or constant with a value, the Swift compiler automatically knows its type. This is called:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "type inference",
+                                    "optionB",
+                                    "type assuming",
+                                    "optionC",
+                                    "type guessing",
+                                    "optionD",
+                                    "type analysis"
+                                    ],
+                  "correctAnswerOption": "optionA"
                   }
                   ]
 }
