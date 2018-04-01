@@ -36,4 +36,10 @@ let applicationView = SKView(frame: applicationFrame)
 let mainController = ApplicationMainController(view: applicationView)
 
 PlaygroundPage.current.liveView = applicationView
-mainController.runApplication()
+applicationView.presentScene(LoadingScene())
+
+// simulate a slight loading of the game
+DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+    mainController.runApplication()
+}
+
