@@ -197,21 +197,6 @@
                   },
                   {
                   "identifier": 111124,
-                  "question": "Variables and constants can be declared as optionals, meaning they:",
-                  "answerOptions": [
-                                    "optionA",
-                                    "are not necessary in later code",
-                                    "optionB",
-                                    "may or may not hold a value",
-                                    "optionC",
-                                    "can change their type",
-                                    "optionD",
-                                    "their name can be reused"
-                                    ],
-                  "correctAnswerOption": "optionB"
-                  },
-                  {
-                  "identifier": 111125,
                   "question": "A Swift variable holding a boolean value (Bool) can be exactly:",
                   "answerOptions": [
                                     "optionA",
@@ -226,7 +211,7 @@
                   "correctAnswerOption": "optionC"
                   },
                   {
-                  "identifier": 111126,
+                  "identifier": 111125,
                   "question": "One of the following snippets does not correctly define a tuple:",
                   "answerOptions": [
                                     "optionA",
@@ -241,7 +226,52 @@
                   "correctAnswerOption": "optionC"
                   },
                   {
+                  "identifier": 111126,
+                  "question": "Variables and constants can be declared as optionals, meaning they:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "are not necessary in later code",
+                                    "optionB",
+                                    "may or may not hold a value",
+                                    "optionC",
+                                    "can change their type",
+                                    "optionD",
+                                    "their name can be reused"
+                                    ],
+                  "correctAnswerOption": "optionB"
+                  },
+                  {
                   "identifier": 111127,
+                  "question": "Using the code snippet \"var myInt: Int? = 101\", which of the following will yield a compile time error?.",
+                  "answerOptions": [
+                                    "optionA",
+                                    "myInt = 6418",
+                                    "optionB",
+                                    "if myInt != nil { print(\"has value\") }",
+                                    "optionC",
+                                    "var myOtherInt: Int; myOtherInt = myInt;",
+                                    "optionD",
+                                    "var myOtherInt: Int?; myOtherInt = myInt;"
+                                    ],
+                  "correctAnswerOption": "optionC"
+                  },
+                  {
+                  "identifier": 111128,
+                  "question": "Executing the code snippet \"var myInt: Int?; print(myInt!);\" will:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "not print anything",
+                                    "optionB",
+                                    "print the value of myInt",
+                                    "optionC",
+                                    "print an empty String",
+                                    "optionD",
+                                    "cause a crash"
+                                    ],
+                  "correctAnswerOption": "optionD"
+                  },
+                  {
+                  "identifier": 111129,
                   "question": "With a typealiases you can:",
                   "answerOptions": [
                                     "optionA",
