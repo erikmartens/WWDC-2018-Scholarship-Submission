@@ -47,7 +47,7 @@
                   },
                   {
                   "identifier": 111114,
-                  "question": "One of the following is not a valid name for a variable",
+                  "question": "One of the following is not a valid name for a variable:",
                   "answerOptions": [
                                     "optionA",
                                     "myVariable",
@@ -77,7 +77,7 @@
                   },
                   {
                   "identifier": 111116,
-                  "question": "In order to ouput to Xcodes \"console\" the global function ... is used.",
+                  "question": "In order to ouput to Xcodes \"console\" pane the global function ... is used.",
                   "answerOptions": [
                                     "optionA",
                                     "printLine(_:separator:terminator:)",
@@ -122,7 +122,7 @@
                   },
                   {
                   "identifier": 111119,
-                  "question": "The integer types Int and UInt exist with different size versions. There is 8, 16, 32 and: ",
+                  "question": "The integer types Int and UInt exist with different size versions. There is 8, 16, 32 and:",
                   "answerOptions": [
                                     "optionA",
                                     "2",
@@ -167,7 +167,7 @@
                   },
                   {
                   "identifier": 111122,
-                  "question": "The maximimum value of an Int32 is:",
+                  "question": "What is the maximimum value of an Int32?",
                   "answerOptions": [
                                     "optionA",
                                     "4,294,967,295",
@@ -197,7 +197,7 @@
                   },
                   {
                   "identifier": 111124,
-                  "question": "A 32-bit floating point value (Float) can store up to ... decimal places?",
+                  "question": "A 32-bit floating point value (Float) can store up to ... decimal places.",
                   "answerOptions": [
                                     "optionA",
                                     "4",
@@ -212,7 +212,7 @@
                   },
                   {
                   "identifier": 111125,
-                  "question": "A 64-bit floating point value (Double) can store up to ... decimal digits?",
+                  "question": "A 64-bit floating point value (Double) can store up to ... decimal digits.",
                   "answerOptions": [
                                     "optionA",
                                     "7",
@@ -347,7 +347,7 @@
                   },
                   {
                   "identifier": 111134,
-                  "question": "You cannot assign nil to one of the following variables:",
+                  "question": "You cannot assign nil to which one of the following variables?",
                   "answerOptions": [
                                     "optionA",
                                     "var myVar: String?",
