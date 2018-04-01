@@ -92,6 +92,21 @@
                   },
                   {
                   "identifier": 111117,
+                  "question": "The global print function has two parameters with default values. They are named:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "separator and terminator",
+                                    "optionB",
+                                    "descriptor and validator",
+                                    "optionC",
+                                    "pipe and closure",
+                                    "optionD",
+                                    "delimiter and linebreak"
+                                    ],
+                  "correctAnswerOption": "optionA"
+                  },
+                  {
+                  "identifier": 111118,
                   "question": "With Swift the following is always necessary:",
                   "answerOptions": [
                                     "optionA",
@@ -106,7 +121,7 @@
                   "correctAnswerOption": "optionD"
                   },
                   {
-                  "identifier": 111118,
+                  "identifier": 111119,
                   "question": "The integer types Int and UInt exist with different size versions. There is 8, 16, 32 and: ",
                   "answerOptions": [
                                     "optionA",
@@ -121,7 +136,7 @@
                   "correctAnswerOption": "optionC"
                   },
                   {
-                  "identifier": 111119,
+                  "identifier": 111120,
                   "question": "Swift has the signed and unsigned integer types Int and UInt. On a 32-bit system they are actually:",
                   "answerOptions": [
                                     "optionA",
@@ -136,7 +151,52 @@
                   "correctAnswerOption": "optionB"
                   },
                   {
-                  "identifier": 111120,
+                  "identifier": 111121,
+                  "question": "Swift has the signed and unsigned integer types Int and UInt. On a 64-bit system they are actually:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "Int16 and UInt16",
+                                    "optionB",
+                                    "Int32 and UInt32",
+                                    "optionC",
+                                    "Int64 and UInt64",
+                                    "optionD",
+                                    "Int64 and UInt64"
+                                    ],
+                  "correctAnswerOption": "optionD"
+                  },
+                  {
+                  "identifier": 111122,
+                  "question": "The maximimum value of an Int32 is:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "4,294,967,295",
+                                    "optionB",
+                                    "2,147,483,647",
+                                    "optionC",
+                                    "65,535",
+                                    "optionD",
+                                    "255"
+                                    ],
+                  "correctAnswerOption": "optionB"
+                  },
+                  {
+                  "identifier": 111123,
+                  "question": "The minimum value of an Int32 is:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "-4,294,967,296",
+                                    "optionB",
+                                    "-2,147,483,648",
+                                    "optionC",
+                                    "-65,536",
+                                    "optionD",
+                                    "-256"
+                                    ],
+                  "correctAnswerOption": "optionB"
+                  },
+                  {
+                  "identifier": 111124,
                   "question": "A 32-bit floating point value (Float) can store up to ... decimal places?",
                   "answerOptions": [
                                     "optionA",
@@ -151,8 +211,8 @@
                   "correctAnswerOption": "optionB"
                   },
                   {
-                  "identifier": 111121,
-                  "question": "A 64-bit floating point value (Double) can have up to ... decimal digits?",
+                  "identifier": 111125,
+                  "question": "A 64-bit floating point value (Double) can store up to ... decimal digits?",
                   "answerOptions": [
                                     "optionA",
                                     "7",
@@ -166,7 +226,7 @@
                   "correctAnswerOption": "optionB"
                   },
                   {
-                  "identifier": 111122,
+                  "identifier": 111126,
                   "question": "The type of variable-declaration \"var myValue = 1.01\" is inferred as:",
                   "answerOptions": [
                                     "optionA",
@@ -181,7 +241,22 @@
                   "correctAnswerOption": "optionD"
                   },
                   {
-                  "identifier": 111123,
+                  "identifier": 111127,
+                  "question": "Regarding type safety, Swift is a ... programming language.",
+                  "answerOptions": [
+                                    "optionA",
+                                    "type-omitting",
+                                    "optionB",
+                                    "type-unchecked",
+                                    "optionC",
+                                    "type-unsafe",
+                                    "optionD",
+                                    "type-safe"
+                                    ],
+                  "correctAnswerOption": "optionD"
+                  },
+                  {
+                  "identifier": 111128,
                   "question": "When declaring a variable or constant with a value, the Swift compiler automatically knows its type. This is called:",
                   "answerOptions": [
                                     "optionA",
@@ -196,7 +271,7 @@
                   "correctAnswerOption": "optionA"
                   },
                   {
-                  "identifier": 111124,
+                  "identifier": 111129,
                   "question": "A Swift variable holding a boolean value (Bool) can be exactly:",
                   "answerOptions": [
                                     "optionA",
@@ -211,7 +286,7 @@
                   "correctAnswerOption": "optionC"
                   },
                   {
-                  "identifier": 111125,
+                  "identifier": 111130,
                   "question": "One of the following snippets does not correctly define a tuple:",
                   "answerOptions": [
                                     "optionA",
@@ -226,7 +301,7 @@
                   "correctAnswerOption": "optionC"
                   },
                   {
-                  "identifier": 111126,
+                  "identifier": 111131,
                   "question": "Variables and constants can be declared as optionals, meaning they:",
                   "answerOptions": [
                                     "optionA",
@@ -241,7 +316,7 @@
                   "correctAnswerOption": "optionB"
                   },
                   {
-                  "identifier": 111127,
+                  "identifier": 111132,
                   "question": "Using the code snippet \"var myInt: Int? = 101\", which of the following will yield a compile time error?.",
                   "answerOptions": [
                                     "optionA",
@@ -256,7 +331,7 @@
                   "correctAnswerOption": "optionC"
                   },
                   {
-                  "identifier": 111128,
+                  "identifier": 111133,
                   "question": "Executing the code snippet \"var myInt: Int?; print(myInt!);\" will:",
                   "answerOptions": [
                                     "optionA",
@@ -271,7 +346,22 @@
                   "correctAnswerOption": "optionD"
                   },
                   {
-                  "identifier": 111129,
+                  "identifier": 111134,
+                  "question": "You cannot assign nil to one of the following variables:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "var myVar: String?",
+                                    "optionB",
+                                    "var myVar: String!",
+                                    "optionC",
+                                    "var myVar: String = \"myString\"",
+                                    "optionD",
+                                    "var myVar: String? = \"myString\""
+                                    ],
+                  "correctAnswerOption": "optionC"
+                  },
+                  {
+                  "identifier": 111135,
                   "question": "With a typealiases you can:",
                   "answerOptions": [
                                     "optionA",
