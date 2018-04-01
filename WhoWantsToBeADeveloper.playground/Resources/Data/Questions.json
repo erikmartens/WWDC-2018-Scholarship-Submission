@@ -209,6 +209,21 @@
                                     "their name can be reused"
                                     ],
                   "correctAnswerOption": "optionB"
+                  },
+                  {
+                  "identifier": 111125,
+                  "question": "With a typealiases you can:",
+                  "answerOptions": [
+                                    "optionA",
+                                    "change the type of a variable",
+                                    "optionB",
+                                    "define a new type",
+                                    "optionC",
+                                    "assign a type to a variable later",
+                                    "optionD",
+                                    "define a new name for an existing type"
+                                    ],
+                  "correctAnswerOption": "optionD"
                   }
                   ]
 }
