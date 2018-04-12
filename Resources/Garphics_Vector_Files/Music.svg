@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="75px" height="50px" viewBox="0 0 75 50" enable-background="new 0 0 75 50" xml:space="preserve">
+<ellipse id="Frame_1_" display="none" fill="#9899CB" cx="-54.167" cy="87.25" rx="37.5" ry="25"/>
+<ellipse id="Background_1_" display="none" fill="#2C2D72" cx="-54.167" cy="87.25" rx="36.25" ry="24.167"/>
+<ellipse id="Background_x5F_Solid" fill="#FFFFFF" cx="37.5" cy="25" rx="36.25" ry="24.167"/>
+<linearGradient id="Background_2_" gradientUnits="userSpaceOnUse" x1="47.2275" y1="49.2998" x2="27.7715" y2="0.701">
+	<stop  offset="0" style="stop-color:#2E3192"/>
+	<stop  offset="1" style="stop-color:#2E3192;stop-opacity:0.5"/>
+</linearGradient>
+<ellipse id="Background_3_" fill="url(#Background_2_)" cx="37.5" cy="25" rx="36.25" ry="24.167"/>
+<path id="Shadow_x5F_Inner" fill="#BCBBDB" d="M31.284,0.833C21.324,2.247,5.453,6.761,1.25,21.124v10.031
+	c0.287-3.263,0.534-6.5,0.534-6.5S1.698,2.556,39.591,1.007c1.503-0.062,2.876-0.119,4.147-0.173H31.284z"/>
+<linearGradient id="Shadow_x5F_Inner_x5F_Gradient_x5F_Overlay_1_" gradientUnits="userSpaceOnUse" x1="17.4092" y1="3.2783" x2="19.5946" y2="8.7426">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="0.0926" style="stop-color:#E3E3E3"/>
+	<stop  offset="0.431" style="stop-color:#838383"/>
+	<stop  offset="0.705" style="stop-color:#3D3D3D"/>
+	<stop  offset="0.9009" style="stop-color:#111111"/>
+	<stop  offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<path id="Shadow_x5F_Inner_x5F_Gradient_x5F_Overlay" opacity="0.4" fill="url(#Shadow_x5F_Inner_x5F_Gradient_x5F_Overlay_1_)" d="
+	M31.284,0.833C21.324,2.247,5.453,6.761,1.25,21.124v10.031c0.287-3.263,0.534-6.5,0.534-6.5S1.698,2.556,39.591,1.007
+	c1.503-0.062,2.876-0.119,4.147-0.173H31.284z"/>
+<path id="Frame" fill="#9899CB" d="M37.5,0C16.79,0,0,11.193,0,25c0,13.807,16.79,25,37.5,25C58.211,50,75,38.808,75,25
+	C75,11.193,58.211,0,37.5,0z M37.5,49.167C17.48,49.167,1.25,38.348,1.25,25c0-13.347,16.23-24.167,36.25-24.167
+	c20.021,0,36.25,10.82,36.25,24.167C73.75,38.348,57.521,49.167,37.5,49.167z"/>
+<linearGradient id="Glare_1_" gradientUnits="userSpaceOnUse" x1="47.5635" y1="50.1367" x2="27.4371" y2="-0.1366">
+	<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
+	<stop  offset="1" style="stop-color:#FFFFFF"/>
+</linearGradient>
+<ellipse id="Glare" opacity="0.4" fill="url(#Glare_1_)" cx="37.5" cy="25" rx="37.5" ry="25"/>
+<g>
+	
+		<image overflow="visible" opacity="0.75" width="121" height="101" xlink:href="data:image/png;base64,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
+QmCC" transform="matrix(0.24 0 0 0.24 22.0947 13.9966)">
+	</image>
+	<g>
+		<g>
+			<rect x="31.804" y="15.997" fill="#FFFFFF" width="1.469" height="14.972"/>
+			<rect x="45.438" y="16.022" fill="#FFFFFF" width="1.468" height="14.972"/>
+			<rect x="31.804" y="15.997" fill="#FFFFFF" width="14.971" height="2.938"/>
+			<ellipse fill="#FFFFFF" cx="42.316" cy="30.994" rx="4.589" ry="3.008"/>
+			<ellipse fill="#FFFFFF" cx="28.684" cy="30.994" rx="4.589" ry="3.01"/>
+		</g>
+	</g>
+</g>
+</svg>
